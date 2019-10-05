@@ -1,0 +1,154 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Attrubutes specific for commerce &#8212; Episerver cookbook  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Filter on items in a list" href="../EpiserverFind/ListFilter.html" />
+    <link rel="prev" title="Setup layout file" href="../EpiserverCMS/SetupLayout.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="attrubutes-specific-for-commerce">
+<h1>Attrubutes specific for commerce<a class="headerlink" href="#attrubutes-specific-for-commerce" title="Permalink to this headline">¶</a></h1>
+<p>Here are a list over special attrubutes used by Episerver Commerce</p>
+<div class="section" id="catalogcontenttype">
+<h2>CatalogContentType<a class="headerlink" href="#catalogcontenttype" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[CatalogContentType(DisplayName = &quot;BlouseProduct&quot;, MetaClassName = &quot;blouse_product&quot;, GUID = &quot;FEDA29DF-020F-4170-B3B5-6E93BAA0A30D&quot;, Description = &quot;&quot;)]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">BlouseProduct</span> <span class="p">:</span> <span class="n">ProductContent</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="encrypted">
+<h2>Encrypted<a class="headerlink" href="#encrypted" title="Permalink to this headline">¶</a></h2>
+<p>Will encrypt the value stored by Meta data plus
+(windows + SQL)</p>
+</div>
+<div class="section" id="useincomparison">
+<h2>UseInComparison<a class="headerlink" href="#useincomparison" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>???</div></blockquote>
+</div>
+<div class="section" id="includeindefaultsearch">
+<h2>IncludeInDefaultSearch<a class="headerlink" href="#includeindefaultsearch" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="includevaluesinsearchresults">
+<h2>IncludeValuesInSearchResults<a class="headerlink" href="#includevaluesinsearchresults" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="sortableinsearchresults">
+<h2>SortableInSearchResults<a class="headerlink" href="#sortableinsearchresults" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="tokenize">
+<h2>Tokenize<a class="headerlink" href="#tokenize" title="Permalink to this headline">¶</a></h2>
+<p>Use this attribute if values of a property should be broken down in individual searchable words.</p>
+</div>
+<div class="section" id="decimalsettings">
+<h2>DecimalSettings<a class="headerlink" href="#decimalsettings" title="Permalink to this headline">¶</a></h2>
+<p>Attribute is used for being able to set precision and scale.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Episerver cookbook</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Episerver CMS:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../EpiserverCMS/SetupLayout.html">Setup layout file</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Episerver Commerce:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Attrubutes specific for commerce</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#catalogcontenttype">CatalogContentType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#encrypted">Encrypted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#useincomparison">UseInComparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#includeindefaultsearch">IncludeInDefaultSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#includevaluesinsearchresults">IncludeValuesInSearchResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sortableinsearchresults">SortableInSearchResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tokenize">Tokenize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#decimalsettings">DecimalSettings</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Episerver Find:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../EpiserverFind/ListFilter.html">Filter on items in a list</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../EpiserverCMS/SetupLayout.html" title="previous chapter">Setup layout file</a></li>
+      <li>Next: <a href="../EpiserverFind/ListFilter.html" title="next chapter">Filter on items in a list</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Michael Krag.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/EpiserverCommerce/Attributes.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

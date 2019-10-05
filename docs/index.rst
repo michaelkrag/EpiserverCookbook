@@ -8,17 +8,19 @@ Welcome to Episerver cookbook's documentation!
 ==============================================
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: Episerver CMS:
 
    EpiserverCMS/SetupLayout
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: Episerver Commerce:
 
+   EpiserverCommerce/Attributes
+
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: Episerver Find:
 
    EpiserverFind/ListFilter
