@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 
-namespace EpiserverCookBook
+namespace MovieShop
 {
     public class EPiServerApplication : EPiServer.Global
     {
