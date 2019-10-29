@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalogs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <Catalog name="MoveCatalog" lastmodified="27-10-2019 16:49:18" startDate="27-10-2019 16:49:18" endDate="27-10-2018 16:49:18" defaultCurrency="USD" weightBase="kgs" lengthBase="cm" defaultLanguage="en" sortOrder="1" isActive="True">
+    <Languages>
+      <Language>
+        <LanguageCode>en</LanguageCode>
+        <UriSegment>movecatalog</UriSegment>
+      </Language>
+    </Languages>
+    <Nodes>
+      <Node>
+        <Name>Movie</Name>
+        <StartDate>2019-10-20 19:19:24Z</StartDate>
+        <EndDate>2029-10-20 19:19:24Z</EndDate>
+        <IsActive>True</IsActive>
+        <DisplayTemplate>default</DisplayTemplate>
+        <Code>Movie_1</Code>
+        <MetaData>
+          <MetaClass>
+            <Name>Movie_1</Name>
+          </MetaClass>
+          <MetaFields>
+            <MetaField>
+              <Name>DisplayName</Name>
+              <Type>ShortString</Type>
+              <Data language="en" value="Movie" />
+            </MetaField>
+            <MetaField>
+              <Name>Epi_IsPublished</Name>
+              <Type>Boolean</Type>
+              <Data language="en" value="True" />
+            </MetaField>
+            <MetaField>
+              <Name>Epi_StartPublish</Name>
+              <Type>DateTime</Type>
+              <Data language="en" value="2019-10-20 19:19:48Z" />
+            </MetaField>
+            <MetaField>
+              <Name>Epi_StopPublish</Name>
+              <Type>DateTime</Type>
+              <Data language="en" value="2029-10-20 19:19:48Z" />
+            </MetaField>
+          </MetaFields>
+        </MetaData>
+      </Node>
+    </Nodes>
+    <Entries>
+      <Entry>
+        <Name>Star wars 2</Name>
+        <StartDate>2019-10-20 19:19:48Z</StartDate>
+        <EndDate>2029-10-20 19:19:48Z</EndDate>
+        <IsActive>True</IsActive>
+        <DisplayTemplate>default</DisplayTemplate>
+        <Code>Star_wars_2</Code>
+        <EntryType>Product</EntryType>
+        <MetaData>
+          <MetaClass>
+            <Name>Movie_Product</Name>
+          </MetaClass>
+          <MetaFields>
+            <MetaField>
+              <Name>DisplayName</Name>
+              <Type>ShortString</Type>
+              <Data language="en" value="Star wars 2" />
+            </MetaField>
+            <MetaField>
+              <Name>Epi_IsPublished</Name>
+              <Type>Boolean</Type>
+              <Data language="en" value="True" />
+            </MetaField>
+            <MetaField>
+              <Name>Epi_StartPublish</Name>
+              <Type>DateTime</Type>
+              <Data language="en" value="2019-10-20 19:19:48Z" />
+            </MetaField>
+            <MetaField>
+              <Name>Epi_StopPublish</Name>
+              <Type>DateTime</Type>
+              <Data language="en" value="2029-10-20 19:19:48Z" />
+            </MetaField>
+          </MetaFields>
+        </MetaData>
+      </Entry>
+      <Entry>
+        <Name>Star wars 2 blueray</Name>
+        <StartDate>2019-10-20 19:19:48Z</StartDate>
+        <EndDate>2029-10-20 19:19:48Z</EndDate>
+        <IsActive>True</IsActive>
+        <DisplayTemplate>default</DisplayTemplate>
+        <Code>Star_wars_2_blueray</Code>
+        <EntryType>Product</EntryType>
+        <MetaData>
+          <MetaClass>
+            <Name>Movie_Product</Name>
+          </MetaClass>
+          <MetaFields>
+            <MetaField>
+              <Name>DisplayName</Name>
+              <Type>ShortString</Type>
+              <Data language="en" value="Star wars 2 blueray" />
+            </MetaField>
+            <MetaField>
+              <Name>Epi_IsPublished</Name>
+              <Type>Boolean</Type>
+              <Data language="en" value="True" />
+            </MetaField>
+            <MetaField>
+              <Name>Epi_StartPublish</Name>
+              <Type>DateTime</Type>
+              <Data language="en" value="2019-10-20 19:19:48Z" />
+            </MetaField>
+            <MetaField>
+              <Name>Epi_StopPublish</Name>
+              <Type>DateTime</Type>
+              <Data language="en" value="2029-10-20 19:19:48Z" />
+            </MetaField>
+          </MetaFields>
+        </MetaData>
+      </Entry>
+    </Entries>
+    <Relations>
+      <NodeEntryRelation>
+        <EntryCode>Star_wars_2</EntryCode>
+        <NodeCode>Movie_1</NodeCode>
+        <IsPrimary>True</IsPrimary>
+      </NodeEntryRelation>
+      <NodeEntryRelation>
+        <EntryCode>Star_wars_2_blueray</EntryCode>
+        <NodeCode>Movie_1</NodeCode>
+        <IsPrimary>True</IsPrimary>
+      </NodeEntryRelation>
+      <EntryRelation>
+        <ParentEntryCode>Star_wars_2</ParentEntryCode>
+        <ChildEntryCode>Star_wars_2_blueray</ChildEntryCode>
+        <RelationType>ProductVariation</RelationType>
+        <Quantity>0.000000000</Quantity>
+        <GroupName>Default</GroupName>
+      </EntryRelation>
+    </Relations>
+  </Catalog>
+</Catalogs>

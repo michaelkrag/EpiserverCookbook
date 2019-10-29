@@ -302,3 +302,4 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
+/src/CommerceManager/ImportExportRepository/ECApplication/catalog/Catalog_0_2019-29-10--22-44-54.zip
