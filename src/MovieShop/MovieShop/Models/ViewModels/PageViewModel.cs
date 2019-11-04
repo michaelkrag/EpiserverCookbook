@@ -9,6 +9,7 @@ namespace MovieShop.Models.ViewModels
     public class PageViewModel<TPageData> : ILayoutViewModel where TPageData : PageData
     {
         public TPageData CurrentPage { get; }
+        public string Title { get; set; }
 
         public PageViewModel(TPageData currentPage)
         {

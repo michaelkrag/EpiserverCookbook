@@ -2,5 +2,6 @@
 {
     public interface ILayoutViewModel
     {
+        string Title { get; set; }
     }
 }

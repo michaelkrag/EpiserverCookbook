@@ -1,6 +1,7 @@
 ﻿using EPiServer.Commerce.Catalog.ContentTypes;
 using EPiServer.Commerce.Catalog.DataAnnotations;
 using EPiServer.Web;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace MovieShop.Features.Catalog.Models
@@ -30,6 +31,7 @@ namespace MovieShop.Features.Catalog.Models
         [UIHint(UIHint.Textarea)]
         public virtual string Summery { get; set; }
 
+        public virtual DateTime ReleaseDate { get; set; }
         //IList<string> Director { get; }
         //IList<string> Genres { get; }
         //IList<string> Starring { get; }
