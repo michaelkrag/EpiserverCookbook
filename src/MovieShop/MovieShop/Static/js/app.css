@@ -1,0 +1,25 @@
+﻿@@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+$material-shadow: 0 1px 3px 0 rgba(0,0,0,.15);
+
+[v-cloak] {
+    display: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #F3F5F7;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.el-input__inner {
+    width: 450px;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

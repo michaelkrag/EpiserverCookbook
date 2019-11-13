@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -26,6 +27,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <TypeScriptToolsVersion>3.5</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -310,6 +312,7 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ItemGroup>
@@ -319,8 +322,10 @@
     <Compile Include="Business\Factory\ViewModelFactory.cs" />
     <Compile Include="CommenLibray\Helpers\SetDefaultHelper.cs" />
     <Compile Include="Controllers\BasePageController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Features\Catalog\Models\BlueRayVariant.cs" />
     <Compile Include="Features\Catalog\Models\DVDVariant.cs" />
+    <Compile Include="Features\Catalog\Models\GenresNode.cs" />
     <Compile Include="Features\Catalog\Models\MovieNode.cs" />
     <Compile Include="Features\Catalog\Models\MovieProduct.cs" />
     <Compile Include="Features\Home\HomePage.cs" />
@@ -342,9 +347,14 @@
     <Folder Include="Models\Blocks\" />
     <Folder Include="Models\Media\" />
     <Folder Include="Models\Properties\" />
-    <Folder Include="Static\" />
+    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Frontend\components\app.js" />
+    <Content Include="Frontend\components\Autocomplete\autocomplete.js" />
+    <Content Include="gulpfile.js" />
+    <Content Include="Static\js\app.css" />
+    <Content Include="Static\js\app.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -374,6 +384,7 @@
     <Content Include="Features\Web.config" />
     <Content Include="Features\Home\HomePage.cshtml" />
     <Content Include="Features\_ViewStart.cshtml" />
+    <Content Include="package.json" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -383,6 +394,9 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

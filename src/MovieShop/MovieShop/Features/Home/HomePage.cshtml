@@ -1,7 +1,28 @@
 ﻿@using MovieShop.Features.Home
 @using MovieShop.Models.ViewModels
 @model PageViewModel<HomePage>
-   
+
+<div id="app-6">
+    <p>{{ query }}</p>
+    <input v-model="query">
+    <li v-for="suggestion in matches">
+        <a href="#">{{ suggestion }}</a>
+    </li>
+</div>
+
+@*
+    <div  id="autocomplete" v-bind:class="{'open':openSuggestion}">
+        <input class="form-control" type="text" v-model="selection" @@keydown.enter='enter' @@keydown.down='down' @@keydown.up='up' @@change='change' />
+        <ul class="dropdown-menu" style="width:100%">
+            <li v-for="suggestion in matches"
+                v-bind:class="{'active': isActive($index)}"
+                @@click="suggestionClick($index)">
+                <a href="#">{{ suggestion }}</a>
+            </li>
+        </ul>
+    </div>
+*@
+@*
     <div class="row mb-5">
         <div class="col-lg-8 mx-auto">
             <h5 class="font-weight-light mb-4 font-italic text-white">Custom rounded search bars with input group</h5>
@@ -39,11 +60,9 @@
                     </div>
                 </form>
                 <!-- End -->
-
             </div>
         </div>
     </div>
-
 
     <div class="container">
         <div class="row">
@@ -72,4 +91,5 @@
         </div>
     </div>
 
+*@
 @Html.PropertyFor(x => x.CurrentPage.Content)
