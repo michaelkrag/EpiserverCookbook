@@ -320,6 +320,19 @@
     <Compile Include="Business\Factory\IViewModelFactory.cs" />
     <Compile Include="Business\Factory\PageViewModelExtensions.cs" />
     <Compile Include="Business\Factory\ViewModelFactory.cs" />
+    <Compile Include="Business\Repository\DynamicDataStoreRepository.cs" />
+    <Compile Include="Business\ScheduledJob\VocabularyScheduledJob.cs" />
+    <Compile Include="Business\Services\Blobstore\BlobFilenameRepository.cs" />
+    <Compile Include="Business\Services\Blobstore\BlobRepository.cs" />
+    <Compile Include="Business\Services\Blobstore\IBlobFilenameRepository.cs" />
+    <Compile Include="Business\Services\Blobstore\IBlobRepository.cs" />
+    <Compile Include="Business\Services\Blobstore\Models\FileInfo.cs" />
+    <Compile Include="Business\Services\Search\AutocompleateService.cs" />
+    <Compile Include="Business\Services\Search\IAutocompleateService.cs" />
+    <Compile Include="Business\Services\Search\ITernaryTreeFactory.cs" />
+    <Compile Include="Business\Services\Search\Models\TernaryTreeModel.cs" />
+    <Compile Include="Business\Services\Search\TernarySearchService.cs" />
+    <Compile Include="Business\Services\Search\TernaryTreeFactory.cs" />
     <Compile Include="CommenLibray\Helpers\SetDefaultHelper.cs" />
     <Compile Include="Controllers\BasePageController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -397,6 +410,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NLPLib\NLPLib.csproj">
+      <Project>{2BD9C206-E37F-4335-AE7C-92DE7308C882}</Project>
+      <Name>NLPLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
