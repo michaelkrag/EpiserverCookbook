@@ -45,6 +45,8 @@
     <Compile Include="Tokenizer\SentencesTokenize.cs" />
     <Compile Include="Tokenizer\TokenizeFactory.cs" />
     <Compile Include="Tokenizer\WordTokenize.cs" />
+    <Compile Include="Tools\Spelling\SpellCorrector.cs" />
+    <Compile Include="Tools\TernaryTree\ISearch.cs" />
     <Compile Include="Tools\TernaryTree\Models\TernarySearchNode.cs" />
     <Compile Include="Tools\TernaryTree\TernarySearch.cs" />
     <Compile Include="Tools\Wordbook\Vocabulary.cs" />

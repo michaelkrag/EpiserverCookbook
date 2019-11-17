@@ -1,4 +1,6 @@
 ﻿using MovieShop.Business.Services.Search;
+using MovieShop.Business.Services.Search.Models;
+using NLPLib.Tools.Spelling;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +23,11 @@ namespace MovieShop.Controllers
         [HttpGet]
         public ActionResult Search(string q)
         {
-            var result = _ternaryTreeService.Search(q);
-
-            var list = result.Select(x => x.Word);
+            ///var result = _ternaryTreeService.Search(q);
+            var alphabet = "abcdefghijklmnopqrstuvwxyz";
+            var sc = new SpellCorrector<TernaryTreeModel>(_ternaryTreeService, alphabet.ToArray());
+            var result = sc.Candidates(q);
+            var list = result.Select(x => x.Word).Take(10);
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NLPLib.Tools.TernaryTree
 {
-    public class TernarySearch<TObj>
+    public class TernarySearch<TObj> : ISearch<TObj>
     {
         private TernarySearchNode<TObj> Root = null;
 
@@ -50,9 +50,19 @@ namespace NLPLib.Tools.TernaryTree
                 return Enumerable.Empty<TObj>();
             }
             var prefixRoot = CrawlToPrefixLastNode(Root, word, 0);
+            if (prefixRoot == null)
+            {
+                return Enumerable.Empty<TObj>();
+            }
             var result = FindAllSuggestions(prefixRoot, word);
 
             return result;
+        }
+
+        public IEnumerable<TObj> Search(IEnumerable<string> words)
+        {
+            var rtnList = words.SelectMany(x => Search(x)).Distinct();
+            return rtnList;
         }
 
         private TernarySearchNode<TObj> CrawlToPrefixLastNode(TernarySearchNode<TObj> tNode, string word, int ptr)
