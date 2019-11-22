@@ -412,6 +412,10 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonLib\CommonLib.csproj">
+      <Project>{1B7F19D7-9904-4398-9848-BE8AB520300D}</Project>
+      <Name>CommonLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NLPLib\NLPLib.csproj">
       <Project>{2BD9C206-E37F-4335-AE7C-92DE7308C882}</Project>
       <Name>NLPLib</Name>

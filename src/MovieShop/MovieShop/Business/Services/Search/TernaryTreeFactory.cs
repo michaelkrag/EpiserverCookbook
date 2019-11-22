@@ -21,7 +21,7 @@ namespace MovieShop.Business.Services.Search
             {
                 foreach (var entry in vocabulary)
                 {
-                    ternaryTreeService.Add(entry.Key, new TernaryTreeModel() { Word = entry.Key, WordCount = entry.Value });
+                    ternaryTreeService.Add(entry.Key, new TernaryTreeModel() { Word = entry.Key, WordCount = entry.Value.Occurrence });
                 }
             }
             return ternaryTreeService;

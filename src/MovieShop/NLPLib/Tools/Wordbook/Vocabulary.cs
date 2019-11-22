@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using NLPLib.Tools.Wordbook.Models;
+using System.Collections.Generic;
 
 namespace NLPLib.Tools.Wordbook
 {
-    public class Vocabulary : Dictionary<string, int>
+    public class Vocabulary : Dictionary<string, VocabularyModel>
     {
+        private int _wordCounter = 0;
+
         public bool HasWord(string word)
         {
             if (string.IsNullOrEmpty(word))
@@ -20,11 +23,11 @@ namespace NLPLib.Tools.Wordbook
                 var wordToInsert = word.ToLower();
                 if (ContainsKey(wordToInsert))
                 {
-                    this[wordToInsert]++;
+                    this[wordToInsert].Occurrence++;
                 }
                 else
                 {
-                    this[wordToInsert] = 1;
+                    this[wordToInsert] = new VocabularyModel() { Index = _wordCounter++, Occurrence = 1 };
                 }
             }
         }
