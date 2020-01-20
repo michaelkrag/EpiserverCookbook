@@ -1,18 +1,13 @@
 ﻿using EPiServer.ServiceLocation;
 using MovieShop.Infrastructure.DependencyInjection;
-using MovieShop.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace MovieShop.Business.Factory
+namespace MovieShop.Foundation.Settings
 {
     public class DependencyInjectionConfig : IDependencyInjectionConfig
     {
         public void Setup(IServiceConfigurationProvider container)
         {
-            container.AddSingleton<IViewModelFactory, ViewModelFactory>();
+            container.AddSingleton<ISettingService, SettingService>();
         }
     }
 }

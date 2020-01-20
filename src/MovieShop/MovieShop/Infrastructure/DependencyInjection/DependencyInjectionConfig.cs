@@ -26,13 +26,19 @@ namespace MovieShop.Infrastructure.DependencyInjection
 
         private static void SetupFeatureModules(IServiceConfigurationProvider container)
         {
-            var types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(p => typeof(IDependencyInjectionConfig).IsAssignableFrom(p) && !p.IsInterface);
-
-            foreach (var type in types)
+            try
             {
-                var methodInfo = type.GetMethod(nameof(IDependencyInjectionConfig.Setup));
-                var classInstance = Activator.CreateInstance(type, null);
-                methodInfo.Invoke(classInstance, new object[] { container });
+                var types = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName.StartsWith("MovieShop")).SelectMany(s => s.GetTypes()).Where(p => typeof(IDependencyInjectionConfig).IsAssignableFrom(p) && !p.IsInterface);
+                foreach (var type in types)
+                {
+                    var methodInfo = type.GetMethod(nameof(IDependencyInjectionConfig.Setup));
+                    var classInstance = Activator.CreateInstance(type, null);
+                    methodInfo.Invoke(classInstance, new object[] { container });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
     }

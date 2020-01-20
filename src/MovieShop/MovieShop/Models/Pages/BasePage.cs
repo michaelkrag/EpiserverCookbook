@@ -4,7 +4,7 @@ using MovieShop.CommenLibray.Helpers;
 
 namespace MovieShop.Models.Pages
 {
-    public class BasePage : PageData
+    public abstract class BasePage : PageData
     {
         public override void SetDefaultValues(ContentType contentType)
         {

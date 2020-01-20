@@ -1,6 +1,6 @@
 ﻿using EPiServer.ServiceLocation;
 
-namespace MovieShop.Models
+namespace MovieShop.Infrastructure.DependencyInjection
 {
     public interface IDependencyInjectionConfig
     {

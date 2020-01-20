@@ -24,13 +24,18 @@ namespace MovieShop.Controllers
         [HttpGet]
         public ActionResult Search(string q)
         {
-            ///var result = _ternaryTreeService.Search(q);
-            var alphabet = "abcdefghijklmnopqrstuvwxyz";
-            var sc = new SpellCorrector<TernaryTreeModel>(_ternaryTreeService, alphabet.ToArray());
-            var result = sc.Candidates(q);
-            var list = result.Select(x => x.Word).Take(10);
+            if (!string.IsNullOrEmpty(q))
+            {
+                var tokens = q.Split(' ');
+                ///var result = _ternaryTreeService.Search(q);
+                var alphabet = "abcdefghijklmnopqrstuvwxyz";
+                var sc = new SpellCorrector<TernaryTreeModel>(_ternaryTreeService, alphabet.ToArray());
+                var result = sc.Candidates(tokens.Last());
+                var list = result.Select(x => x.Word).Take(10);
 
-            return Json(list, JsonRequestBehavior.AllowGet);
+                return Json(list, JsonRequestBehavior.AllowGet);
+            }
+            return Json(Enumerable.Empty<string>(), JsonRequestBehavior.AllowGet);
         }
     }
 }

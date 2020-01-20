@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace NLPLib.Tokenizer
 {
@@ -14,7 +15,7 @@ namespace NLPLib.Tokenizer
             _stopWords = stopWords;
         }
 
-        public IEnumerable<string> GetTokens(string sentencen)
+        public IEnumerable<string> GetTokens2(string sentencen)
         {
             var words = sentencen.Split(' ', '(', ')', '"', ':', ';', '!').Where(x => !string.IsNullOrEmpty(x)).Select(x => x.ToLower());
 
@@ -23,6 +24,23 @@ namespace NLPLib.Tokenizer
                 if (!_stopWords.Contains(word))
                 {
                     yield return _abbreviations.TryGetValue(word, out var newWord) ? newWord : word;
+                }
+            }
+        }
+
+        public IEnumerable<string> GetTokens(string sentencen)
+        {
+            var sb = new StringBuilder();
+            foreach (var ch in sentencen)
+            {
+                if (ch == ' ')
+                {
+                    yield return sb.ToString();
+                    sb.Clear();
+                }
+                else
+                {
+                    sb.Append(ch);
                 }
             }
         }
