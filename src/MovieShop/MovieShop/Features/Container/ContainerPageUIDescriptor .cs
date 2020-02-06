@@ -1,6 +1,6 @@
 ﻿using EPiServer.Shell;
 
-namespace MovieShop.Features.Catalog.Container
+namespace MovieShop.Features.Container
 {
     [UIDescriptorRegistration]
     public class ContainerPageUIDescriptor : UIDescriptor<ContainerPage>

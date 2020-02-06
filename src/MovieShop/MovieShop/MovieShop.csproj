@@ -333,11 +333,10 @@
     <Compile Include="Business\Services\Search\Models\TernaryTreeModel.cs" />
     <Compile Include="Business\Services\Search\TernarySearchService.cs" />
     <Compile Include="Business\Services\Search\TernaryTreeFactory.cs" />
-    <Compile Include="CommenLibray\Helpers\SetDefaultHelper.cs" />
     <Compile Include="Controllers\BasePageController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="Features\Catalog\Container\ContainerPage.cs" />
-    <Compile Include="Features\Catalog\Container\ContainerPageUIDescriptor .cs" />
+    <Compile Include="Features\Container\ContainerPage.cs" />
+    <Compile Include="Features\Container\ContainerPageUIDescriptor .cs" />
     <Compile Include="Features\Catalog\Models\BlueRayVariant.cs" />
     <Compile Include="Features\Catalog\Models\DVDVariant.cs" />
     <Compile Include="Features\Catalog\Models\GenresNode.cs" />
@@ -345,8 +344,10 @@
     <Compile Include="Features\Catalog\Models\MovieProduct.cs" />
     <Compile Include="Features\Home\HomePage.cs" />
     <Compile Include="Features\Home\HomePageController.cs" />
-    <Compile Include="Foundation\Menu\Models\MenuItem.cs" />
-    <Compile Include="Foundation\Menu\Models\SubMenuItem.cs" />
+    <Compile Include="Features\Menu\Models\MenuPage.cs" />
+    <Compile Include="Foundation\Menu\Models\IMenu.cs" />
+    <Compile Include="Features\Menu\Models\MenuItemPage.cs" />
+    <Compile Include="Features\Menu\Models\SubMenuItemPage.cs" />
     <Compile Include="Foundation\Settings\BaseSettingsPage.cs" />
     <Compile Include="Foundation\Extensions\ContentAreaExtension.cs" />
     <Compile Include="Foundation\Extensions\ContentAreaItemExtension.cs" />
@@ -364,14 +365,14 @@
     <Compile Include="Infrastructure\DependencyInjection\DependencyResolverInitialization.cs" />
     <Compile Include="Infrastructure\DependencyInjection\IDependencyInjectionConfig.cs" />
     <Compile Include="Infrastructure\EPiServerCommerceInitializationModule.cs" />
+    <Compile Include="Infrastructure\Helpers\SetDefaultHelper.cs" />
+    <Compile Include="Models\Blocks\BaseBlock.cs" />
     <Compile Include="Models\Pages\BasePage.cs" />
     <Compile Include="Models\ViewModels\ILayoutViewModel.cs" />
     <Compile Include="Models\ViewModels\PageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Features\Menu\" />
-    <Folder Include="Models\Blocks\" />
     <Folder Include="Models\Media\" />
     <Folder Include="Models\Properties\" />
     <Folder Include="Views\Search\" />

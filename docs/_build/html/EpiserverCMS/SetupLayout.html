@@ -16,7 +16,7 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Filter on items in a list" href="../EpiserverFind/ListFilter.html" />
+    <link rel="next" title="Attrubutes specific for commerce" href="../EpiserverCommerce/Attributes.html" />
     <link rel="prev" title="Welcome to Episerver cookbook’s documentation!" href="../index.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -39,34 +39,10 @@
 <p>add a _ViewStart.cshtml file in the view folder</p>
 <img alt="../_images/AddViewStart.png" src="../_images/AddViewStart.png" />
 <p>whit the following</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>@{
-<span class="hll">    Layout = &quot;~/Views/Shared/_Layout.cshtml&quot;;
-</span>}
-</pre></div>
-</div>
 <p>When a user want to see a page.</p>
 <p>Add a _layout.cshtml file in the shared folder</p>
 <img alt="../_images/layoutfolder.png" src="../_images/layoutfolder.png" />
 <p>example of a basic layout file with boostrap. &#64;RenderBody, is where the page will be renderet</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!doctype html&gt;</span>
-<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1, shrink-to-fit=no&quot;</span><span class="p">&gt;</span>
-
-    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css&quot;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&quot;sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T&quot;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span><span class="p">&gt;</span>
-
-    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Hello, world!<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-<span class="hll">    @RenderBody()
-</span>    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://code.jquery.com/jquery-3.3.1.slim.min.js&quot;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&quot;sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo&quot;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js&quot;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&quot;sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1&quot;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js&quot;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&quot;sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM&quot;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
-</pre></div>
-</div>
 </div>
 
 
@@ -89,6 +65,10 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Setup layout file</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Episerver Commerce:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../EpiserverCommerce/Attributes.html">Attrubutes specific for commerce</a></li>
+</ul>
 <p class="caption"><span class="caption-text">Episerver Find:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../EpiserverFind/ListFilter.html">Filter on items in a list</a></li>
@@ -99,7 +79,7 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
       <li>Previous: <a href="../index.html" title="previous chapter">Welcome to Episerver cookbook’s documentation!</a></li>
-      <li>Next: <a href="../EpiserverFind/ListFilter.html" title="next chapter">Filter on items in a list</a></li>
+      <li>Next: <a href="../EpiserverCommerce/Attributes.html" title="next chapter">Attrubutes specific for commerce</a></li>
   </ul></li>
 </ul>
 </div>

@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 
-namespace MovieShop.CommenLibray.Helpers
+namespace MovieShop.Infrastructure.Helpers
 {
     public static class SetDefaultHelper
     {

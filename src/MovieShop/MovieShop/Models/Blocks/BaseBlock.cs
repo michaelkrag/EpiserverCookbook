@@ -2,9 +2,9 @@
 using EPiServer.DataAbstraction;
 using MovieShop.Infrastructure.Helpers;
 
-namespace MovieShop.Models.Pages
+namespace MovieShop.Models.Blocks
 {
-    public abstract class BasePage : PageData
+    public abstract class BaseBlock : BlockData
     {
         public override void SetDefaultValues(ContentType contentType)
         {
