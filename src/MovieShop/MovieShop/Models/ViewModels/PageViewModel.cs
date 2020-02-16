@@ -1,4 +1,5 @@
-﻿using EPiServer.Core;
+﻿using EPiServer.Commerce.Catalog.ContentTypes;
+using EPiServer.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,16 @@ namespace MovieShop.Models.ViewModels
         public PageViewModel(TPage currentPage, TData currentData) : base(currentPage)
         {
             CurrentData = currentData;
+        }
+    }
+
+    public class CatalogViewModel<TCatalogContent, TPage> : PageViewModel<TPage> where TPage : PageData where TCatalogContent : CatalogContentBase
+    {
+        public TCatalogContent CurrentContent { get; }
+
+        public CatalogViewModel(TCatalogContent catalogContent, TPage currentPage) : base(currentPage)
+        {
+            CurrentContent = catalogContent;
         }
     }
 }

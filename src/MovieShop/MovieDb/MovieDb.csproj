@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2BD9C206-E37F-4335-AE7C-92DE7308C882}</ProjectGuid>
+    <ProjectGuid>{C027A785-4993-45B1-B697-99C04C6CB201}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NLPLib</RootNamespace>
-    <AssemblyName>NLPLib</AssemblyName>
+    <RootNamespace>MovieDb</RootNamespace>
+    <AssemblyName>MovieDb</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,37 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Search\DocumentStores\DocumentStorageMemory.cs" />
-    <Compile Include="Search\DocumentStores\IDocumentStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Search\Index\InvertedIndex.cs" />
-    <Compile Include="Search\Index\Models\DocumentHit.cs" />
-    <Compile Include="Search\Index\Models\DocumentInformation.cs" />
-    <Compile Include="Search\Index\Models\TermInfomation.cs" />
-    <Compile Include="Search\IrtRetSearch.cs" />
-    <Compile Include="Search\Models\DocumentScore.cs" />
-    <Compile Include="Search\Models\SearchHit.cs" />
-    <Compile Include="Search\Scores\Bm25.cs" />
-    <Compile Include="Search\Scores\IScore.cs" />
-    <Compile Include="Tokenizers\ITokinizer.cs" />
-    <Compile Include="Tokenizers\Models\Token.cs" />
-    <Compile Include="Tokenizers\SentencesTokenize.cs" />
-    <Compile Include="Tokenizers\TokenizeFactory.cs" />
-    <Compile Include="Tokenizers\Tokinizer.cs" />
-    <Compile Include="Tokenizers\WordTokenize.cs" />
-    <Compile Include="Tools\Spelling\SpellCorrector.cs" />
-    <Compile Include="Tools\TernaryTree\ISearch.cs" />
-    <Compile Include="Tools\TernaryTree\Models\TernarySearchNode.cs" />
-    <Compile Include="Tools\TernaryTree\TernarySearch.cs" />
-    <Compile Include="Tools\Wordbook\Models\VocabularyModel.cs" />
-    <Compile Include="Tools\Wordbook\Vocabulary.cs" />
-    <Compile Include="Vocabularys\IVocabulary.cs" />
-    <Compile Include="Vocabularys\Models\VocabularyEntry.cs" />
-    <Compile Include="Vocabularys\Models\WordInfo.cs" />
-    <Compile Include="Vocabularys\Vocabulary.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NLP\Cooccurrence\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

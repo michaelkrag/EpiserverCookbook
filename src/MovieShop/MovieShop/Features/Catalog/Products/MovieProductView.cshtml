@@ -1,0 +1,23 @@
+﻿@using MovieShop.Features.Home
+@using MovieShop.Models.ViewModels
+@using MovieShop.Features.Catalog.Products
+@using MovieShop.Foundation.Helpers
+@model  CatalogViewModel<MovieProduct, HomePage>
+<div class="row column container-padded">
+    <div class="work-feature-block row">
+        <div class="columns medium-5">
+            <h2 class="work-feature-block-header">@Html.PropertyFor(x => x.CurrentContent.OriginalTitle)</h2>
+            <p>@Html.PropertyFor(x => x.CurrentContent.Summery)</p>
+            <h2>Details</h2>
+            <ul>
+                <li>ReleaseDate @Html.PropertyFor(x => x.CurrentContent.ReleaseDate)</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+                <li>Item 4</li>
+            </ul>
+        </div>
+        <div class="columns medium-7">
+            <img class="work-feature-block-image" src="@Html.MovieDbImage(Model.CurrentContent.PosterPath,400)" />
+        </div>
+    </div>
+</div>

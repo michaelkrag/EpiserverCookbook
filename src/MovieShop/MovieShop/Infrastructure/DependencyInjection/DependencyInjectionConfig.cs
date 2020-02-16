@@ -1,9 +1,10 @@
 ﻿using EPiServer.ServiceLocation;
 using MovieShop.Business.Services.Blobstore;
 using MovieShop.Business.Services.Search;
-using MovieShop.Models;
+using CommonLib.Extensions;
 using System;
 using System.Linq;
+using MovieShop.Infrastructure.DependencyInjection.Extensions;
 
 namespace MovieShop.Infrastructure.DependencyInjection
 {
@@ -11,6 +12,7 @@ namespace MovieShop.Infrastructure.DependencyInjection
     {
         public static void Setup(IServiceConfigurationProvider container)
         {
+            SetupDefaultConvention(container);
             SetupFeatureModules(container);
             SetupExternal(container);
         }
@@ -22,6 +24,11 @@ namespace MovieShop.Infrastructure.DependencyInjection
             container.AddTransient<IBlobRepository, BlobRepository>();
             container.AddTransient<ITernaryTreeFactory, TernaryTreeFactory>();
             container.AddSingleton<TernaryTreeService>(x => x.GetInstance<ITernaryTreeFactory>().GenerateTree());
+        }
+
+        public static void SetupDefaultConvention(IServiceConfigurationProvider container)
+        {
+            container.Add(AssemblyScanner.ForAssamby<DependencyResolverInitialization>().GetInterfaceWithDefaultConventions());
         }
 
         private static void SetupFeatureModules(IServiceConfigurationProvider container)

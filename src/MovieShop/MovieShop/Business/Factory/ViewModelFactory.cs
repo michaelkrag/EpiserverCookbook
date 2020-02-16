@@ -1,4 +1,5 @@
-﻿using EPiServer.Core;
+﻿using EPiServer.Commerce.Catalog.ContentTypes;
+using EPiServer.Core;
 using MovieShop.Models.ViewModels;
 
 namespace MovieShop.Business.Factory
@@ -17,6 +18,12 @@ namespace MovieShop.Business.Factory
         public PageViewModel<TPage, TData> Create<TPage, TData>(TPage currentPage, TData CurrentData) where TPage : PageData
         {
             return new PageViewModel<TPage, TData>(currentPage, CurrentData).SetLayout(currentPage);
+        }
+
+        public CatalogViewModel<TCatalogContent, TPageData> CreateCatalog<TCatalogContent, TPageData>(TCatalogContent currentContent, TPageData currentPage) where TCatalogContent : EntryContentBase where TPageData : PageData
+        {
+            CatalogViewModel<TCatalogContent, TPageData> catalogViewModel = new CatalogViewModel<TCatalogContent, TPageData>(currentContent, currentPage);
+            return catalogViewModel;
         }
     }
 }

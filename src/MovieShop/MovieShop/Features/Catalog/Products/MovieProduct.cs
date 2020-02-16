@@ -4,7 +4,7 @@ using EPiServer.Web;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MovieShop.Features.Catalog.Models
+namespace MovieShop.Features.Catalog.Products
 {
     [CatalogContentType(DisplayName = "MovieProduct", MetaClassName = "Movie_Product", GUID = "D96324E3-2090-4A48-AAFA-1B21A1DC2FA6", Description = "")]
     public class MovieProduct : ProductContent
@@ -31,7 +31,13 @@ namespace MovieShop.Features.Catalog.Models
         [UIHint(UIHint.Textarea)]
         public virtual string Summery { get; set; }
 
+        public virtual string PosterPath { get; set; }
+        public virtual string BackdropPath { get; set; }
+
         public virtual DateTime ReleaseDate { get; set; }
+
+        public virtual double VoteAverage { get; set; }
+        public virtual int VoteCount { get; set; }
         //IList<string> Director { get; }
         //IList<string> Genres { get; }
         //IList<string> Starring { get; }

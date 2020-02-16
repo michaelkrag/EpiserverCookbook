@@ -335,16 +335,19 @@
     <Compile Include="Business\Services\Search\TernaryTreeFactory.cs" />
     <Compile Include="Controllers\BasePageController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Features\Catalog\Products\MovieProductController.cs" />
     <Compile Include="Features\Container\ContainerPage.cs" />
     <Compile Include="Features\Container\ContainerPageUIDescriptor .cs" />
     <Compile Include="Features\Catalog\Models\BlueRayVariant.cs" />
     <Compile Include="Features\Catalog\Models\DVDVariant.cs" />
     <Compile Include="Features\Catalog\Models\GenresNode.cs" />
     <Compile Include="Features\Catalog\Models\MovieNode.cs" />
-    <Compile Include="Features\Catalog\Models\MovieProduct.cs" />
+    <Compile Include="Features\Catalog\Products\MovieProduct.cs" />
     <Compile Include="Features\Home\HomePage.cs" />
     <Compile Include="Features\Home\HomePageController.cs" />
     <Compile Include="Features\Menu\Models\MenuPage.cs" />
+    <Compile Include="Foundation\Extensions\ContentLoaderExtensions.cs" />
+    <Compile Include="Foundation\Helpers\ImageHelper.cs" />
     <Compile Include="Foundation\Menu\Models\IMenu.cs" />
     <Compile Include="Features\Menu\Models\MenuItemPage.cs" />
     <Compile Include="Features\Menu\Models\SubMenuItemPage.cs" />
@@ -357,15 +360,19 @@
     <Compile Include="Foundation\Settings\ISettingsBlock.cs" />
     <Compile Include="Foundation\Settings\SettingsBlockUIDescriptor.cs" />
     <Compile Include="Foundation\Settings\SettingService.cs" />
+    <Compile Include="Foundation\Vocabularys\IVocabularyRepository.cs" />
+    <Compile Include="Foundation\Vocabularys\VocabularyRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\DependencyInjection\DependencyInjectionConfig.cs" />
     <Compile Include="Infrastructure\DependencyInjection\DependencyInjectionResolver.cs" />
     <Compile Include="Infrastructure\DependencyInjection\DependencyResolverInitialization.cs" />
+    <Compile Include="Infrastructure\DependencyInjection\Extensions\ServiceConfigurationProviderExtensions.cs" />
     <Compile Include="Infrastructure\DependencyInjection\IDependencyInjectionConfig.cs" />
     <Compile Include="Infrastructure\EPiServerCommerceInitializationModule.cs" />
     <Compile Include="Infrastructure\Helpers\SetDefaultHelper.cs" />
+    <Compile Include="Infrastructure\MediaFiles\ImageFile.cs" />
     <Compile Include="Models\Blocks\BaseBlock.cs" />
     <Compile Include="Models\Pages\BasePage.cs" />
     <Compile Include="Models\ViewModels\ILayoutViewModel.cs" />
@@ -381,6 +388,7 @@
     <Content Include="Frontend\components\app.js" />
     <Content Include="Frontend\components\Autocomplete\autocomplete.js" />
     <Content Include="gulpfile.js" />
+    <Content Include="Static\CSS\App.css" />
     <Content Include="Static\js\app.css" />
     <Content Include="Static\js\app.js" />
     <Content Include="Views\Web.config" />
@@ -413,6 +421,7 @@
     <Content Include="Features\Home\HomePage.cshtml" />
     <Content Include="Features\_ViewStart.cshtml" />
     <Content Include="package.json" />
+    <Content Include="Features\Catalog\Products\MovieProductView.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

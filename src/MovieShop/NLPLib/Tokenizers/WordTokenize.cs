@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace NLPLib.Tokenizer
+namespace NLPLib.Tokenizers
 {
     public class WordTokenize
     {

@@ -1,12 +1,13 @@
 ﻿using EPiServer;
 using EPiServer.Commerce.Catalog.ContentTypes;
-using EPiServer.Core;
 using EPiServer.PlugIn;
 using EPiServer.Scheduler;
 using Mediachase.Commerce.Catalog;
 using MovieShop.Business.Services.Blobstore;
-using MovieShop.Features.Catalog.Models;
-using NLPLib.Tokenizer;
+using MovieShop.Features.Catalog.Products;
+using MovieShop.Foundation.Extensions;
+using NLPLib.Search;
+using NLPLib.Tokenizers;
 using NLPLib.Tools.Wordbook;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace MovieShop.Business.ScheduledJob
         private readonly ReferenceConverter _referenceConverter;
         private readonly IContentLoader _contentLoader;
         private readonly IBlobRepository _blobRepository;
-        private static Dictionary<string, string> abbreviations = new Dictionary<string, string>() { { "u.s.", "United States" }, { "dr.", "doctor" }, { "jr.", " junior" }, { "mr.", "Mister" }, { "l.a.", "Los Angeles" } };
+        private static Dictionary<string, string> abbreviations = new Dictionary<string, string>() { { "u.s.", "United States" }, { "dr.", "doctor" }, { "jr.", " junior" }, { "mr.", "mister" }, { "l.a.", "Los Angeles" } };
         private static HashSet<string> stopwords = new HashSet<string>() { "-", };
 
         public VocabularyScheduledJob(ReferenceConverter referenceConverter, IContentLoader contentLoader, IBlobRepository blobRepository)
@@ -31,19 +32,20 @@ namespace MovieShop.Business.ScheduledJob
 
         public override string Execute()
         {
-            var rootLink = _referenceConverter.GetRootLink();
-            var catalogRef = _contentLoader.GetChildren<CatalogContentBase>(rootLink).First();
+            //    var search = new IrtRetSearch()
 
-            var nodeQueue = new Queue<CatalogContentBase>(new List<CatalogContentBase>() { catalogRef });
+            return $"Found 1 words";
+        }
 
+        public string oldExecute()
+        {
             var tf = new TokenizeFactory(abbreviations, stopwords);
             var sentencesTokenize = tf.CreateSentencesTokenize();
             var wordTokenize = tf.CreateWordTokenize();
             var vocabulary = new Vocabulary();
-            while (nodeQueue.Any())
-            {
-                var contentData = nodeQueue.Dequeue();
 
+            foreach (var contentData in _contentLoader.GetAllChildren<CatalogContentBase>(_referenceConverter.GetRootLink()))
+            {
                 if (contentData is MovieProduct movieProduct)
                 {
                     var title = new List<string>() { movieProduct.Title, movieProduct.Summery };
@@ -55,13 +57,6 @@ namespace MovieShop.Business.ScheduledJob
                             vocabulary.Insert(words);
                         }
                     }
-                }
-
-                var children = _contentLoader.GetChildren<CatalogContentBase>(contentData.ContentLink);
-
-                foreach (var child in children)
-                {
-                    nodeQueue.Enqueue(child);
                 }
             }
             _blobRepository.Save("Vocabulary", vocabulary);

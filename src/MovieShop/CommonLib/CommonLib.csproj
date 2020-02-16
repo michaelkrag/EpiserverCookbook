@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\AssemblyScanner.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Monads\Maybe.cs" />
     <Compile Include="Monads\MaybeExtension.cs" />
     <Compile Include="Monads\MaybeValue.cs" />

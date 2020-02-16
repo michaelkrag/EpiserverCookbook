@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NLPLib.Tokenizer
+namespace NLPLib.Tokenizers
 {
     public class TokenizeFactory
     {
