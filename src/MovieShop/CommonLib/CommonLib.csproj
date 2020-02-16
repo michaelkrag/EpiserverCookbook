@@ -31,8 +31,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core.AsyncInterceptor, Version=1.7.0.0, Culture=neutral, PublicKeyToken=e33b67d3bb5581e4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.AsyncInterceptor.1.7.0\lib\net45\Castle.Core.AsyncInterceptor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,6 +53,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\CacheAsyncExtension.cs" />
+    <Compile Include="Cache\CacheDurationType.cs" />
+    <Compile Include="Cache\CacheExtension.cs" />
+    <Compile Include="Cache\ICache.cs" />
+    <Compile Include="Cache\ICacheAsync.cs" />
+    <Compile Include="Cache\Implementation\MemoryCacheAside.cs" />
+    <Compile Include="Cache\Implementation\MsObjectCache.cs" />
+    <Compile Include="Cache\Infrastructor\Concurrency.cs" />
+    <Compile Include="Cache\Infrastructor\Lock.cs" />
+    <Compile Include="Cache\Proxies\Interceptors\CacheInterceptor.cs" />
+    <Compile Include="Cache\Proxies\IProxyKeyHandler.cs" />
+    <Compile Include="Cache\Proxies\ProxyCache.cs" />
+    <Compile Include="Cache\Proxies\ProxyFactory.cs" />
+    <Compile Include="Cache\TimeOut.cs" />
+    <Compile Include="Cookies\CookieRepository.cs" />
+    <Compile Include="Cookies\Helpers\CookieHelper.cs" />
+    <Compile Include="Cookies\Helpers\ICookieHelper.cs" />
+    <Compile Include="Cookies\ICookieRepository.cs" />
     <Compile Include="Extensions\AssemblyScanner.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Monads\Maybe.cs" />
@@ -48,6 +78,9 @@
     <Compile Include="Monads\MaybeValue.cs" />
     <Compile Include="Monads\MaybeNone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

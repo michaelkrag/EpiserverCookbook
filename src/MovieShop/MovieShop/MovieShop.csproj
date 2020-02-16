@@ -316,6 +316,8 @@
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ItemGroup>
+    <Compile Include="Adapters\Cache\EpiCache.cs" />
+    <Compile Include="Adapters\DocumentStore\ObjectGenerator.cs" />
     <Compile Include="Business\Factory\DependencyInjectionConfig.cs" />
     <Compile Include="Business\Factory\IViewModelFactory.cs" />
     <Compile Include="Business\Factory\PageViewModelExtensions.cs" />
