@@ -317,6 +317,9 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ItemGroup>
     <Compile Include="Adapters\Cache\EpiCache.cs" />
+    <Compile Include="Adapters\DocumentStore\ContentMapper.cs" />
+    <Compile Include="Adapters\DocumentStore\DocumentStore.cs" />
+    <Compile Include="Adapters\DocumentStore\IContentMapper.cs" />
     <Compile Include="Adapters\DocumentStore\ObjectGenerator.cs" />
     <Compile Include="Business\Factory\DependencyInjectionConfig.cs" />
     <Compile Include="Business\Factory\IViewModelFactory.cs" />
@@ -331,10 +334,8 @@
     <Compile Include="Business\Services\Blobstore\Models\FileInfo.cs" />
     <Compile Include="Business\Services\Search\AutocompleateService.cs" />
     <Compile Include="Business\Services\Search\IAutocompleateService.cs" />
-    <Compile Include="Business\Services\Search\ITernaryTreeFactory.cs" />
     <Compile Include="Business\Services\Search\Models\TernaryTreeModel.cs" />
     <Compile Include="Business\Services\Search\TernarySearchService.cs" />
-    <Compile Include="Business\Services\Search\TernaryTreeFactory.cs" />
     <Compile Include="Controllers\BasePageController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Features\Catalog\Products\MovieProductController.cs" />
@@ -353,6 +354,9 @@
     <Compile Include="Foundation\Menu\Models\IMenu.cs" />
     <Compile Include="Features\Menu\Models\MenuItemPage.cs" />
     <Compile Include="Features\Menu\Models\SubMenuItemPage.cs" />
+    <Compile Include="Foundation\Search\ISearch.cs" />
+    <Compile Include="Foundation\Search\ITernaryTreeFactory.cs" />
+    <Compile Include="Foundation\Search\TernaryTreeFactory.cs" />
     <Compile Include="Foundation\Settings\BaseSettingsPage.cs" />
     <Compile Include="Foundation\Extensions\ContentAreaExtension.cs" />
     <Compile Include="Foundation\Extensions\ContentAreaItemExtension.cs" />

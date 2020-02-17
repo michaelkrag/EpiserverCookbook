@@ -4,12 +4,14 @@ using EPiServer.PlugIn;
 using EPiServer.Scheduler;
 using Mediachase.Commerce.Catalog;
 using MovieShop.Business.Services.Blobstore;
-using MovieShop.Features.Catalog.Products;
 using MovieShop.Foundation.Extensions;
+using MovieShop.Foundation.Search;
 using NLPLib.Search;
+using NLPLib.Search.DocumentStores;
 using NLPLib.Tokenizers;
-using NLPLib.Tools.Wordbook;
+using NLPLib.Vocabularys;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace MovieShop.Business.ScheduledJob
@@ -21,7 +23,7 @@ namespace MovieShop.Business.ScheduledJob
         private readonly IContentLoader _contentLoader;
         private readonly IBlobRepository _blobRepository;
         private static Dictionary<string, string> abbreviations = new Dictionary<string, string>() { { "u.s.", "United States" }, { "dr.", "doctor" }, { "jr.", " junior" }, { "mr.", "mister" }, { "l.a.", "Los Angeles" } };
-        private static HashSet<string> stopwords = new HashSet<string>() { "-", };
+        private static HashSet<string> stopwords = new HashSet<string>() { "-", "!", "?", ".", "\"", "(", ")", ":", ";", "," };
 
         public VocabularyScheduledJob(ReferenceConverter referenceConverter, IContentLoader contentLoader, IBlobRepository blobRepository)
         {
@@ -32,11 +34,28 @@ namespace MovieShop.Business.ScheduledJob
 
         public override string Execute()
         {
-            //    var search = new IrtRetSearch()
+            var tokinizer = new Tokinizer(stopwords);
+            var documentStore = new DocumentStorageMemory();
+            var vocabulary = new Vocabulary();
+            var search = new IrtRetSearch(vocabulary, documentStore, tokinizer);
+            var numberOfDocuments = 0;
+            foreach (var contentData in _contentLoader.GetAllChildren<CatalogContentBase>(_referenceConverter.GetRootLink()))
+            {
+                if (contentData is ISearch movieProduct)
+                {
+                    search.Indexing<ISearch>(contentData.ContentLink.ID, movieProduct);
+                    numberOfDocuments++;
+                    Debug.WriteLine(movieProduct.Title);
+                }
+            }
 
-            return $"Found 1 words";
+            var vocabularyEntrys = vocabulary.Export();
+            _blobRepository.Save("Vocabulary", vocabularyEntrys);
+
+            return $"Number of documents; {numberOfDocuments}, number of words {vocabularyEntrys.Count()}";
         }
 
+        /*
         public string oldExecute()
         {
             var tf = new TokenizeFactory(abbreviations, stopwords);
@@ -61,6 +80,6 @@ namespace MovieShop.Business.ScheduledJob
             }
             _blobRepository.Save("Vocabulary", vocabulary);
             return $"Found {vocabulary.Count()} words";
-        }
+        }*/
     }
 }

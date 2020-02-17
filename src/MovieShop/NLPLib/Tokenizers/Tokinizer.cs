@@ -20,7 +20,7 @@ namespace NLPLib.Tokenizers
             var index = 0;
             foreach ((var ch, int i) in text.Select((value, i) => (value, i)))
             {
-                if (ch == ' ' || ch == ',' || ch == '-')
+                if (ch == ' ')
                 {
                     if (stringBuilder.Length > 0)
                     {
@@ -29,7 +29,7 @@ namespace NLPLib.Tokenizers
                     }
                     index = i + 1;
                 }
-                else if (ch == '!' || ch == '?' || ch == '.')
+                else if (ch == '!' || ch == '?' || ch == '.' || ch == '"' || ch == '(' || ch == ')' || ch == ':' || ch == ';' || ch == '-' || ch == ',')
                 {
                     if (stringBuilder.Length > 0)
                     {

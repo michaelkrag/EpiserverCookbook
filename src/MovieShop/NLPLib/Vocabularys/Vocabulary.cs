@@ -8,7 +8,7 @@ namespace NLPLib.Vocabularys
 {
     public class Vocabulary : IVocabulary
     {
-        public ConcurrentDictionary<string, VocabularyEntry> _words = new ConcurrentDictionary<string, VocabularyEntry>();
+        private ConcurrentDictionary<string, VocabularyEntry> _words = new ConcurrentDictionary<string, VocabularyEntry>();
         private int _index = 0;
 
         public int NumberOfWords => _index;
@@ -45,6 +45,23 @@ namespace NLPLib.Vocabularys
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public IEnumerable<VocabularyItem> Export()
+        {
+            foreach (var term in _words)
+            {
+                yield return new VocabularyItem() { Term = term.Key, Occurs = term.Value.Occurs, TermId = term.Value.TermId };
+            }
+        }
+
+        public void Import(IEnumerable<VocabularyItem> terms)
+        {
+            _words = new ConcurrentDictionary<string, VocabularyEntry>();
+            foreach (var term in terms)
+            {
+                _words.TryAdd(term.Term, new VocabularyEntry(term.TermId, term.Occurs));
+            }
         }
     }
 }

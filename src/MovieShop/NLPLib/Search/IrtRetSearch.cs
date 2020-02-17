@@ -1,4 +1,5 @@
-﻿using NLPLib.Search.DocumentStores;
+﻿using NLPLib.Search.Attributes;
+using NLPLib.Search.DocumentStores;
 using NLPLib.Search.Index;
 using NLPLib.Search.Models;
 using NLPLib.Search.Scores;
@@ -34,15 +35,18 @@ namespace NLPLib.Search
             var numberOfTerms = 0;
             foreach (var member in typeof(TObj).GetProperties())
             {
-                if (member.PropertyType == typeof(string))
+                var attribute = member.GetCustomAttributes(typeof(IndexingAttribute), true).FirstOrDefault();
+                if (attribute != null && member.PropertyType == typeof(string))
                 {
                     var text = member.GetValue(obj, null) as string;
-
-                    foreach (var token in _tokinizer.GetTokens(text))
+                    if (!string.IsNullOrEmpty(text))
                     {
-                        numberOfTerms++;
-                        var wordId = _vocabulary.GetOrAddIndex(token.Term.ToLower());
-                        _invertedIndex.Insert(wordId, documentId, token.Index);
+                        foreach (var token in _tokinizer.GetTokens(text))
+                        {
+                            numberOfTerms++;
+                            var wordId = _vocabulary.GetOrAddIndex(token.Term.ToLower());
+                            _invertedIndex.Insert(wordId, documentId, token.Index);
+                        }
                     }
                 }
             }

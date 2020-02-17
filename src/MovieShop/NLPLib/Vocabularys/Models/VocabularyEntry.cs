@@ -16,6 +16,12 @@ namespace NLPLib.Vocabularys.Models
             TermId = termId;
         }
 
+        public VocabularyEntry(int termId, int occurs)
+        {
+            TermId = termId;
+            Occurs = occurs;
+        }
+
         public void Occurred()
         {
             Occurs++;

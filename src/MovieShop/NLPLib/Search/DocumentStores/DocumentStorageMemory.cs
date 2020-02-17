@@ -7,13 +7,13 @@ namespace NLPLib.Search.DocumentStores
     {
         private Dictionary<int, object> _storage = new Dictionary<int, object>();
 
-        public int Insert<TObj>(int documentID, TObj obj)
+        public virtual int Insert<TObj>(int documentID, TObj obj)
         {
             _storage[documentID] = obj;
             return documentID;
         }
 
-        public TObj Get<TObj>(int id)
+        public virtual TObj Get<TObj>(int id)
         {
             return (TObj)_storage[id];
         }

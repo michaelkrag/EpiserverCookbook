@@ -1,6 +1,7 @@
 ﻿using CommonLib.Monads;
 using MovieShop.Business.Services.Search;
 using MovieShop.Business.Services.Search.Models;
+using NLPLib.TernaryTree;
 using NLPLib.Tools.Spelling;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,11 @@ namespace MovieShop.Controllers
 {
     public class SearchController : Controller
     {
-        private TernaryTreeService _ternaryTreeService;
+        private ITernarySearch _ternarySearch;
 
-        public SearchController(TernaryTreeService ternaryTreeService)
+        public SearchController(ITernarySearch ternarySearch)
         {
-            _ternaryTreeService = ternaryTreeService;
+            _ternarySearch = ternarySearch;
         }
 
         // GET: Search
@@ -29,9 +30,9 @@ namespace MovieShop.Controllers
                 var tokens = q.Split(' ');
                 ///var result = _ternaryTreeService.Search(q);
                 var alphabet = "abcdefghijklmnopqrstuvwxyz";
-                var sc = new SpellCorrector<TernaryTreeModel>(_ternaryTreeService, alphabet.ToArray());
-                var result = sc.Candidates(tokens.Last());
-                var list = result.Select(x => x.Word).Take(10);
+                //    var sc = new SpellCorrector<TernaryTreeModel>(_ternaryTreeService, alphabet.ToArray());
+                var result = _ternarySearch.Compleate(tokens.Last());//sc.Candidates(tokens.Last());
+                var list = result.Select(x => x).Take(10);
 
                 return Json(list, JsonRequestBehavior.AllowGet);
             }

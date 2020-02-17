@@ -5,6 +5,8 @@ using CommonLib.Extensions;
 using System;
 using System.Linq;
 using MovieShop.Infrastructure.DependencyInjection.Extensions;
+using MovieShop.Foundation.Search;
+using NLPLib.TernaryTree;
 
 namespace MovieShop.Infrastructure.DependencyInjection
 {
@@ -22,8 +24,8 @@ namespace MovieShop.Infrastructure.DependencyInjection
             container.AddTransient<IBlobFilenameRepository, BlobFilenameRepository>();
 
             container.AddTransient<IBlobRepository, BlobRepository>();
-            container.AddTransient<ITernaryTreeFactory, TernaryTreeFactory>();
-            container.AddSingleton<TernaryTreeService>(x => x.GetInstance<ITernaryTreeFactory>().GenerateTree());
+            container.AddSingleton<ITernaryTreeFactory, TernaryTreeFactory>();
+            container.AddSingleton<ITernarySearch>(x => x.GetInstance<ITernaryTreeFactory>().GenerateTree());
         }
 
         public static void SetupDefaultConvention(IServiceConfigurationProvider container)

@@ -7,7 +7,7 @@ using System.Web;
 
 namespace MovieShop.Business.Services.Search
 {
-    public class TernaryTreeService : TernarySearch<TernaryTreeModel>
-    {
-    }
+    /* public class TernaryTreeService : TernarySearch<TernaryTreeModel>
+     {
+     }*/
 }

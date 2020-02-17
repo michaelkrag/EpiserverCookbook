@@ -7,7 +7,7 @@ namespace MovieShop.Adapters.DocumentStore
     {
         private static ProxyGenerator _proxyGenerator = new ProxyGenerator();
 
-        private static TInterface Generate<TInterface>() where TInterface : class
+        public static TInterface Generate<TInterface>() where TInterface : class
         {
             return _proxyGenerator.CreateInterfaceProxyWithoutTarget<TInterface>(new Interceptor());
         }

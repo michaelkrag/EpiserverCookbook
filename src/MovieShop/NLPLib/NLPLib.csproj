@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Search\Attributes\IndexingAttribute.cs" />
     <Compile Include="Search\DocumentStores\DocumentStorageMemory.cs" />
     <Compile Include="Search\DocumentStores\IDocumentStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -53,6 +54,9 @@
     <Compile Include="Search\Models\SearchHit.cs" />
     <Compile Include="Search\Scores\Bm25.cs" />
     <Compile Include="Search\Scores\IScore.cs" />
+    <Compile Include="TernaryTree\ITernarySearch.cs" />
+    <Compile Include="TernaryTree\Models\TernarySearchNode.cs" />
+    <Compile Include="TernaryTree\TernarySearch.cs" />
     <Compile Include="Tokenizers\ITokinizer.cs" />
     <Compile Include="Tokenizers\Models\Token.cs" />
     <Compile Include="Tokenizers\SentencesTokenize.cs" />
@@ -67,6 +71,7 @@
     <Compile Include="Tools\Wordbook\Vocabulary.cs" />
     <Compile Include="Vocabularys\IVocabulary.cs" />
     <Compile Include="Vocabularys\Models\VocabularyEntry.cs" />
+    <Compile Include="Vocabularys\Models\VocabularyItem.cs" />
     <Compile Include="Vocabularys\Models\WordInfo.cs" />
     <Compile Include="Vocabularys\Vocabulary.cs" />
   </ItemGroup>

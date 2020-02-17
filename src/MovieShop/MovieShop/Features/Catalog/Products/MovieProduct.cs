@@ -1,13 +1,14 @@
 ﻿using EPiServer.Commerce.Catalog.ContentTypes;
 using EPiServer.Commerce.Catalog.DataAnnotations;
 using EPiServer.Web;
+using MovieShop.Foundation.Search;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace MovieShop.Features.Catalog.Products
 {
     [CatalogContentType(DisplayName = "MovieProduct", MetaClassName = "Movie_Product", GUID = "D96324E3-2090-4A48-AAFA-1B21A1DC2FA6", Description = "")]
-    public class MovieProduct : ProductContent
+    public class MovieProduct : ProductContent, ISearch
     {
         [Display(Name = "Adult")]
         public virtual bool Adult { get; set; }
