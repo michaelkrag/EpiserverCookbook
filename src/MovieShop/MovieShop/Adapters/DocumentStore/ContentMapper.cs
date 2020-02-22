@@ -7,9 +7,9 @@ namespace MovieShop.Adapters.DocumentStore
 {
     public class ContentMapper : IContentMapper
     {
-        public TInterface Map<TInterface>(object content) where TInterface : class
+        public object Map<TInterface>(object content) where TInterface : class
         {
-            var obj = ObjectGenerator.Generate<TInterface>();
+            var obj = ObjectGenerator.Generate<TInterface>(null);
             return obj;
         }
     }

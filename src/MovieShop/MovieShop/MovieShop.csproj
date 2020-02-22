@@ -59,6 +59,9 @@
     <Reference Include="Castle.Windsor, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Windsor.4.1.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="Dynamitey, Version=2.0.9.136, Culture=neutral, PublicKeyToken=cbf53ea3aeb972c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dynamitey.2.0.9.136\lib\net40\Dynamitey.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -148,6 +151,9 @@
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ImpromptuInterface, Version=7.0.1.0, Culture=neutral, PublicKeyToken=0b1781c923b2975b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImpromptuInterface.7.0.1\lib\net40\ImpromptuInterface.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
@@ -335,7 +341,6 @@
     <Compile Include="Business\Services\Search\AutocompleateService.cs" />
     <Compile Include="Business\Services\Search\IAutocompleateService.cs" />
     <Compile Include="Business\Services\Search\Models\TernaryTreeModel.cs" />
-    <Compile Include="Business\Services\Search\TernarySearchService.cs" />
     <Compile Include="Controllers\BasePageController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Features\Catalog\Products\MovieProductController.cs" />
@@ -355,6 +360,7 @@
     <Compile Include="Features\Menu\Models\MenuItemPage.cs" />
     <Compile Include="Features\Menu\Models\SubMenuItemPage.cs" />
     <Compile Include="Foundation\Search\ISearch.cs" />
+    <Compile Include="Foundation\Search\SearchFactory.cs" />
     <Compile Include="Foundation\Search\ITernaryTreeFactory.cs" />
     <Compile Include="Foundation\Search\TernaryTreeFactory.cs" />
     <Compile Include="Foundation\Settings\BaseSettingsPage.cs" />

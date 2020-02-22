@@ -2,8 +2,8 @@
 {
     public interface IDocumentStorage
     {
-        int Insert<TObj>(int documentId, TObj obj);
+        int Insert<TObj>(int documentId, TObj obj) where TObj : class;
 
-        TObj Get<TObj>(int id);
+        TObj Get<TObj>(int id) where TObj : class;
     }
 }

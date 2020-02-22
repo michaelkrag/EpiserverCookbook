@@ -22,14 +22,16 @@ namespace MovieShop.Business.ScheduledJob
         private readonly ReferenceConverter _referenceConverter;
         private readonly IContentLoader _contentLoader;
         private readonly IBlobRepository _blobRepository;
+        private readonly ISentencezer _sentencezer;
         private static Dictionary<string, string> abbreviations = new Dictionary<string, string>() { { "u.s.", "United States" }, { "dr.", "doctor" }, { "jr.", " junior" }, { "mr.", "mister" }, { "l.a.", "Los Angeles" } };
         private static HashSet<string> stopwords = new HashSet<string>() { "-", "!", "?", ".", "\"", "(", ")", ":", ";", "," };
 
-        public VocabularyScheduledJob(ReferenceConverter referenceConverter, IContentLoader contentLoader, IBlobRepository blobRepository)
+        public VocabularyScheduledJob(ReferenceConverter referenceConverter, IContentLoader contentLoader, IBlobRepository blobRepository, ISentencezer sentencezer)
         {
             _referenceConverter = referenceConverter;
             _contentLoader = contentLoader;
             _blobRepository = blobRepository;
+            _sentencezer = sentencezer;
         }
 
         public override string Execute()
@@ -51,7 +53,7 @@ namespace MovieShop.Business.ScheduledJob
 
             var vocabularyEntrys = vocabulary.Export();
             _blobRepository.Save("Vocabulary", vocabularyEntrys);
-
+            _blobRepository.Save("Search", search.Export());
             return $"Number of documents; {numberOfDocuments}, number of words {vocabularyEntrys.Count()}";
         }
 

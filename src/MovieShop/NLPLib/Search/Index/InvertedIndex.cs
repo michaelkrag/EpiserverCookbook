@@ -3,25 +3,17 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NLPLib.Search.Index
 {
     public class InvertedIndex
     {
-        private ConcurrentDictionary<int, TermInfomation> _invertedIndex = new ConcurrentDictionary<int, TermInfomation>();
-        private int _numberOfDocument { get; set; } = 0;
-
-        public InvertedIndex()
-        {
-        }
+        public ConcurrentDictionary<int, TermInfomation> _invertedIndex = new ConcurrentDictionary<int, TermInfomation>();
 
         public void Insert(int termId, int documentId, int termOffser)
         {
             var term = _invertedIndex.GetOrAdd(termId, new TermInfomation());
             term.AddDocumentIndex(documentId, termOffser);
-            _numberOfDocument = _invertedIndex.Count();
         }
 
         public DocumentHit[] Search(int termId)

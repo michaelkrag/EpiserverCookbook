@@ -1,30 +1,24 @@
 ﻿using MovieShop.Business.Services.Blobstore;
 using NLPLib.TernaryTree;
 using NLPLib.Vocabularys;
-using NLPLib.Vocabularys.Models;
-using System.Collections.Generic;
 
 namespace MovieShop.Foundation.Search
 {
     public class TernaryTreeFactory : ITernaryTreeFactory
     {
         private readonly IBlobRepository _blobRepository;
+        private readonly IVocabulary _vocabulary;
 
-        public TernaryTreeFactory(IBlobRepository blobRepository)
+        public TernaryTreeFactory(IBlobRepository blobRepository, IVocabulary vocabulary)
         {
             _blobRepository = blobRepository;
+            _vocabulary = vocabulary;
         }
 
         public ITernarySearch GenerateTree()
         {
-            var vocabularyItems = _blobRepository.Load<List<VocabularyItem>>("Vocabulary");
             var ternarySearch = new TernarySearch();
-            if (vocabularyItems != null)
-            {
-                var vocabulary = new Vocabulary();
-                vocabulary.Import(vocabularyItems);
-                ternarySearch.Insert(vocabulary);
-            }
+            ternarySearch.Insert(_vocabulary);
             return ternarySearch;
         }
     }

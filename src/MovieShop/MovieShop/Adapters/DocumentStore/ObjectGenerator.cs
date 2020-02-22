@@ -7,9 +7,11 @@ namespace MovieShop.Adapters.DocumentStore
     {
         private static ProxyGenerator _proxyGenerator = new ProxyGenerator();
 
-        public static TInterface Generate<TInterface>() where TInterface : class
+        public static object Generate<TInterface>(object obj34) where TInterface : class
         {
-            return _proxyGenerator.CreateInterfaceProxyWithoutTarget<TInterface>(new Interceptor());
+            // var obj = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TInterface>(new Interceptor());
+            var obj = _proxyGenerator.CreateInterfaceProxyWithoutTarget(typeof(TInterface), new Interceptor());
+            return obj;
         }
     }
 
@@ -20,7 +22,7 @@ namespace MovieShop.Adapters.DocumentStore
             Console.WriteLine($"Before target call {invocation.Method.Name}");
             try
             {
-                invocation.Proceed();
+                //  invocation.Proceed();
             }
             catch (Exception ex)
             {

@@ -11,13 +11,13 @@ using System.Linq;
 
 namespace NLPLib.Search
 {
-    public class IrtRetSearch
+    public class IrtRetSearch : IIrtRetSearch
     {
         private readonly ITokinizer _tokinizer;
         private InvertedIndex _invertedIndex = new InvertedIndex();
         private readonly IVocabulary _vocabulary;
         private readonly IDocumentStorage _documentStorage;
-        private Dictionary<int, int> _numberOfTerms = new Dictionary<int, int>();
+        private Dictionary<int, int> _documentNumberOfTerms = new Dictionary<int, int>();
         private int NumberOfDocuments = 0;
         public int NumberOfTerms = 0;
 
@@ -28,7 +28,7 @@ namespace NLPLib.Search
             _tokinizer = tokinizer;
         }
 
-        public int Indexing<TObj>(int documentId, TObj obj)
+        public int Indexing<TObj>(int documentId, TObj obj) where TObj : class
         {
             _documentStorage.Insert<TObj>(documentId, obj);
             NumberOfDocuments++;
@@ -51,11 +51,11 @@ namespace NLPLib.Search
                 }
             }
             NumberOfTerms += numberOfTerms;
-            _numberOfTerms[documentId] = numberOfTerms;
+            _documentNumberOfTerms[documentId] = numberOfTerms;
             return documentId;
         }
 
-        public TObj GetDocument<TObj>(int id)
+        public TObj GetDocument<TObj>(int id) where TObj : class
         {
             return _documentStorage.Get<TObj>(id);
         }
@@ -66,12 +66,12 @@ namespace NLPLib.Search
             var scoreCalculater = new Bm25(NumberOfDocuments, (double)NumberOfTerms / NumberOfDocuments);
             foreach (var docHit in documentHitList)
             {
-                var score = scoreCalculater.Score(docHit.DocumentId, documentHitList.Count(), docHit.Offsets.Count(), _numberOfTerms[docHit.DocumentId]);
+                var score = scoreCalculater.Score(docHit.DocumentId, documentHitList.Count(), docHit.Offsets.Count(), _documentNumberOfTerms[docHit.DocumentId]);
                 yield return new DocumentScore() { DocumentId = docHit.DocumentId, Score = score };
             }
         }
 
-        public IEnumerable<SearchHit<TObj>> Search<TObj>(string str)
+        public IEnumerable<SearchHit<TObj>> Search<TObj>(string str) where TObj : class
         {
             var resultContainer = new ConcurrentDictionary<int, double>();
             var terms = _tokinizer.GetTokens(str.ToLower());
@@ -88,6 +88,25 @@ namespace NLPLib.Search
                 }
             }
             return resultContainer.Select(x => new SearchHit<TObj>() { Score = x.Value, Document = _documentStorage.Get<TObj>(x.Key) });
+        }
+
+        public void Import(SearchExport searchExport)
+        {
+            _invertedIndex = searchExport.InvertedIndex;
+            _documentNumberOfTerms = searchExport.DocumentNumberOfTerms;
+            NumberOfDocuments = searchExport.NumberOfDocuments;
+            NumberOfTerms = searchExport.NumberOfTerms;
+        }
+
+        public SearchExport Export()
+        {
+            return new SearchExport()
+            {
+                NumberOfTerms = NumberOfTerms,
+                NumberOfDocuments = NumberOfDocuments,
+                DocumentNumberOfTerms = _documentNumberOfTerms,
+                InvertedIndex = _invertedIndex
+            };
         }
     }
 }

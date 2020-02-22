@@ -41,26 +41,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NGrams\INGram.cs" />
+    <Compile Include="NGrams\Models\ContextWords.cs" />
+    <Compile Include="NGrams\NGram.cs" />
     <Compile Include="Search\Attributes\IndexingAttribute.cs" />
     <Compile Include="Search\DocumentStores\DocumentStorageMemory.cs" />
     <Compile Include="Search\DocumentStores\IDocumentStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\IIrtRetSearch.cs" />
     <Compile Include="Search\Index\InvertedIndex.cs" />
     <Compile Include="Search\Index\Models\DocumentHit.cs" />
     <Compile Include="Search\Index\Models\DocumentInformation.cs" />
     <Compile Include="Search\Index\Models\TermInfomation.cs" />
     <Compile Include="Search\IrtRetSearch.cs" />
     <Compile Include="Search\Models\DocumentScore.cs" />
+    <Compile Include="Search\Models\SearchExport.cs" />
     <Compile Include="Search\Models\SearchHit.cs" />
     <Compile Include="Search\Scores\Bm25.cs" />
     <Compile Include="Search\Scores\IScore.cs" />
     <Compile Include="TernaryTree\ITernarySearch.cs" />
     <Compile Include="TernaryTree\Models\TernarySearchNode.cs" />
     <Compile Include="TernaryTree\TernarySearch.cs" />
+    <Compile Include="Tokenizers\ISentencezer.cs" />
     <Compile Include="Tokenizers\ITokinizer.cs" />
+    <Compile Include="Tokenizers\Sentencezer.cs" />
     <Compile Include="Tokenizers\Models\Token.cs" />
-    <Compile Include="Tokenizers\SentencesTokenize.cs" />
-    <Compile Include="Tokenizers\TokenizeFactory.cs" />
     <Compile Include="Tokenizers\Tokinizer.cs" />
     <Compile Include="Tokenizers\WordTokenize.cs" />
     <Compile Include="Tools\Spelling\SpellCorrector.cs" />

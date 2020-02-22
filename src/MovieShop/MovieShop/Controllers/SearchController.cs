@@ -13,11 +13,11 @@ namespace MovieShop.Controllers
 {
     public class SearchController : Controller
     {
-        private ITernarySearch _ternarySearch;
+        private readonly IAutocompleateService _autocompleateService;
 
-        public SearchController(ITernarySearch ternarySearch)
+        public SearchController(IAutocompleateService autocompleateService)
         {
-            _ternarySearch = ternarySearch;
+            _autocompleateService = autocompleateService;
         }
 
         // GET: Search
@@ -27,12 +27,7 @@ namespace MovieShop.Controllers
         {
             if (!string.IsNullOrEmpty(q))
             {
-                var tokens = q.Split(' ');
-                ///var result = _ternaryTreeService.Search(q);
-                var alphabet = "abcdefghijklmnopqrstuvwxyz";
-                //    var sc = new SpellCorrector<TernaryTreeModel>(_ternaryTreeService, alphabet.ToArray());
-                var result = _ternarySearch.Compleate(tokens.Last());//sc.Candidates(tokens.Last());
-                var list = result.Select(x => x).Take(10);
+                var list = _autocompleateService.GetSuggestions(q);
 
                 return Json(list, JsonRequestBehavior.AllowGet);
             }
