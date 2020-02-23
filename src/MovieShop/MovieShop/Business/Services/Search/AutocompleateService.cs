@@ -1,4 +1,6 @@
 ﻿using MovieShop.Foundation.Search;
+using NLPLib.NGrams;
+using NLPLib.NGrams.Models;
 using NLPLib.Search;
 using NLPLib.TernaryTree;
 using System;
@@ -12,11 +14,13 @@ namespace MovieShop.Business.Services.Search
     {
         private readonly ITernarySearch _ternarySearch;
         private readonly IIrtRetSearch _irtRetSearch;
+        private readonly INGram _iNGram;
 
-        public AutocompleateService(ITernarySearch ternarySearch, IIrtRetSearch irtRetSearch)
+        public AutocompleateService(ITernarySearch ternarySearch, IIrtRetSearch irtRetSearch, INGram iNGram)
         {
             _ternarySearch = ternarySearch;
             _irtRetSearch = irtRetSearch;
+            _iNGram = iNGram;
         }
 
         public IEnumerable<string> GetSuggestions(string query)
@@ -29,13 +33,18 @@ namespace MovieShop.Business.Services.Search
                 }
                 var tokens = query.Split(' ');
                 var result = _ternarySearch.Compleate(tokens.Last());
+
                 var list = result.Select(x => x).Take(7);
+                foreach (var term in result)
+                {
+                    PredictQuery(tokens.Take(tokens.Length - 1), term);
+                }
 
                 var newQuery = string.Join(" ", tokens.Take(tokens.Length - 1).ToList());
 
                 var suggestions = list.Select(x => $"{newQuery} {x}");
 
-                //      var suggesions = _irtRetSearch.Search<ISearch>(tryQuerys).OrderByDescending(x => x.Score).Take(8).Select(x => x.Document.Title).ToList();
+                //        var suggesions = _irtRetSearch.Search<ISearch>(query, 5).ToList();
 
                 return suggestions;
             }
@@ -43,6 +52,18 @@ namespace MovieShop.Business.Services.Search
             {
                 throw;
             }
+        }
+
+        public IEnumerable<SuggestionHit> PredictQuery(IEnumerable<string> queryTerms, string currentTerm)
+        {
+            var suggestion = new List<IEnumerable<SuggestionHit>>();
+            var all = new List<string>(queryTerms);
+            all.Add(currentTerm);
+            foreach (var term in all)
+            {
+                suggestion.Add(_iNGram.GetSuggestions(term));
+            }
+            return suggestion.First();
         }
     }
 }

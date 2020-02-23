@@ -64,13 +64,13 @@ namespace NLPLib.NGrams
             }
         }
 
-        public IEnumerable<string> GetSuggestions(string word)
+        public IEnumerable<SuggestionHit> GetSuggestions(string word)
         {
             if (_nGams.TryGetValue(word, out var value))
             {
                 return value.GetWords();
             }
-            return Enumerable.Empty<string>();
+            return Enumerable.Empty<SuggestionHit>();
         }
 
         public ConcurrentDictionary<string, ContextWords> Export()

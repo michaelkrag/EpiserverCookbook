@@ -5,6 +5,6 @@ namespace NLPLib.Search
 {
     public interface IIrtRetSearch
     {
-        IEnumerable<SearchHit<TObj>> Search<TObj>(string str) where TObj : class;
+        IEnumerable<SearchHit<TObj>> Search<TObj>(string str, int numberOfDucuments) where TObj : class;
     }
 }

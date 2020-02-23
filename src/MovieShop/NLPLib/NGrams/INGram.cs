@@ -1,6 +1,10 @@
-﻿namespace NLPLib.NGrams
+﻿using NLPLib.NGrams.Models;
+using System.Collections.Generic;
+
+namespace NLPLib.NGrams
 {
-    public class INGram
+    public interface INGram
     {
+        IEnumerable<SuggestionHit> GetSuggestions(string word);
     }
 }

@@ -14,6 +14,7 @@ using NLPLib.Vocabularys.Models;
 using NLPLib.Search.DocumentStores;
 using MovieShop.Adapters.DocumentStore;
 using NLPLib.Tokenizers;
+using NLPLib.NGrams;
 
 namespace MovieShop.Infrastructure.DependencyInjection
 {
@@ -39,7 +40,8 @@ namespace MovieShop.Infrastructure.DependencyInjection
             container.AddSingleton<ITokinizer>(new Tokinizer(new HashSet<string>() { "-", "!", "?", ".", "\"", "(", ")", ":", ";", "," }));
             container.AddSingleton<IDocumentStorage, DocumentStore>();
             container.AddSingleton<SearchFactory, SearchFactory>();
-            container.AddSingleton<IIrtRetSearch>(x => x.GetInstance<SearchFactory>().Create());
+            container.AddSingleton<IIrtRetSearch>(x => x.GetInstance<SearchFactory>().CreateSearch());
+            container.AddSingleton<INGram>(x => x.GetInstance<SearchFactory>().CreateNGram());
             container.AddSingleton<ISentencezer>(new Sentencezer(new Tokinizer(new HashSet<string>() { "-", "\"", "(", ")", ":", ";", "," })));
         }
 

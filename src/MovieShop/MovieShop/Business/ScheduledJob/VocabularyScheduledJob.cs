@@ -6,6 +6,7 @@ using Mediachase.Commerce.Catalog;
 using MovieShop.Business.Services.Blobstore;
 using MovieShop.Foundation.Extensions;
 using MovieShop.Foundation.Search;
+using NLPLib.NGrams;
 using NLPLib.Search;
 using NLPLib.Search.DocumentStores;
 using NLPLib.Tokenizers;
@@ -40,21 +41,24 @@ namespace MovieShop.Business.ScheduledJob
             var documentStore = new DocumentStorageMemory();
             var vocabulary = new Vocabulary();
             var search = new IrtRetSearch(vocabulary, documentStore, tokinizer);
+
+            var ngram = new NGram(5, new Sentencezer(new Tokinizer(new HashSet<string>() { "-", "\"", "(", ")", ":", ";", "," })));
             var numberOfDocuments = 0;
             foreach (var contentData in _contentLoader.GetAllChildren<CatalogContentBase>(_referenceConverter.GetRootLink()))
             {
                 if (contentData is ISearch movieProduct)
                 {
                     search.Indexing<ISearch>(contentData.ContentLink.ID, movieProduct);
+                    ngram.Insert<ISearch>(movieProduct);
                     numberOfDocuments++;
                     Debug.WriteLine(movieProduct.Title);
                 }
             }
 
-            var vocabularyEntrys = vocabulary.Export();
-            _blobRepository.Save("Vocabulary", vocabularyEntrys);
+            _blobRepository.Save("NGram", ngram.Export());
+            _blobRepository.Save("Vocabulary", vocabulary.Export());
             _blobRepository.Save("Search", search.Export());
-            return $"Number of documents; {numberOfDocuments}, number of words {vocabularyEntrys.Count()}";
+            return $"Number of documents; {numberOfDocuments}, number of words {vocabulary.Count()}";
         }
 
         /*

@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="NGrams\INGram.cs" />
     <Compile Include="NGrams\Models\ContextWords.cs" />
+    <Compile Include="NGrams\Models\SuggestionHit.cs" />
     <Compile Include="NGrams\NGram.cs" />
     <Compile Include="Search\Attributes\IndexingAttribute.cs" />
     <Compile Include="Search\DocumentStores\DocumentStorageMemory.cs" />

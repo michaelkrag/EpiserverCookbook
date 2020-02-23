@@ -8,9 +8,9 @@ namespace NLPLib.NGrams.Models
     {
         public ConcurrentDictionary<string, double> _words = new ConcurrentDictionary<string, double>();
 
-        public IEnumerable<string> GetWords()
+        public IEnumerable<SuggestionHit> GetWords()
         {
-            return _words.OrderByDescending(x => x.Value).Select(x => x.Key);
+            return _words.OrderByDescending(x => x.Value).Select(x => new SuggestionHit() { term = x.Key, Score = x.Value });
         }
 
         public void AddWord(string word, double inc)
