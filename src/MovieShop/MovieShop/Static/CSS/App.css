@@ -10,11 +10,9 @@
     padding: 10px 0;
 }
 
-
 @charset "UTF-8";
 
 /*! normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
-
 
 html {
     font-family: sans-serif;
@@ -23,12 +21,9 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
-
-
 body {
     margin: 0;
 }
-
 
 article,
 aside,
@@ -39,24 +34,19 @@ section {
     display: block;
 }
 
-
 h1 {
     font-size: 2em;
     margin: 0.67em 0;
 }
-
-
 
 figcaption,
 figure {
     display: block;
 }
 
-
 figure {
     margin: 1em 40px;
 }
-
 
 hr {
     box-sizing: content-box;
@@ -64,31 +54,24 @@ hr {
     overflow: visible;
 }
 
-
 main {
     display: block;
 }
-
 
 pre {
     font-family: monospace, monospace;
     font-size: 1em;
 }
 
-
-
 a {
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
 }
 
-
     a:active,
     a:hover {
         outline-width: 0;
     }
-
-
 
 abbr[title] {
     border-bottom: none;
@@ -96,18 +79,15 @@ abbr[title] {
     text-decoration: underline dotted;
 }
 
-
 b,
 strong {
     font-weight: inherit;
 }
 
-
 b,
 strong {
     font-weight: bolder;
 }
-
 
 code,
 kbd,
@@ -116,22 +96,18 @@ samp {
     font-size: 1em;
 }
 
-
 dfn {
     font-style: italic;
 }
-
 
 mark {
     background-color: #ff0;
     color: #000;
 }
 
-
 small {
     font-size: 80%;
 }
-
 
 sub,
 sup {
@@ -149,30 +125,23 @@ sup {
     top: -0.5em;
 }
 
-
-
 audio,
 video {
     display: inline-block;
 }
-
 
     audio:not([controls]) {
         display: none;
         height: 0;
     }
 
-
 img {
     border-style: none;
 }
 
-
 svg:not(:root) {
     overflow: hidden;
 }
-
-
 
 button,
 input,
@@ -185,17 +154,14 @@ textarea {
     margin: 0;
 }
 
-
 button {
     overflow: visible;
 }
-
 
 button,
 select {
     text-transform: none;
 }
-
 
 button,
 html [type="button"],
@@ -225,11 +191,9 @@ button,
         outline: 1px dotted ButtonText;
     }
 
-
 input {
     overflow: visible;
 }
-
 
 [type="checkbox"],
 [type="radio"] {
@@ -237,12 +201,10 @@ input {
     padding: 0;
 }
 
-
 [type="number"]::-webkit-inner-spin-button,
 [type="number"]::-webkit-outer-spin-button {
     height: auto;
 }
-
 
 [type="search"] {
     -webkit-appearance: textfield;
@@ -253,19 +215,16 @@ input {
         -webkit-appearance: none;
     }
 
-
 ::-webkit-file-upload-button {
     -webkit-appearance: button;
     font: inherit;
 }
-
 
 fieldset {
     border: 1px solid #c0c0c0;
     margin: 0 2px;
     padding: 0.35em 0.625em 0.75em;
 }
-
 
 legend {
     box-sizing: border-box;
@@ -276,45 +235,34 @@ legend {
     white-space: normal;
 }
 
-
 progress {
     display: inline-block;
     vertical-align: baseline;
 }
 
-
 textarea {
     overflow: auto;
 }
-
-
 
 details {
     display: block;
 }
 
-
 summary {
     display: list-item;
 }
-
 
 menu {
     display: block;
 }
 
-
-
 canvas {
     display: inline-block;
 }
 
-
 template {
     display: none;
 }
-
-
 
 [hidden] {
     display: none;
@@ -6407,4 +6355,13 @@ a.thumbnail {
 
 .container-padded {
     padding: 1rem 0;
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }

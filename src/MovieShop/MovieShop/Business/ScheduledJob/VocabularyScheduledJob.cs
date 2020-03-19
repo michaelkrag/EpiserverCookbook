@@ -42,20 +42,23 @@ namespace MovieShop.Business.ScheduledJob
             var vocabulary = new Vocabulary();
             var search = new IrtRetSearch(vocabulary, documentStore, tokinizer);
 
-            var ngram = new NGram(5, new Sentencezer(new Tokinizer(new HashSet<string>() { "-", "\"", "(", ")", ":", ";", "," })));
+            var bigram = new NGram(2, new Sentencezer(new Tokinizer(new HashSet<string>() { "-", "\"", "(", ")", ":", ";", "," })));
+            var trigram = new NGram(3, new Sentencezer(new Tokinizer(new HashSet<string>() { "-", "\"", "(", ")", ":", ";", "," })));
             var numberOfDocuments = 0;
             foreach (var contentData in _contentLoader.GetAllChildren<CatalogContentBase>(_referenceConverter.GetRootLink()))
             {
                 if (contentData is ISearch movieProduct)
                 {
                     search.Indexing<ISearch>(contentData.ContentLink.ID, movieProduct);
-                    ngram.Insert<ISearch>(movieProduct);
+                    bigram.Insert<ISearch>(movieProduct);
+                    trigram.Insert<ISearch>(movieProduct);
                     numberOfDocuments++;
                     Debug.WriteLine(movieProduct.Title);
                 }
             }
 
-            _blobRepository.Save("NGram", ngram.Export());
+            _blobRepository.Save("BiGram", bigram.Export());
+            _blobRepository.Save("TriGram", trigram.Export());
             _blobRepository.Save("Vocabulary", vocabulary.Export());
             _blobRepository.Save("Search", search.Export());
             return $"Number of documents; {numberOfDocuments}, number of words {vocabulary.Count()}";

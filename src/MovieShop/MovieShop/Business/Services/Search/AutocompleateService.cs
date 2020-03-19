@@ -14,13 +14,15 @@ namespace MovieShop.Business.Services.Search
     {
         private readonly ITernarySearch _ternarySearch;
         private readonly IIrtRetSearch _irtRetSearch;
-        private readonly INGram _iNGram;
+        private readonly IBiGram _biGram;
+        private readonly ITriGram _triGram;
 
-        public AutocompleateService(ITernarySearch ternarySearch, IIrtRetSearch irtRetSearch, INGram iNGram)
+        public AutocompleateService(ITernarySearch ternarySearch, IIrtRetSearch irtRetSearch, IBiGram biGram, ITriGram triGram)
         {
             _ternarySearch = ternarySearch;
             _irtRetSearch = irtRetSearch;
-            _iNGram = iNGram;
+            _biGram = biGram;
+            _triGram = triGram;
         }
 
         public IEnumerable<string> GetSuggestions(string query)
@@ -32,38 +34,46 @@ namespace MovieShop.Business.Services.Search
                     return Enumerable.Empty<string>();
                 }
                 var tokens = query.Split(' ');
-                var result = _ternarySearch.Compleate(tokens.Last());
-
-                var list = result.Select(x => x).Take(7);
-                foreach (var term in result)
+                var result = _ternarySearch.Compleate(tokens.Last()).Take(7);
+                var suggestions = new List<string>();
+                if (tokens.Length < 2)
                 {
-                    PredictQuery(tokens.Take(tokens.Length - 1), term);
+                    foreach (var word in result)
+                    {
+                        var nextWord = _biGram.GetSuggestions(word).OrderByDescending(x => x.Score).Select(x => x.term);
+                        if (nextWord.Count() > 0)
+                        {
+                            var biWord = $"{word} {nextWord.First()}";
+                            nextWord = _triGram.GetSuggestions(biWord).OrderByDescending(x => x.Score).Select(x => x.term);
+                            if (nextWord.Count() > 0)
+                            {
+                                suggestions.Add($"{biWord} {nextWord.First()}");
+                            }
+                            else
+                            {
+                                suggestions.Add($"{biWord}");
+                            }
+                        }
+                        else
+                        {
+                            suggestions.Add($"{word}");
+                        }
+                    }
                 }
-
-                var newQuery = string.Join(" ", tokens.Take(tokens.Length - 1).ToList());
-
-                var suggestions = list.Select(x => $"{newQuery} {x}");
-
+                else
+                {
+                    foreach (var word in result)
+                    {
+                        suggestions.Add($"{string.Join(" ", tokens.Take(tokens.Length - 1))} {word}");
+                    }
+                }
                 //        var suggesions = _irtRetSearch.Search<ISearch>(query, 5).ToList();
-
                 return suggestions;
             }
             catch (Exception ex)
             {
                 throw;
             }
-        }
-
-        public IEnumerable<SuggestionHit> PredictQuery(IEnumerable<string> queryTerms, string currentTerm)
-        {
-            var suggestion = new List<IEnumerable<SuggestionHit>>();
-            var all = new List<string>(queryTerms);
-            all.Add(currentTerm);
-            foreach (var term in all)
-            {
-                suggestion.Add(_iNGram.GetSuggestions(term));
-            }
-            return suggestion.First();
         }
     }
 }

@@ -1,6 +1,9 @@
 ﻿using NLPLib.Search.Attributes;
 using NLPLib.Search.DocumentStores;
+using NLPLib.Search.Extensions;
+using NLPLib.Search.Fields;
 using NLPLib.Search.Index;
+using NLPLib.Search.Index.Models;
 using NLPLib.Search.Models;
 using NLPLib.Search.Scores;
 using NLPLib.Tokenizers;
@@ -20,6 +23,7 @@ namespace NLPLib.Search
         private Dictionary<int, int> _documentNumberOfTerms = new Dictionary<int, int>();
         private int NumberOfDocuments = 0;
         public int NumberOfTerms = 0;
+        private FieldDictionary _fieldDictionary = new FieldDictionary();
 
         public IrtRetSearch(IVocabulary vocabulary, IDocumentStorage documentStorage, ITokinizer tokinizer)
         {
@@ -35,6 +39,8 @@ namespace NLPLib.Search
             var numberOfTerms = 0;
             foreach (var member in typeof(TObj).GetProperties())
             {
+                var fieldName = member.FullName();
+                var fieldId = _fieldDictionary.GetOrCreate(fieldName);
                 var attribute = member.GetCustomAttributes(typeof(IndexingAttribute), true).FirstOrDefault();
                 if (attribute != null && member.PropertyType == typeof(string))
                 {
@@ -45,7 +51,8 @@ namespace NLPLib.Search
                         {
                             numberOfTerms++;
                             var wordId = _vocabulary.GetOrAddIndex(token.Term.ToLower());
-                            _invertedIndex.Insert(wordId, documentId, token.Index);
+                            var termInfo = new TermInformation() { TermIndex = token.Index, FieldId = fieldId, StartIndex = 0, StopIndex = 0 };
+                            _invertedIndex.Insert(wordId, documentId, termInfo);
                         }
                     }
                 }
@@ -71,7 +78,7 @@ namespace NLPLib.Search
             }
         }
 
-        public IEnumerable<SearchHit<TObj>> Search<TObj>(string str, int numberOfDucuments) where TObj : class
+        public IEnumerable<SearchHit<TObj>> Search<TObj>(string str, int numberOfDocuments) where TObj : class
         {
             var resultContainer = new ConcurrentDictionary<int, double>();
             var terms = _tokinizer.GetTokens(str.ToLower());
@@ -87,7 +94,7 @@ namespace NLPLib.Search
                     resultContainer.TryUpdate(score.DocumentId, newScore, docTempScore);
                 }
             }
-            return resultContainer.OrderByDescending(x => x.Value).Take(numberOfDucuments).Select(x => new SearchHit<TObj>() { Score = x.Value, Document = _documentStorage.Get<TObj>(x.Key) });
+            return resultContainer.OrderByDescending(x => x.Value).Take(numberOfDocuments).Select(x => new SearchHit<TObj>() { Score = x.Value, Document = _documentStorage.Get<TObj>(x.Key) });
         }
 
         public void Import(SearchExport searchExport)

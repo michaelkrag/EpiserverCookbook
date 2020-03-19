@@ -12,9 +12,10 @@ namespace MovieShop.Models.ViewModels
         public TPageData CurrentPage { get; }
         public string Title { get; set; }
 
-        public PageViewModel(TPageData currentPage)
+        public PageViewModel(TPageData currentPage, string title)
         {
             CurrentPage = currentPage;
+            Title = title;
         }
     }
 
@@ -22,7 +23,7 @@ namespace MovieShop.Models.ViewModels
     {
         public TData CurrentData { get; }
 
-        public PageViewModel(TPage currentPage, TData currentData) : base(currentPage)
+        public PageViewModel(TPage currentPage, TData currentData) : base(currentPage, currentPage.Name)
         {
             CurrentData = currentData;
         }
@@ -32,7 +33,7 @@ namespace MovieShop.Models.ViewModels
     {
         public TCatalogContent CurrentContent { get; }
 
-        public CatalogViewModel(TCatalogContent catalogContent, TPage currentPage) : base(currentPage)
+        public CatalogViewModel(TCatalogContent catalogContent, TPage currentPage) : base(currentPage, catalogContent.Name)
         {
             CurrentContent = catalogContent;
         }

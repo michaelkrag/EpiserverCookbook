@@ -41,7 +41,8 @@ namespace MovieShop.Infrastructure.DependencyInjection
             container.AddSingleton<IDocumentStorage, DocumentStore>();
             container.AddSingleton<SearchFactory, SearchFactory>();
             container.AddSingleton<IIrtRetSearch>(x => x.GetInstance<SearchFactory>().CreateSearch());
-            container.AddSingleton<INGram>(x => x.GetInstance<SearchFactory>().CreateNGram());
+            container.AddSingleton<IBiGram>(x => x.GetInstance<SearchFactory>().CreateBiGram());
+            container.AddSingleton<ITriGram>(x => x.GetInstance<SearchFactory>().CreateTriGram());
             container.AddSingleton<ISentencezer>(new Sentencezer(new Tokinizer(new HashSet<string>() { "-", "\"", "(", ")", ":", ";", "," })));
         }
 

@@ -12,7 +12,7 @@ namespace MovieShop.Business.Factory
 
         public PageViewModel<TPage> Create<TPage>(TPage currentPage) where TPage : PageData
         {
-            return new PageViewModel<TPage>(currentPage).SetLayout(currentPage);
+            return new PageViewModel<TPage>(currentPage, currentPage.Name).SetLayout(currentPage);
         }
 
         public PageViewModel<TPage, TData> Create<TPage, TData>(TPage currentPage, TData CurrentData) where TPage : PageData

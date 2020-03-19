@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NLPLib.NGrams
 {
-    public class NGram : INGram
+    public class NGram : INGram, IBiGram, ITriGram
     {
         private ConcurrentDictionary<string, ContextWords> _nGams = new ConcurrentDictionary<string, ContextWords>();
         private readonly int _window;
@@ -22,7 +22,7 @@ namespace NLPLib.NGrams
             _sentencezer = sentencezer;
         }
 
-        public void Insert(string[] sentence)
+        public void InsertOld(string[] sentence)
         {
             var wordIndex = 0;
 
@@ -42,6 +42,26 @@ namespace NLPLib.NGrams
                     }
                 }
                 wordIndex++;
+            }
+        }
+
+        public void Insert5(string[] sentence)
+        {
+            for (var wordIndex = 0; wordIndex < sentence.Length - _window + 1; wordIndex++)
+            {
+                var contextWords = _nGams.GetOrAdd(sentence[wordIndex], new ContextWords());
+
+                contextWords.AddWord(sentence[wordIndex + 1], 1);
+            }
+        }
+
+        public void Insert(string[] sentence)
+        {
+            for (var wordIndex = 0; wordIndex < sentence.Length - _window + 1; wordIndex++)
+            {
+                var word = string.Join(" ", sentence.Skip(wordIndex).Take(_window - 1));
+                var contextWords = _nGams.GetOrAdd(word, new ContextWords());
+                contextWords.AddWord(sentence[wordIndex + _window - 1], 1);
             }
         }
 

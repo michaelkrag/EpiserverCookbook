@@ -6,11 +6,8 @@ using NLPLib.Search.DocumentStores;
 using NLPLib.Search.Models;
 using NLPLib.Tokenizers;
 using NLPLib.Vocabularys;
-using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace MovieShop.Foundation.Search
 {
@@ -37,9 +34,17 @@ namespace MovieShop.Foundation.Search
             return search;
         }
 
-        public INGram CreateNGram()
+        public IBiGram CreateBiGram()
         {
-            var nGramData = _blobRepository.Load<ConcurrentDictionary<string, ContextWords>>("NGram");
+            var nGramData = _blobRepository.Load<ConcurrentDictionary<string, ContextWords>>("BiGram");
+            var ngram = new NGram(5, new Sentencezer(new Tokinizer(new HashSet<string>() { "-", "\"", "(", ")", ":", ";", "," })));
+            ngram.Impot(nGramData);
+            return ngram;
+        }
+
+        public ITriGram CreateTriGram()
+        {
+            var nGramData = _blobRepository.Load<ConcurrentDictionary<string, ContextWords>>("TriGram");
             var ngram = new NGram(5, new Sentencezer(new Tokinizer(new HashSet<string>() { "-", "\"", "(", ")", ":", ";", "," })));
             ngram.Impot(nGramData);
             return ngram;

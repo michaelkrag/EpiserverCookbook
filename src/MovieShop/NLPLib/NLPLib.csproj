@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NGrams\ITriGram.cs" />
+    <Compile Include="NGrams\IBiGram.cs" />
     <Compile Include="NGrams\INGram.cs" />
     <Compile Include="NGrams\Models\ContextWords.cs" />
     <Compile Include="NGrams\Models\SuggestionHit.cs" />
@@ -49,11 +51,13 @@
     <Compile Include="Search\DocumentStores\DocumentStorageMemory.cs" />
     <Compile Include="Search\DocumentStores\IDocumentStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\Extensions\PropertyInfoExtensions.cs" />
+    <Compile Include="Search\Fields\FieldDictionary.cs" />
     <Compile Include="Search\IIrtRetSearch.cs" />
     <Compile Include="Search\Index\InvertedIndex.cs" />
     <Compile Include="Search\Index\Models\DocumentHit.cs" />
-    <Compile Include="Search\Index\Models\DocumentInformation.cs" />
-    <Compile Include="Search\Index\Models\TermInfomation.cs" />
+    <Compile Include="Search\Index\Models\Posting.cs" />
+    <Compile Include="Search\Index\Models\PostingList.cs" />
     <Compile Include="Search\IrtRetSearch.cs" />
     <Compile Include="Search\Models\DocumentScore.cs" />
     <Compile Include="Search\Models\SearchExport.cs" />

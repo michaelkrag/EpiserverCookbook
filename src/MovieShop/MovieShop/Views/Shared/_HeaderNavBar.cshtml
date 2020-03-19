@@ -1,0 +1,36 @@
+﻿@model MovieShop.Models.ViewModels.ILayoutViewModel
+
+@*header*@
+<div id="app-6">
+    <div class="top-bar row">
+        <div class="columns large-2">Site Title</div>
+        <div class="columns large-6">
+            <input type="search" placeholder="Search" v-model="query">
+            <ul class="dropdown-menu"style="width:100%" >
+                <li v-for="suggestion in matches">
+                    <a href="#">{{ suggestion }}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="top-bar row" >
+      
+        <div class="top-bar-right">
+            <ul class="dropdown menu" data-dropdown-menu>
+                <li class="has-submenu">
+                    <a href="#0">One</a>
+                    <ul class="submenu menu vertical" data-submenu>
+                        <li><a href="#0">One</a></li>
+                        <li><a href="#0">Two</a></li>
+                        <li><a href="#0">Three</a></li>
+                    </ul>
+                </li>
+                <li><a href="#0">Two</a></li>
+                <li><a href="#0">Three</a></li>
+            </ul>
+        </div>
+    </div>
+
+    
+</div>
