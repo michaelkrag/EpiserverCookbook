@@ -25,5 +25,24 @@ namespace MovieShop.Foundation.Extensions
                 }
             }
         }
+        public static IEnumerable<TChild> GetAllChildren2<TChild>(this IContentLoader contentLoader, ContentReference contentReference) where TChild : IContent
+        {
+            var catalogRef = contentLoader.GetChildren<IContent>(contentReference);
+            var nodeQueue = new Queue<IContent>(catalogRef);
+            while (nodeQueue.Any())
+            {
+                var contentData = nodeQueue.Dequeue();
+                var children = contentLoader.GetChildren<IContent>(contentData.ContentLink);
+                foreach (var child in children)
+                {
+                    nodeQueue.Enqueue(child);
+                }
+
+                if (contentData is TChild content)
+                {
+                    yield return content;
+                }               
+            }
+        }        
     }
 }
