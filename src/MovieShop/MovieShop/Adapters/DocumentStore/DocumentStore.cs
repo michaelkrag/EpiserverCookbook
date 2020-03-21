@@ -53,7 +53,7 @@ namespace MovieShop.Adapters.DocumentStore
 
             foreach (var property in propertys)
             {
-                dictionary_object[property.Name] = content.GetValue(property.Name);
+                dictionary_object[property.Name] = GetPropValue(content, property.Name);
                 /*                var value = content.GetValue(property.Name);
                                 property.SetValue(obj, value, null);*/
             }
@@ -61,6 +61,11 @@ namespace MovieShop.Adapters.DocumentStore
             var obj = Impromptu.ActLike<TObj>(test);
 
             return (TObj)obj;
+        }
+
+        public static object GetPropValue(object src, string propName)
+        {
+            return src.GetType().GetProperty(propName).GetValue(src, null);
         }
     }
 }

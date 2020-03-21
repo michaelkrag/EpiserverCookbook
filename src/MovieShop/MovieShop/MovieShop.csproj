@@ -356,6 +356,7 @@
     <Compile Include="Features\Menu\Models\MenuPage.cs" />
     <Compile Include="Features\Search\SearchPageController.cs" />
     <Compile Include="Features\Search\SearchPage.cs" />
+    <Compile Include="Features\Search\SearchResultData.cs" />
     <Compile Include="Foundation\Extensions\ContentLoaderExtensions.cs" />
     <Compile Include="Foundation\Helpers\ImageHelper.cs" />
     <Compile Include="Foundation\Menu\Models\IMenu.cs" />
@@ -440,6 +441,7 @@
     <Content Include="package.json" />
     <Content Include="Features\Catalog\Products\MovieProductView.cshtml" />
     <Content Include="Features\Search\SearchPage.cshtml" />
+    <Content Include="Features\Search\SearchPageResult.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

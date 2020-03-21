@@ -1,0 +1,28 @@
+﻿@using MovieShop.Features.Search
+@using MovieShop.Models.ViewModels
+@using MovieShop.Foundation.Search
+@using MovieShop.Foundation.Helpers
+@model PageViewModel<SearchPage, SearchResultData>
+
+<div class=" row">
+    <div id="searchform" class="result-center">
+        <autocompleate query="@Model.CurrentData.Query"></autocompleate>
+    </div>
+</div>
+@foreach (var result in Model.CurrentData.SearcheResults)
+{
+    <div class="row">        
+            <div class="small-12 medium-3 columns">
+                <img src="@Html.MovieDbImage(result.PosterPath,300)" />
+            </div>
+            <div class="small-12 medium-9 columns">
+                <div class="hero-slider-slide-content">                    
+                    <h3>@result.Title</h3>
+                    <p>@result.Summery<a href="@Url.ContentUrl(result.ContentLink)"> Learn More</a></p>
+                    <div>
+                        <button class="hollow button" type="button"><img src="https://placehold.it/20x20" /> Watch Video</button>
+                    </div>
+                </div>
+            </div>         
+    </div>
+}

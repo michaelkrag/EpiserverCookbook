@@ -115,11 +115,15 @@ module.exports = g;
 //
 
 module.exports = {
-    name: 'autocompleate',
+    props: {
+        query: {
+            type: String,
+            default: ''
+        }
+    },
     data: function () {
         return {
             suggestions: [],
-            query: '',
             open: false,
             current: -1
         };
@@ -134,13 +138,19 @@ module.exports = {
     methods: {
         //When enter pressed on the input
         enter() {
-            this.query = this.suggestions[this.current];
-            this.open = false;
+            if (this.current === -1) {
+                window.location.href = 'http://localhost:62432/en/search?q=' + this.query;
+                return;
+            } else {
+                this.query = this.suggestions[this.current];
+                this.open = false;
+                this.current = -1;
+            }
         },
 
         //When up pressed while suggestions are open
         up() {
-            if (this.current > 0) this.current--;
+            if (this.current > -1) this.current--;
         },
 
         //When up pressed while suggestions are open
@@ -11492,88 +11502,84 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "autocomplete", attrs: { id: "autocompleate" } },
-    [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.query,
-            expression: "query"
+  return _c("div", { staticClass: "autocomplete" }, [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.query,
+          expression: "query"
+        }
+      ],
+      attrs: { type: "text", placeholder: "Search from vue" },
+      domProps: { value: _vm.query },
+      on: {
+        keydown: [
+          function($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            return _vm.enter($event)
+          },
+          function($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "down", 40, $event.key, [
+                "Down",
+                "ArrowDown"
+              ])
+            ) {
+              return null
+            }
+            return _vm.down($event)
+          },
+          function($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "up", 38, $event.key, ["Up", "ArrowUp"])
+            ) {
+              return null
+            }
+            return _vm.up($event)
           }
         ],
-        attrs: { type: "text", placeholder: "Search from vue" },
-        domProps: { value: _vm.query },
-        on: {
-          keydown: [
-            function($event) {
-              if (
-                !$event.type.indexOf("key") &&
-                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-              ) {
-                return null
-              }
-              return _vm.enter($event)
-            },
-            function($event) {
-              if (
-                !$event.type.indexOf("key") &&
-                _vm._k($event.keyCode, "down", 40, $event.key, [
-                  "Down",
-                  "ArrowDown"
-                ])
-              ) {
-                return null
-              }
-              return _vm.down($event)
-            },
-            function($event) {
-              if (
-                !$event.type.indexOf("key") &&
-                _vm._k($event.keyCode, "up", 38, $event.key, ["Up", "ArrowUp"])
-              ) {
-                return null
-              }
-              return _vm.up($event)
+        input: [
+          function($event) {
+            if ($event.target.composing) {
+              return
             }
-          ],
-          input: [
-            function($event) {
-              if ($event.target.composing) {
-                return
+            _vm.query = $event.target.value
+          },
+          _vm.change
+        ]
+      }
+    }),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "autocomplete-items" },
+      _vm._l(_vm.suggestions, function(suggestion, index) {
+        return _c(
+          "div",
+          {
+            staticClass: "item-text",
+            class: { active: _vm.isActive(index) },
+            on: {
+              click: function($event) {
+                return _vm.suggestionClick(index)
               }
-              _vm.query = $event.target.value
-            },
-            _vm.change
-          ]
-        }
+            }
+          },
+          [_c("a", { attrs: { href: "#" } }, [_vm._v(_vm._s(suggestion))])]
+        )
       }),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "autocomplete-items" },
-        _vm._l(_vm.suggestions, function(suggestion, index) {
-          return _c(
-            "div",
-            {
-              staticClass: "item-text",
-              class: { active: _vm.isActive(index) },
-              on: {
-                click: function($event) {
-                  return _vm.suggestionClick(index)
-                }
-              }
-            },
-            [_c("a", { attrs: { href: "#" } }, [_vm._v(_vm._s(suggestion))])]
-          )
-        }),
-        0
-      )
-    ]
-  )
+      0
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -11599,7 +11605,7 @@ exports = module.exports = __webpack_require__(14)();
 
 
 // module
-exports.push([module.i, "\n.active[data-v-4777623e]{\n     background-color: #e9e9e9;\n}\n.autocomplete[data-v-4777623e] {\n    position: relative;\n    display: inline-block;\n}\n.autocomplete-items[data-v-4777623e] {\n    position: absolute;\n    border: 1px solid #d4d4d4;\n    border-bottom: none;\n    border-top: none;\n    z-index: 99;\n    /*position the autocomplete items to be the same width as the container:*/\n    top: 100%;\n    left: 0;\n    right: 0;\n}\n.autocomplete-items div[data-v-4777623e] {\n    padding: 10px;\n    cursor: pointer;\n/*    background-color: #fff;*/\n    border-bottom: 1px solid #d4d4d4;\n}\n\n/*when hovering an item:*/\n.autocomplete-items div[data-v-4777623e]:hover {\n    background-color: #e9e9e9;\n}\n\n\n", ""]);
+exports.push([module.i, "\n.active[data-v-4777623e] {\n    background-color: #e9e9e9;\n}\n.autocomplete[data-v-4777623e] {\n    position: relative;\n    display: inline-block;\n}\n.autocomplete-items[data-v-4777623e] {\n    position: absolute;\n    border: 1px solid #d4d4d4;\n    border-bottom: none;\n    border-top: none;\n    z-index: 99;\n    /*position the autocomplete items to be the same width as the container:*/\n    top: 100%;\n    left: 0;\n    right: 0;\n    background: whitesmoke;\n}\n.autocomplete-items div[data-v-4777623e] {\n        padding: 10px;\n        cursor: pointer;\n        /*    background-color: #fff;*/\n        border-bottom: 1px solid #d4d4d4;\n}\n\n        /*when hovering an item:*/\n.autocomplete-items div[data-v-4777623e]:hover {\n            background-color: #e9e9e9;\n}\n", ""]);
 
 // exports
 
