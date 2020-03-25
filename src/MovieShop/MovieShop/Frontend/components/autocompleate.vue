@@ -12,7 +12,7 @@
 <script>
     module.exports = {
         props: {
-            query: {
+            stratQuery: {
                 type: String,
                 default: ''
             }
@@ -21,7 +21,8 @@
             return {
                 suggestions: [],
                 open: false,
-                current: -1
+                current: -1,
+                query: this.stratQuery
             };
         },
         watch: {

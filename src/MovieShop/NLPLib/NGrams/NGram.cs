@@ -22,6 +22,7 @@ namespace NLPLib.NGrams
             _sentencezer = sentencezer;
         }
 
+        /*
         public void InsertOld(string[] sentence)
         {
             var wordIndex = 0;
@@ -54,14 +55,19 @@ namespace NLPLib.NGrams
                 contextWords.AddWord(sentence[wordIndex + 1], 1);
             }
         }
+        */
 
         public void Insert(string[] sentence)
         {
-            for (var wordIndex = 0; wordIndex < sentence.Length - _window + 1; wordIndex++)
+            var wordList = new List<string>() { "<s>" };
+            wordList.AddRange(sentence);
+            wordList.Add(@"<\s>");
+
+            for (var wordIndex = 0; wordIndex < wordList.Count - _window + 1; wordIndex++)
             {
-                var word = string.Join(" ", sentence.Skip(wordIndex).Take(_window - 1));
+                var word = string.Join(" ", wordList.Skip(wordIndex).Take(_window - 1));
                 var contextWords = _nGams.GetOrAdd(word, new ContextWords());
-                contextWords.AddWord(sentence[wordIndex + _window - 1], 1);
+                contextWords.AddWord(wordList[wordIndex + _window - 1], 1);
             }
         }
 

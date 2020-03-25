@@ -20,7 +20,7 @@ namespace NLPLib.Search.Index
         {
             if (_invertedIndex.TryGetValue(termId, out var documents))
             {
-                return documents.Postings.Select(x => new DocumentHit() { DocumentId = x.Key, Offsets = new List<int>() }).ToArray();
+                return documents.Postings.Select(x => new DocumentHit() { DocumentId = x.Key, Offsets = x.Value.TermOffsetList.Select(y => y.Key) }).ToArray();
             }
             return Array.Empty<DocumentHit>();
         }

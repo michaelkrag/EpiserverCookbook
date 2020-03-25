@@ -7,7 +7,7 @@
 
         public override string ToString()
         {
-            return $"{DocumentId}  :  {Score}";
+            return $"id: {DocumentId}  , score: {Score}";
         }
     }
 }

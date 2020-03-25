@@ -1,21 +1,16 @@
 ﻿@model MovieShop.Models.ViewModels.ILayoutViewModel
 
 @*header*@
-<div id="app-6">
+<div>
     <div class="top-bar row">
         <div class="columns large-2">Site Title</div>
         <div class="columns large-6">
-            <input type="search" placeholder="Search" v-model="query">
-            <ul class="dropdown-menu"style="width:100%" >
-                <li v-for="suggestion in matches">
-                    <a href="#">{{ suggestion }}</a>
-                </li>
-            </ul>
+            <autocompleate></autocompleate>
         </div>
     </div>
 
-    <div class="top-bar row" >
-      
+    <div class="top-bar row">
+
         <div class="top-bar-right">
             <ul class="dropdown menu" data-dropdown-menu>
                 <li class="has-submenu">
@@ -31,6 +26,4 @@
             </ul>
         </div>
     </div>
-
-    
 </div>

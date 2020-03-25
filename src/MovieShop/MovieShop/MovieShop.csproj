@@ -400,14 +400,12 @@
     <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Frontend\components\Autocomplete\autocomplete.js" />
-    <Content Include="Frontend\components\Autocomplete\autocomplete2.js" />
     <Content Include="Frontend\components\autocompleate.vue" />
     <Content Include="Frontend\index.js" />
     <Content Include="gulpfile.js" />
     <Content Include="Static\CSS\App.css" />
+    <Content Include="Static\dist\app.js" />
     <Content Include="Static\js\app.css" />
-    <Content Include="Static\js\app.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />

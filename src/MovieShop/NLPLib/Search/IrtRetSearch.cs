@@ -82,11 +82,11 @@ namespace NLPLib.Search
         {
             var resultContainer = new ConcurrentDictionary<int, double>();
             var terms = _tokinizer.GetTokens(str.ToLower());
-            var termIds = terms.Select(x => _vocabulary.GetIndex(x.Term)).Where(x => x != -1);
+            var termIds = terms.Select(x => new { id = _vocabulary.GetIndex(x.Term), term = x.Term }).Where(x => x.id != -1);
 
             foreach (var termId in termIds)
             {
-                var docScore = SearchForTerm(termId);
+                var docScore = SearchForTerm(termId.id);
                 foreach (var score in docScore)
                 {
                     var docTempScore = resultContainer.GetOrAdd(score.DocumentId, 0);

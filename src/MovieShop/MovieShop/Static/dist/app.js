@@ -116,7 +116,7 @@ module.exports = g;
 
 module.exports = {
     props: {
-        query: {
+        stratQuery: {
             type: String,
             default: ''
         }
@@ -125,7 +125,8 @@ module.exports = {
         return {
             suggestions: [],
             open: false,
-            current: -1
+            current: -1,
+            query: this.stratQuery
         };
     },
     watch: {
