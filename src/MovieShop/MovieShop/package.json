@@ -23,7 +23,7 @@
     "vue-loader": "15.9.0",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^3.12.0",
-    "webpack-dev-server": "^2.7.1",
+    "webpack-dev-server": "^3.1.11",
     "gulp-run-command": "0.0.10"
   }
 }
