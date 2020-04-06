@@ -343,14 +343,14 @@
     <Compile Include="Business\Services\Search\Models\TernaryTreeModel.cs" />
     <Compile Include="Controllers\BasePageController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="Features\Catalog\Products\MovieProductController.cs" />
+    <Compile Include="Features\Product\MovieProductController.cs" />
     <Compile Include="Features\Container\ContainerPage.cs" />
     <Compile Include="Features\Container\ContainerPageUIDescriptor .cs" />
-    <Compile Include="Features\Catalog\Models\BlueRayVariant.cs" />
-    <Compile Include="Features\Catalog\Models\DVDVariant.cs" />
-    <Compile Include="Features\Catalog\Models\GenresNode.cs" />
-    <Compile Include="Features\Catalog\Models\MovieNode.cs" />
-    <Compile Include="Features\Catalog\Products\MovieProduct.cs" />
+    <Compile Include="Domain\Commerce\Variants\BlueRayVariant.cs" />
+    <Compile Include="Domain\Commerce\Variants\DVDVariant.cs" />
+    <Compile Include="Domain\Commerce\Nodes\GenresNode.cs" />
+    <Compile Include="Domain\Commerce\Nodes\MovieNode.cs" />
+    <Compile Include="Features\Product\MovieProduct.cs" />
     <Compile Include="Features\Home\HomePage.cs" />
     <Compile Include="Features\Home\HomePageController.cs" />
     <Compile Include="Features\Menu\Models\MenuPage.cs" />
@@ -401,6 +401,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Frontend\components\autocompleate.vue" />
+    <Content Include="Frontend\components\event-bus.js" />
     <Content Include="Frontend\index.js" />
     <Content Include="gulpfile.js" />
     <Content Include="Static\CSS\App.css" />
@@ -437,9 +438,10 @@
     <Content Include="Features\Home\HomePage.cshtml" />
     <Content Include="Features\_ViewStart.cshtml" />
     <Content Include="package.json" />
-    <Content Include="Features\Catalog\Products\MovieProductView.cshtml" />
+    <Content Include="Features\Product\MovieProductView.cshtml" />
     <Content Include="Features\Search\SearchPage.cshtml" />
     <Content Include="Features\Search\SearchPageResult.cshtml" />
+    <Content Include="Frontend\components\add-to-basket.vue" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

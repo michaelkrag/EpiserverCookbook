@@ -5,7 +5,7 @@ using MovieShop.Foundation.Search;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MovieShop.Features.Catalog.Products
+namespace MovieShop.Features.Product
 {
     [CatalogContentType(DisplayName = "MovieProduct", MetaClassName = "Movie_Product", GUID = "D96324E3-2090-4A48-AAFA-1B21A1DC2FA6", Description = "")]
     public class MovieProduct : ProductContent, ISearch
