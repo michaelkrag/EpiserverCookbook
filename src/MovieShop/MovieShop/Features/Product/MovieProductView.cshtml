@@ -1,29 +1,47 @@
 ﻿@using MovieShop.Features.Home
 @using MovieShop.Models.ViewModels
-@using MovieShop.Features.Product
+@using MovieShop.Domain.Commerce.Products;
 @using MovieShop.Foundation.Helpers
-@using MovieShop.Foundation.Helpers
-@model  CatalogViewModel<MovieProduct, HomePage>
-<div class="row column container-padded">
-    <div class="work-feature-block row">
-        <div class="columns medium-2">
-            <img class="work-feature-block-image" src="@Html.MovieDbImage(Model.CurrentContent.PosterPath,400)" />
-        </div>
+@using MovieShop.Domain.MediaR;
+@model  CatalogViewModel<MovieProduct, HomePage, VariantsResponce>
 
-        <div class="columns medium-8">
-            <h2 class="work-feature-block-header">@Html.PropertyFor(x => x.CurrentContent.OriginalTitle)</h2>
-            <p>@Html.PropertyFor(x => x.CurrentContent.Summery)</p>
-            <h2>Details</h2>
-            <ul>
-                <li>ReleaseDate @Html.PropertyFor(x => x.CurrentContent.ReleaseDate)</li>
-                <li>Item 2</li>
-                <li>Item 3</li>
-                <li>Item 4</li>
-            </ul>
-        </div>
-        <div class="columns medium-2 buy-section wrapper">
-            <div>buy section</div>
-            <add-to-basket butten-label="min knap" sku="min sku" hover-text="min hover"></add-to-basket>
-        </div>
+<div class="row">
+
+    <div class="col-2">
+        <img class="work-feature-block-image" src="@Html.MovieDbImage(Model.CurrentContent.PosterPath,400)" />
+    </div>
+    <div class="col-8">
+        <h2 class="work-feature-block-header">@Html.PropertyFor(x => x.CurrentContent.OriginalTitle)</h2>
+
+        @if (Model.CurrentData.Any())
+        {
+            <div class="horizontal-list-outer row">
+                <ul class="horizontal-list">
+                    @foreach (var item in Model.CurrentData.Variants)
+                    {
+                        <li>
+                            <a href="@(Model.CurrentData.IsPrimaryVariant(item) ? "javascript:void(0)" : "?code=" +item.Code)">
+                                <div class="horizontal-list-box @(Model.CurrentData.IsPrimaryVariant(item) ? "active":"")">
+                                    <span>@item.DisplayName</span><br />
+                                    <span>@item.Price</span>
+                                </div>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+        <p>@Html.PropertyFor(x => x.CurrentContent.Summery)</p>
+        <h2>Details</h2>
+        <ul>
+            <li>ReleaseDate @Html.PropertyFor(x => x.CurrentContent.ReleaseDate)</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+        </ul>
+    </div>
+    <div class="col-2">
+        <div>buy section</div>
+        <add-to-basket butten-label="Add to cart" sku="@Model.CurrentData.ActiveVariant.Code" hover-text="add @Model.CurrentData.ActiveVariant.Name to the cart"></add-to-basket>
     </div>
 </div>

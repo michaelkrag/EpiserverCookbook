@@ -20,9 +20,15 @@ namespace MovieShop.Business.Factory
             return new PageViewModel<TPage, TData>(currentPage, CurrentData).SetLayout(currentPage);
         }
 
-        public CatalogViewModel<TCatalogContent, TPageData> CreateCatalog<TCatalogContent, TPageData>(TCatalogContent currentContent, TPageData currentPage) where TCatalogContent : EntryContentBase where TPageData : PageData
+        public CatalogViewModel<TCatalogContent, TPage> CreateCatalog<TCatalogContent, TPage>(TCatalogContent currentContent, TPage currentPage) where TCatalogContent : EntryContentBase where TPage : PageData
         {
-            CatalogViewModel<TCatalogContent, TPageData> catalogViewModel = new CatalogViewModel<TCatalogContent, TPageData>(currentContent, currentPage);
+            var catalogViewModel = new CatalogViewModel<TCatalogContent, TPage>(currentContent, currentPage);
+            return catalogViewModel;
+        }
+
+        public CatalogViewModel<TCatalogContent, TPage, TData> CreateCatalog<TCatalogContent, TPage, TData>(TCatalogContent currentContent, TPage currentPage, TData data) where TCatalogContent : EntryContentBase where TPage : PageData
+        {
+            var catalogViewModel = new CatalogViewModel<TCatalogContent, TPage, TData>(currentContent, currentPage, data);
             return catalogViewModel;
         }
     }

@@ -15,6 +15,10 @@ using NLPLib.Search.DocumentStores;
 using MovieShop.Adapters.DocumentStore;
 using NLPLib.Tokenizers;
 using NLPLib.NGrams;
+using MediatR;
+using MovieShop.Services.Product;
+using EPiServer.Commerce.Order;
+using MovieShop.Infrastructure.Factorys;
 
 namespace MovieShop.Infrastructure.DependencyInjection
 {
@@ -25,6 +29,7 @@ namespace MovieShop.Infrastructure.DependencyInjection
             SetupDefaultConvention(container);
             SetupFeatureModules(container);
             SetupExternal(container);
+            SetupMediaR(container);
         }
 
         private static void SetupExternal(IServiceConfigurationProvider container)
@@ -32,6 +37,7 @@ namespace MovieShop.Infrastructure.DependencyInjection
             container.AddTransient<IBlobFilenameRepository, BlobFilenameRepository>();
 
             container.AddTransient<IBlobRepository, BlobRepository>();
+            container.AddTransient<ICart>(x => x.GetInstance<ICartFactory>().Create());
 
             container.AddSingleton<IVocabulary>(x => CreateVocabulary(x.GetInstance<IBlobRepository>()));
 
@@ -73,6 +79,35 @@ namespace MovieShop.Infrastructure.DependencyInjection
                     var classInstance = Activator.CreateInstance(type, null);
                     methodInfo.Invoke(classInstance, new object[] { container });
                 }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private static void SetupMediaR(IServiceConfigurationProvider container)
+        {
+            try
+            {
+                var test = typeof(ProductHandle);
+
+                var types = AppDomain.CurrentDomain.GetAssemblies()
+                                                   .Where(x => x.FullName.StartsWith("MovieShop"))
+                                                   .SelectMany(s => s.GetTypes());
+
+                foreach (var type in types)
+                {
+                    foreach (Type intType in type.GetInterfaces())
+                    {
+                        if (intType.IsGenericType && intType.GetGenericTypeDefinition() == typeof(IRequestHandler<,>))
+                        {
+                            container.AddTransient(intType, type);
+                        }
+                    }
+                }
+                container.AddSingleton<ServiceFactory>(ctx => ctx.GetInstance);
+                container.AddTransient<IMediator, Mediator>();
             }
             catch (Exception ex)
             {

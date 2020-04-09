@@ -4,18 +4,13 @@
 @using MovieShop.Foundation.Helpers
 @model PageViewModel<SearchPage, SearchResultData>
 
-<div class=" row">
-    <div id="searchform" class="result-center">
-        <autocompleate strat-query="@Model.CurrentData.Query"></autocompleate>
-    </div>
-</div>
 @foreach (var result in Model.CurrentData.SearcheResults)
 {
     <div class="row">
-        <div class="small-12 medium-3 columns">
+        <div class="col-3">
             <img src="@Html.MovieDbImage(result.PosterPath,300)" />
         </div>
-        <div class="small-12 medium-9 columns">
+        <div class="col-9">
             <div class="hero-slider-slide-content">
                 <h3>@result.Title</h3>
                 <p>@result.Summery<a href="@Url.ContentUrl(result.ContentLink)"> Learn More</a></p>

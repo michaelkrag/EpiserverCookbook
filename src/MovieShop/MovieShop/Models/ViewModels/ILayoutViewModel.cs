@@ -2,6 +2,7 @@
 {
     public interface ILayoutViewModel
     {
-        string Title { get; set; }
+        string Title { get; }
+        string CartApiUrl { get; }
     }
 }

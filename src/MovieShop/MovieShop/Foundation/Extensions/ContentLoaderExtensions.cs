@@ -1,6 +1,7 @@
 ﻿using EPiServer;
+using EPiServer.Commerce.Catalog.ContentTypes;
 using EPiServer.Core;
-using MovieShop.Features.Product;
+using MovieShop.Domain.Commerce.Products;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,8 +12,8 @@ namespace MovieShop.Foundation.Extensions
         public static IEnumerable<TChild> GetAllChildren<TChild>(this IContentLoader contentLoader, ContentReference contentReference) where TChild : IContent
         {
             var usedIds = new HashSet<int>();
-            var catalogRef = contentLoader.GetChildren<TChild>(contentReference).First();
-            var nodeQueue = new Queue<TChild>(new List<TChild>() { catalogRef });
+            var catalogRef = contentLoader.GetChildren<IContent>(contentReference).First();
+            var nodeQueue = new Queue<IContent>(new List<IContent>() { catalogRef });
             while (nodeQueue.Any())
             {
                 var contentData = nodeQueue.Dequeue();
@@ -20,15 +21,18 @@ namespace MovieShop.Foundation.Extensions
                 if (!usedIds.Contains(contentData.ContentLink.ID))
                 {
                     usedIds.Add(contentData.ContentLink.ID);
-                    var children = contentLoader.GetChildren<TChild>(contentData.ContentLink);
-                    if (!(children is MovieProduct))
+                    if (!(contentData is ProductContent) && !(contentData is VariationContent))
                     {
+                        var children = contentLoader.GetChildren<IContent>(contentData.ContentLink);
                         foreach (var child in children)
                         {
                             nodeQueue.Enqueue(child);
                         }
                     }
-                    yield return contentData;
+                    if (contentData is TChild content)
+                    {
+                        yield return content;
+                    }
                 }
             }
         }

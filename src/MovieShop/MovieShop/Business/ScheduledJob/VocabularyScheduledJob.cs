@@ -4,6 +4,7 @@ using EPiServer.PlugIn;
 using EPiServer.Scheduler;
 using Mediachase.Commerce.Catalog;
 using MovieShop.Business.Services.Blobstore;
+using MovieShop.Domain.Commerce.Products;
 using MovieShop.Foundation.Extensions;
 using MovieShop.Foundation.Search;
 using NLPLib.NGrams;
@@ -45,7 +46,7 @@ namespace MovieShop.Business.ScheduledJob
             var bigram = new NGram(2, new Sentencezer(new Tokinizer(new HashSet<string>() { "-", "\"", "(", ")", ":", ";", "," })));
             var trigram = new NGram(3, new Sentencezer(new Tokinizer(new HashSet<string>() { "-", "\"", "(", ")", ":", ";", "," })));
             var numberOfDocuments = 0;
-            foreach (var contentData in _contentLoader.GetAllChildren<CatalogContentBase>(_referenceConverter.GetRootLink()))
+            foreach (var contentData in _contentLoader.GetAllChildren<MovieProduct>(_referenceConverter.GetRootLink()))
             {
                 if (contentData is ISearch movieProduct)
                 {

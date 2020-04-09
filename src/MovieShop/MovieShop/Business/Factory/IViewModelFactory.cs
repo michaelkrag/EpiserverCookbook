@@ -11,5 +11,7 @@ namespace MovieShop.Business.Factory
         PageViewModel<TPage, TData> Create<TPage, TData>(TPage currentPage, TData CurrentData) where TPage : PageData;
 
         CatalogViewModel<TCatalogContent, TPageData> CreateCatalog<TCatalogContent, TPageData>(TCatalogContent currentContent, TPageData currentPage) where TCatalogContent : EntryContentBase where TPageData : PageData;
+
+        CatalogViewModel<TCatalogContent, TPage, TData> CreateCatalog<TCatalogContent, TPage, TData>(TCatalogContent currentContent, TPage currentPage, TData data) where TCatalogContent : EntryContentBase where TPage : PageData;
     }
 }
