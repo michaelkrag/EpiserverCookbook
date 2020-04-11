@@ -352,6 +352,7 @@
     <Compile Include="Domain\Commerce\Variants\MovieVariant.cs" />
     <Compile Include="Domain\MediaR\CartAddRequest.cs" />
     <Compile Include="Domain\MediaR\CartAddResponce.cs" />
+    <Compile Include="Domain\MediaR\CartQuantityQuery.cs" />
     <Compile Include="Features\Product\MovieProductController.cs" />
     <Compile Include="Features\Container\ContainerPage.cs" />
     <Compile Include="Features\Container\ContainerPageUIDescriptor .cs" />
@@ -366,6 +367,8 @@
     <Compile Include="Features\Search\SearchPageController.cs" />
     <Compile Include="Features\Search\SearchPage.cs" />
     <Compile Include="Features\Search\SearchResultData.cs" />
+    <Compile Include="Features\ShoppingCart\ShoppingCartPageController.cs" />
+    <Compile Include="Features\ShoppingCart\ShoppingCartPage.cs" />
     <Compile Include="Foundation\Extensions\CartExtensions.cs" />
     <Compile Include="Foundation\Extensions\ContentLoaderExtensions.cs" />
     <Compile Include="Foundation\Helpers\ImageHelper.cs" />
@@ -410,14 +413,20 @@
     <Compile Include="Domain\MediaR\VariantsRequest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Features\SiteSetting\" />
     <Folder Include="Models\Media\" />
     <Folder Include="Models\Properties\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Frontend\Javascript\components\urlHelper.js" />
     <Content Include="Frontend\Sass\Components\body.scss" />
     <Content Include="Frontend\Sass\Components\grid.scss" />
     <Content Include="Frontend\Sass\Components\product.scss" />
+    <Content Include="Frontend\Javascript\components\shoppingcarticon.vue" />
+    <Content Include="Frontend\Javascript\components\shoppingcartquantity.vue" />
+    <Content Include="Features\ShoppingCart\ShoppingCart.cshtml" />
+    <Content Include="Frontend\Sass\Components\searchresult.scss" />
     <None Include="Frontend\Sass\styles.scss" />
     <Content Include="Frontend\Javascript\components\autocompleate.vue" />
     <Content Include="Frontend\Javascript\components\cart.js" />
@@ -463,11 +472,11 @@
     <Content Include="modules\_protected\EPiServer.Commerce.Shell\EPiServer.Commerce.Shell.zip" />
     <Content Include="modules\_protected\Commerce\Commerce.zip" />
     <Content Include="modules\_protected\EPiServer.Commerce.UI.CustomerService\EPiServer.Commerce.UI.CustomerService.zip" />
-    <None Include="Frontend\Sass\Components\header.scss" />
+    <None Include="Frontend\Sass\Components\navigation.scss" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_HeaderNavBar.cshtml" />
+    <Content Include="Views\Shared\_Navigation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

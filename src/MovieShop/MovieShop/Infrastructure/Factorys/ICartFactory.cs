@@ -4,7 +4,7 @@ namespace MovieShop.Infrastructure.Factorys
 {
     public interface ICartFactory
     {
-        ICart Create(string name = "Default");
+        ICart LoadOrCreateCart(string name = "Default");
 
         void Save(ICart cart);
     }

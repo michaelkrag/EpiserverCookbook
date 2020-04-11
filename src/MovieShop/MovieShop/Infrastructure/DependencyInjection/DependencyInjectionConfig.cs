@@ -37,7 +37,7 @@ namespace MovieShop.Infrastructure.DependencyInjection
             container.AddTransient<IBlobFilenameRepository, BlobFilenameRepository>();
 
             container.AddTransient<IBlobRepository, BlobRepository>();
-            container.AddTransient<ICart>(x => x.GetInstance<ICartFactory>().Create());
+            container.AddTransient<ICart>(x => x.GetInstance<ICartFactory>().LoadOrCreateCart());
 
             container.AddSingleton<IVocabulary>(x => CreateVocabulary(x.GetInstance<IBlobRepository>()));
 

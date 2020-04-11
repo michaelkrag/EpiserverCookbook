@@ -18,7 +18,7 @@ namespace MovieShop.Infrastructure.Factorys
             _customerContext = customerContext;
         }
 
-        public ICart Create(string name = "Default")
+        public ICart LoadOrCreateCart(string name = "Default")
         {
             var cart = _orderRepository.LoadOrCreateCart<ICart>(_customerContext.CurrentContactId, name);
             return cart;

@@ -4,14 +4,14 @@
 @using MovieShop.Foundation.Helpers
 @model PageViewModel<SearchPage, SearchResultData>
 
-@foreach (var result in Model.CurrentData.SearcheResults)
-{
-    <div class="row">
-        <div class="col-3">
-            <img src="@Html.MovieDbImage(result.PosterPath,300)" />
-        </div>
-        <div class="col-9">
-            <div class="hero-slider-slide-content">
+<div class="search-result">
+    @foreach (var result in Model.CurrentData.SearcheResults)
+    {
+        <div class="search-result-item">
+            <div class="search-result-left">
+                <img src="@Html.MovieDbImage(result.PosterPath,300)" />
+            </div>
+            <div class="search-result-right">
                 <h3>@result.Title</h3>
                 <p>@result.Summery<a href="@Url.ContentUrl(result.ContentLink)"> Learn More</a></p>
                 <div>
@@ -19,5 +19,5 @@
                 </div>
             </div>
         </div>
-    </div>
-}
+    }
+</div>

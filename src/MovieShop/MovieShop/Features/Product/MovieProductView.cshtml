@@ -5,31 +5,28 @@
 @using MovieShop.Domain.MediaR;
 @model  CatalogViewModel<MovieProduct, HomePage, VariantsResponce>
 
-<div class="row">
-
-    <div class="col-2">
+<div class="product">
+    <div class="product-left">
         <img class="work-feature-block-image" src="@Html.MovieDbImage(Model.CurrentContent.PosterPath,400)" />
     </div>
-    <div class="col-8">
+    <div class="product-center">
         <h2 class="work-feature-block-header">@Html.PropertyFor(x => x.CurrentContent.OriginalTitle)</h2>
 
         @if (Model.CurrentData.Any())
-        {
-            <div class="horizontal-list-outer row">
-                <ul class="horizontal-list">
-                    @foreach (var item in Model.CurrentData.Variants)
-                    {
-                        <li>
-                            <a href="@(Model.CurrentData.IsPrimaryVariant(item) ? "javascript:void(0)" : "?code=" +item.Code)">
-                                <div class="horizontal-list-box @(Model.CurrentData.IsPrimaryVariant(item) ? "active":"")">
-                                    <span>@item.DisplayName</span><br />
-                                    <span>@item.Price</span>
-                                </div>
-                            </a>
-                        </li>
-                    }
-                </ul>
-            </div>
+        {            
+            <ul class="media-list">
+                @foreach (var item in Model.CurrentData.Variants)
+                {
+                    <li>
+                        <a href="@(Model.CurrentData.IsPrimaryVariant(item) ? "javascript:void(0)" : "?code=" +item.Code)">
+                            <div class="horizontal-list-box @(Model.CurrentData.IsPrimaryVariant(item) ? "active":"")">
+                                <div>@item.DisplayName</div><br />
+                                <div>@item.Price</div>
+                            </div>
+                        </a>
+                    </li>
+                }
+            </ul>         
         }
         <p>@Html.PropertyFor(x => x.CurrentContent.Summery)</p>
         <h2>Details</h2>
@@ -40,7 +37,7 @@
             <li>Item 4</li>
         </ul>
     </div>
-    <div class="col-2">
+    <div class="product-right">
         <div>buy section</div>
         <add-to-basket butten-label="Add to cart" sku="@Model.CurrentData.ActiveVariant.Code" hover-text="add @Model.CurrentData.ActiveVariant.Name to the cart"></add-to-basket>
     </div>

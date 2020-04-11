@@ -1,12 +1,33 @@
-﻿async function add(sku, quantity) {
-    const url = window.appConfig.cartApiUrl + '?sku=' + sku + '&quantity=' + quantity;
-    const response = await fetch(url, { method: 'POST' });
+﻿console.log('cart.js a');
+import bus from './event-bus.js';
 
-    alert('add ' + response);
+export async function add(sku, quantity) {
+    const url = window.appConfig.cartApiUrl + '?sku=' + sku + '&quantity=' + quantity;
+    const response = await fetch(url, { method: 'POST' })
+                                .then((response) => {
+                                    return response.json();
+                                })
+                                .then((data) => {
+                                    return data;
+                                });
+
+    bus.$emit('ProductAdded', response.QuantityAdded);
 }
 
-function remove() {
+export async function quantity() {
+    const url = window.appConfig.cartApiUrl + '/quantity';
+    var result = await fetch(url)
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            return data;
+        });
+    const rtn = result.quantity;
+    return rtn;
+}
+export function remove() {
     alert('delete');
 }
-
-export { add, remove }; // a list of exported variables
+console.log('cart.js b');
+//export { add, remove, quantity }; // a list of exported variables

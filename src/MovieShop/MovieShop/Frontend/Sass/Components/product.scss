@@ -1,4 +1,39 @@
-﻿.horizontal-list-outer {
+﻿
+.product {
+    display: flex;
+    flex-direction: row;
+
+    .product-left {
+        width: 25%;
+        padding: 10px;
+    }
+
+    .product-center {
+        width: 60%;
+        padding: 10px;
+    }
+
+    .product-right {
+        padding: 10px;
+        width: 15%;
+    }
+}
+.media-list {
+    list-style: none;
+    display: flex;
+
+    li {
+        display: inline;
+        float: left;
+        padding: 5px;
+        a{
+            text-decoration:none;
+        }
+    }
+}
+
+
+.horizontal-list-outer {
     height: 84px;
 }
 

@@ -7,13 +7,14 @@ using MovieShop.Domain.Commerce.Variants;
 using MovieShop.Domain.MediaR;
 using MovieShop.Foundation.Extensions;
 using MovieShop.Infrastructure.Factorys;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace MovieShop.Business.Handlers
 {
-    public class CartHandler : IRequestHandler<CartAddRequest, CartAddResponce>
+    public class CartHandler : IRequestHandler<CartAddRequest, CartAddResponce>, IRequestHandler<CartQuantityQuery, int>
     {
         private readonly ICartFactory _cartFactory;
         private readonly IOrderGroupFactory _orderGroupFactory;
@@ -30,7 +31,7 @@ namespace MovieShop.Business.Handlers
 
         public async Task<CartAddResponce> Handle(CartAddRequest request, CancellationToken cancellationToken)
         {
-            var cart = _cartFactory.Create();
+            var cart = _cartFactory.LoadOrCreateCart();
             var variantReference = _referenceConverter.GetContentLink(request.Code);
             if (variantReference == null)
             {
@@ -45,7 +46,18 @@ namespace MovieShop.Business.Handlers
             cart.InsertOrUpdate(request.Code, request.Quantity, content.DisplayName);
 
             _cartFactory.Save(cart);
-            return await Task.FromResult(new CartAddResponce() { Code = request.Code, VariantAdded = true });
+            return await Task.FromResult(new CartAddResponce() { Code = request.Code, VariantAdded = true, QuantityAdded = request.Quantity });
+        }
+
+        public async Task<int> Handle(CartQuantityQuery request, CancellationToken cancellationToken)
+        {
+            var cart = _cartFactory.LoadOrCreateCart();
+            if (cart == null)
+            {
+                return await Task.FromResult(0);
+            }
+            var quantity = cart.GetAllLineItems().Sum(x => x.Quantity);
+            return await Task.FromResult(Convert.ToInt32(quantity));
         }
     }
 }

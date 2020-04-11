@@ -1,7 +1,7 @@
 ﻿<template>
     <div class="autocomplete">
-        <input type="text" placeholder="Search from vue" v-model="query" @keydown.enter='enter' @keydown.down='down' @keydown.up='up' @input='change' />       
-        <div class="autocomplete-items" v-if="showSuggestions">
+        <input type="text" placeholder="Search from vue" v-model="query" @keydown.enter='enter' @keydown.down='down' @keydown.up='up' @input='change' />
+        <div class="autocomplete-items" v-if="suggestions.length > 0">
             <div class="item-text" v-for="(suggestion, index) in suggestions" v-bind:class="{'active': isActive(index)}" @click="suggestionClick(index)">
                 <a href="#">{{ suggestion }}</a>
             </div>
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+    var urlHelper = require('./urlHelper.js');
     module.exports = {
         props: {
             stratQuery: {
@@ -22,20 +23,24 @@
                 suggestions: [],
                 open: false,
                 current: -1,
-                query: this.stratQuery
+                query: this.stratQuery,
+                findSuggestions: false
             };
         },
-        computed: {
-            showSuggestions: function () {
-                // `this` points to the vm instance
-                return this.suggestions.length > 0;
+        mounted: function () {
+            var url = urlHelper.parseURL(window.location.href);
+            const q = decodeURIComponent((url.searchObject['q']));
+            if (q !== "undefined" && q !== null) {
+                this.query = q;
             }
         },
         watch: {
             query: async function (newQuestion, oldQuestion) {
                 console.log(newQuestion);
-                const response = await fetch('/autocomplete?q=' + newQuestion);
-                this.suggestions = await response.json();
+                if (this.findSuggestions === true) {
+                    const response = await fetch('/autocomplete?q=' + newQuestion);
+                    this.suggestions = await response.json();
+                }
             }
         },
         methods: {
@@ -74,6 +79,7 @@
                 if (this.open == false) {
                     this.open = true;
                     this.current = -1;
+                    this.findSuggestions = true;
                 }
             },
 
@@ -123,14 +129,16 @@
             .autocomplete-items div:hover {
                 background-color: #e9e9e9;
             }
-    .item-text{
-        width:100%;
+
+    .item-text {
+        width: 100%;
     }
 
         .item-text a {
             color: black;
             text-decoration: none;
         }
+
     input {
         border: none;
         border: 1px solid #eaeaea;

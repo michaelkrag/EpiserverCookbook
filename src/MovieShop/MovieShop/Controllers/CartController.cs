@@ -23,7 +23,13 @@ namespace MovieShop.Controllers
         public async Task<ActionResult> Add(string sku, int quantity)
         {
             var result = await _mediator.Send(CartAddRequest.Create(sku, quantity));
-            return Json(result, JsonRequestBehavior.AllowGet);
+
+            var obj = new
+            {
+                QuantityAdded = result.QuantityAdded
+            };
+
+            return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
         [Route("cart/sku")]
@@ -47,6 +53,15 @@ namespace MovieShop.Controllers
         public ActionResult Cart()
         {
             var obj = new { status = "ok" };
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("cart/quantity")]
+        [HttpGet]
+        public async Task<ActionResult> Quantity()
+        {
+            var result = await _mediator.Send(CartQuantityQuery.Create());
+            var obj = new { quantity = result };
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
     }
