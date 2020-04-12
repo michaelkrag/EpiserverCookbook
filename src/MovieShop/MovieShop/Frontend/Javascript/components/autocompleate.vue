@@ -11,14 +11,14 @@
 
 <script>
     var urlHelper = require('./urlHelper.js');
-    module.exports = {
+    export default {
         props: {
             stratQuery: {
                 type: String,
                 default: ''
             }
         },
-        data: function () {
+        data() {
             return {
                 suggestions: [],
                 open: false,
@@ -27,7 +27,7 @@
                 findSuggestions: false
             };
         },
-        mounted: function () {
+        mounted() {
             var url = urlHelper.parseURL(window.location.href);
             const q = decodeURIComponent((url.searchObject['q']));
             if (q !== "undefined" && q !== null) {

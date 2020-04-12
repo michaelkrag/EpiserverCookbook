@@ -18,18 +18,18 @@
 
 <script>
     var cart = require('./cart.js');
-    module.exports = {
-        data: function () {
+    export default {
+        data() {
             return {
-                quantity: 0                
+                quantity: 0
             };
         },
-        created: async function () {
-           
+        async created() {
+
         },
-        mounted: async function () {
+        async mounted() {
             const test = await cart.quantity();
-            this.quantity = test;            
+            this.quantity = test;
         }
     };
 </script>

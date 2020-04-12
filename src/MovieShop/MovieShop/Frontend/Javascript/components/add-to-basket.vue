@@ -6,7 +6,7 @@
 
 <script>
     var cart = require('./cart.js');
-    module.exports = {
+    export default {
         props: {
             buttenLabel: {
                 type: String,
