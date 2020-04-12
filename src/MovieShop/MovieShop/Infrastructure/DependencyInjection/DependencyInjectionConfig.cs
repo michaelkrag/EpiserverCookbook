@@ -19,6 +19,8 @@ using MediatR;
 using MovieShop.Services.Product;
 using EPiServer.Commerce.Order;
 using MovieShop.Infrastructure.Factorys;
+using MovieShop.Domain.Settings.SettingsBlocke;
+using MovieShop.Infrastructure.Settings;
 
 namespace MovieShop.Infrastructure.DependencyInjection
 {
@@ -30,6 +32,12 @@ namespace MovieShop.Infrastructure.DependencyInjection
             SetupFeatureModules(container);
             SetupExternal(container);
             SetupMediaR(container);
+            SetupSettings(container);
+        }
+
+        private static void SetupSettings(IServiceConfigurationProvider container)
+        {
+            container.AddTransient<IMenuSettings>(x => x.GetInstance<ISettingsService>().GetSetting<IMenuSettings>());
         }
 
         private static void SetupExternal(IServiceConfigurationProvider container)

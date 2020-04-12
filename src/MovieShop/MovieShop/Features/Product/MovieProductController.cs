@@ -23,7 +23,7 @@ namespace MovieShop.Features.Product
         public async Task<ActionResult> Index(MovieProduct currentContent, HomePage currentPage, string code)
         {
             var variants = await _mediator.Send(VariantsRequest.Create(currentContent.ContentLink, code));
-            var viewModel = _viewModelFactory.CreateCatalog(currentContent, currentPage, variants);
+            var viewModel = await _viewModelFactory.CreateCatalog(currentContent, currentPage, variants);
             return View("~/Features/Product/MovieProductView.cshtml", viewModel);
         }
     }

@@ -1,4 +1,5 @@
-﻿using EPiServer.Commerce.Catalog.ContentTypes;
+﻿using EPiServer;
+using EPiServer.Commerce.Catalog.ContentTypes;
 using EPiServer.Commerce.Catalog.Linking;
 using EPiServer.Core;
 using EPiServer.Core.Internal;
@@ -15,9 +16,9 @@ namespace MovieShop.Services.Product
     public class ProductHandle : IRequestHandler<VariantsRequest, VariantsResponce>
     {
         private readonly IRelationRepository _relationRepository;
-        private readonly ContentLoader _contentLoader;
+        private readonly IContentLoader _contentLoader;
 
-        public ProductHandle(IRelationRepository relationRepository, ContentLoader contentLoader)
+        public ProductHandle(IRelationRepository relationRepository, IContentLoader contentLoader)
         {
             _relationRepository = relationRepository;
             _contentLoader = contentLoader;

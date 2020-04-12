@@ -7,17 +7,36 @@ using System.Web;
 
 namespace MovieShop.Models.ViewModels
 {
-    public class PageViewModel<TPageData> : ILayoutViewModel where TPageData : PageData
+    public class PageViewModel<TPageData> : ILayoutViewModel, IMenuViewModel where TPageData : PageData
     {
         public TPageData CurrentPage { get; }
         public string Title { get; set; }
         public string CartApiUrl { get; set; }
 
-        public PageViewModel(TPageData currentPage, string title)
+        public string RecommendTitle { get; set; } = "For you";
+
+        public IEnumerable<MenuItem> Recommend { get; set; } = new List<MenuItem>();
+
+        public string CategoriesTitle { get; set; } = "Categories";
+
+        public IEnumerable<MenuItem> Categories { get; set; } = new List<MenuItem>();
+
+        public string CartUrl { get; set; }
+
+        public bool ShowRecommendTitle()
+        {
+            return Recommend.Any();
+        }
+
+        public bool ShowCategoriesTitle()
+        {
+            return Recommend.Any() && Categories.Any();
+        }
+
+        public PageViewModel(TPageData currentPage, string name)
         {
             CurrentPage = currentPage;
-            Title = title;
-            CartApiUrl = "/cart";
+            Title = name;
         }
     }
 

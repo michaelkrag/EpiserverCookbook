@@ -1,10 +1,9 @@
 ﻿using MovieShop.Business.Factory;
 using MovieShop.Controllers;
 using MovieShop.Foundation.Search;
-using MovieShop.Models.ViewModels;
 using NLPLib.Search;
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace MovieShop.Features.Search
@@ -20,7 +19,7 @@ namespace MovieShop.Features.Search
             _irtRetSearch = irtRetSearch;
         }
 
-        public ActionResult Index(SearchPage currentPage, string q)
+        public async Task<ActionResult> Index(SearchPage currentPage, string q)
         {
             if (string.IsNullOrEmpty(q))
             {
@@ -32,8 +31,8 @@ namespace MovieShop.Features.Search
                 Query = q,
                 SearcheResults = searchResult.Select(x => x.Document).ToList()
             };
-
-            return View("~/Features/Search/SearchPageResult.cshtml", _viewModelFactory.Create(currentPage, result));
+            var viewModel = await _viewModelFactory.Create(currentPage, result);
+            return View("~/Features/Search/SearchPageResult.cshtml", viewModel);
         }
     }
 }

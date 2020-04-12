@@ -1,6 +1,7 @@
 ﻿using MovieShop.Business.Factory;
 using MovieShop.Controllers;
 using MovieShop.Models.ViewModels;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace MovieShop.Features.Home
@@ -14,9 +15,9 @@ namespace MovieShop.Features.Home
             _viewModelFactory = viewModelFactory;
         }
 
-        public ActionResult Index(HomePage currentPage)
+        public async Task<ActionResult> Index(HomePage currentPage)
         {
-            var viewModel = _viewModelFactory.Create(currentPage);
+            var viewModel = await _viewModelFactory.Create(currentPage);
             return View("~/Features/Home/HomePage.cshtml", viewModel);
         }
     }
