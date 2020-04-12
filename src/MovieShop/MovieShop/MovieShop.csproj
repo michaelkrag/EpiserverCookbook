@@ -427,6 +427,7 @@
     <Content Include="Frontend\Javascript\components\shoppingcartquantity.vue" />
     <Content Include="Features\ShoppingCart\ShoppingCart.cshtml" />
     <Content Include="Frontend\Sass\Components\searchresult.scss" />
+    <Content Include="Frontend\Sass\Components\menu.scss" />
     <None Include="Frontend\Sass\styles.scss" />
     <Content Include="Frontend\Javascript\components\autocompleate.vue" />
     <Content Include="Frontend\Javascript\components\cart.js" />
