@@ -16,5 +16,10 @@ namespace NLPLib.Search.Index.Models
             document.AddOffset(termInformation);
             NumberOfDocuments = Postings.Count();
         }
+
+        public override string ToString()
+        {
+            return $"NumberOfTerms: {NumberOfTerms}";
+        }
     }
 }

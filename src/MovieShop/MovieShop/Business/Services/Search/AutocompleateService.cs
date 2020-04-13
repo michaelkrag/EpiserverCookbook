@@ -13,14 +13,14 @@ namespace MovieShop.Business.Services.Search
     public class AutocompleateService : IAutocompleateService
     {
         private readonly ITernarySearch _ternarySearch;
-        private readonly IIrtRetSearch _irtRetSearch;
+        private readonly ISearchEngine _searchEngine;
         private readonly IBiGram _biGram;
         private readonly ITriGram _triGram;
 
-        public AutocompleateService(ITernarySearch ternarySearch, IIrtRetSearch irtRetSearch, IBiGram biGram, ITriGram triGram)
+        public AutocompleateService(ITernarySearch ternarySearch, ISearchEngine searchEngine, IBiGram biGram, ITriGram triGram)
         {
             _ternarySearch = ternarySearch;
-            _irtRetSearch = irtRetSearch;
+            _searchEngine = searchEngine;
             _biGram = biGram;
             _triGram = triGram;
         }

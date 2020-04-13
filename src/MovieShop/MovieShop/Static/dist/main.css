@@ -247,3 +247,20 @@ img {
     padding: 10px 0;
     font-size: 22px; }
 
+.category {
+  display: flex; }
+  .category .category-filter {
+    width: 20%; }
+  .category .category-result {
+    width: 80%; }
+    .category .category-result .category-result-item {
+      display: flex; }
+      .category .category-result .category-result-item .category-result-left {
+        width: 20%;
+        padding: 10px;
+        padding-left: 20px; }
+      .category .category-result .category-result-item .category-result-right {
+        width: 80%;
+        padding: 10px;
+        padding-right: 20px; }
+

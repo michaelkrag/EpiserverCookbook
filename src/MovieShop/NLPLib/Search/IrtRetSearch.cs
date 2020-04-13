@@ -8,9 +8,11 @@ using NLPLib.Search.Models;
 using NLPLib.Search.Scores;
 using NLPLib.Tokenizers;
 using NLPLib.Vocabularys;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace NLPLib.Search
 {

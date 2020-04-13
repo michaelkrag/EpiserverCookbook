@@ -13,5 +13,6 @@ namespace NLPLib.Search.Models
         public Dictionary<int, int> DocumentNumberOfTerms { get; set; }
         public int NumberOfDocuments { get; set; }
         public int NumberOfTerms { get; set; }
+        public FieldIndex FieldIndex { get; set; }
     }
 }

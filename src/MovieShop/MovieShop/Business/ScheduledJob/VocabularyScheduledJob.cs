@@ -41,7 +41,7 @@ namespace MovieShop.Business.ScheduledJob
             var tokinizer = new Tokinizer(stopwords);
             var documentStore = new DocumentStorageMemory();
             var vocabulary = new Vocabulary();
-            var search = new IrtRetSearch(vocabulary, documentStore, tokinizer);
+            var search = new SearchEngine(vocabulary, documentStore, tokinizer);
 
             var bigram = new NGram(2, new Sentencezer(new Tokinizer(new HashSet<string>() { "-", "\"", "(", ")", ":", ";", "," })));
             var trigram = new NGram(3, new Sentencezer(new Tokinizer(new HashSet<string>() { "-", "\"", "(", ")", ":", ";", "," })));

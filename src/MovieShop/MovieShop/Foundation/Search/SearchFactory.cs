@@ -26,10 +26,10 @@ namespace MovieShop.Foundation.Search
             _tokinizer = tokinizer;
         }
 
-        public IIrtRetSearch CreateSearch()
+        public ISearchEngine CreateSearch()
         {
             var searchItems = _blobRepository.Load<SearchExport>("Search");
-            var search = new IrtRetSearch(_vocabulary, _documentStorage, _tokinizer);
+            var search = new SearchEngine(_vocabulary, _documentStorage, _tokinizer);
             search.Import(searchItems);
             return search;
         }

@@ -361,6 +361,7 @@
     <Compile Include="Domain\Settings\ISettingBlock.cs" />
     <Compile Include="Domain\Settings\ISettingsPage.cs" />
     <Compile Include="Features\Category\CategoryController.cs" />
+    <Compile Include="Features\Category\CategoryViewModel.cs" />
     <Compile Include="Features\Menu\Settings\CartSettings.cs" />
     <Compile Include="Features\Product\MovieProductController.cs" />
     <Compile Include="Features\Container\ContainerPage.cs" />
@@ -442,6 +443,7 @@
     <Content Include="Frontend\Sass\Components\searchresult.scss" />
     <Content Include="Frontend\Sass\Components\menu.scss" />
     <Content Include="Features\Category\CategoryView.cshtml" />
+    <Content Include="Frontend\Sass\Components\category-page.scss" />
     <None Include="Frontend\Sass\styles.scss" />
     <Content Include="Frontend\Javascript\components\autocompleate.vue" />
     <Content Include="Frontend\Javascript\components\cart.js" />
