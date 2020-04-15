@@ -20,6 +20,8 @@ namespace MovieShop.Models.ViewModels
         IEnumerable<MenuItem> Recommend { get; }
         string CategoriesTitle { get; }
         IEnumerable<MenuItem> Categories { get; }
+
+        IEnumerable<SelectEntry> Markets { get; }
         string CartUrl { get; }
 
         bool ShowRecommendTitle();

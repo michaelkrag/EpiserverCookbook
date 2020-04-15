@@ -1,5 +1,7 @@
 ﻿using EPiServer.Commerce.Catalog.ContentTypes;
 using EPiServer.Core;
+using Mediachase.Commerce;
+using Mediachase.Commerce.Markets;
 using MediatR;
 using MovieShop.Domain.MediaR;
 using MovieShop.Domain.Settings.SettingsBlocke;
@@ -14,17 +16,26 @@ namespace MovieShop.Business.Factory
     {
         private readonly IMediator _mediator;
         private readonly IMenuSettings _menuSettings;
+        private readonly IMarketService _marketService;
+        private readonly ICurrentMarket _currentMarket;
 
-        public ViewModelFactory(IMediator mediator, IMenuSettings menuSettings)
+        public ViewModelFactory(IMediator mediator, IMenuSettings menuSettings, IMarketService marketService, ICurrentMarket currentMarket)
         {
             _mediator = mediator;
             _menuSettings = menuSettings;
+            _marketService = marketService;
+            _currentMarket = currentMarket;
         }
 
         private async Task FullOutModel<TModel, TPage>(TModel viewModel) where TModel : PageViewModel<TPage> where TPage : PageData
         {
             viewModel.CartApiUrl = "/cart";
             viewModel.CartUrl = "/en/shooping-cart/";
+
+            var currentMarket = _currentMarket.GetCurrentMarket();
+
+            viewModel.Markets = _marketService.GetAllMarkets().Select(
+                x => new SelectEntry() { DisplayName = x.MarketName, Key = x.MarketId.Value, Selected = x.MarketId.Value == currentMarket.MarketId.Value });
 
             var bugerMenu = await _mediator.Send(CategoryRequest.Create(_menuSettings.MovieFolder));
             viewModel.Categories = bugerMenu.CategoryEntries.Select(x => new MenuItem() { Link = x.Link, Title = x.Title });

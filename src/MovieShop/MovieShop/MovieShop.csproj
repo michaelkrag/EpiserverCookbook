@@ -350,10 +350,13 @@
     <Compile Include="Business\Services\Search\Models\TernaryTreeModel.cs" />
     <Compile Include="Controllers\BasePageController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\MarketController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Domain\Commerce\Variants\MovieVariant.cs" />
     <Compile Include="Domain\MediaR\CartAddRequest.cs" />
     <Compile Include="Domain\MediaR\CartAddResponce.cs" />
+    <Compile Include="Domain\MediaR\CartContentResponce.cs" />
+    <Compile Include="Domain\MediaR\CartContentRequest.cs" />
     <Compile Include="Domain\MediaR\CartQuantityQuery.cs" />
     <Compile Include="Domain\MediaR\CategoryRequest.cs" />
     <Compile Include="Domain\MediaR\CategoryResponce.cs" />
@@ -362,6 +365,9 @@
     <Compile Include="Domain\Settings\ISettingsPage.cs" />
     <Compile Include="Features\Category\CategoryController.cs" />
     <Compile Include="Features\Category\CategoryViewModel.cs" />
+    <Compile Include="Features\Market\CurrentMarket.cs" />
+    <Compile Include="Features\Market\Models\DIConfig.cs" />
+    <Compile Include="Features\Market\Models\MarketCookie.cs" />
     <Compile Include="Features\Menu\Settings\CartSettings.cs" />
     <Compile Include="Features\Product\MovieProductController.cs" />
     <Compile Include="Features\Container\ContainerPage.cs" />
@@ -421,6 +427,7 @@
     <Compile Include="Models\Pages\BasePage.cs" />
     <Compile Include="Models\ViewModels\IMenuViewModel.cs" />
     <Compile Include="Models\ViewModels\ILayoutViewModel.cs" />
+    <Compile Include="Models\ViewModels\SelectEntry.cs" />
     <Compile Include="Models\ViewModels\PageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\MediaR\VariantsResponce.cs" />
@@ -444,6 +451,7 @@
     <Content Include="Frontend\Sass\Components\menu.scss" />
     <Content Include="Features\Category\CategoryView.cshtml" />
     <Content Include="Frontend\Sass\Components\category-page.scss" />
+    <Content Include="Frontend\Sass\Components\ShoppingCart.scss" />
     <None Include="Frontend\Sass\styles.scss" />
     <Content Include="Frontend\Javascript\components\autocompleate.vue" />
     <Content Include="Frontend\Javascript\components\cart.js" />

@@ -58,3 +58,49 @@ namespace MovieShop.Foundation.Extensions
         }
     }
 }
+
+/*
+
+  public virtual IEnumerable<T> GetEntriesRecursive<T>(ContentReference parentLink, CultureInfo defaultCulture) where T : EntryContentBase
+  {
+      foreach (var nodeContent in LoadChildrenBatched<NodeContent>(parentLink, defaultCulture))
+      {
+           foreach (var entry in GetEntriesRecursive<T>(nodeContent.ContentLink, defaultCulture))
+          {
+                 yield return entry;
+         }
+     }
+
+     foreach (var entry in LoadChildrenBatched<T>(parentLink, defaultCulture))
+     {
+         yield return entry;
+     }
+ }
+
+ private IEnumerable<T> LoadChildrenBatched<T>(ContentReference parentLink, CultureInfo defaultCulture) where T : IContent
+ {
+     var start = 0;
+
+     while (true)
+     {
+         var batch = _contentLoader.GetChildren<T>(parentLink, defaultCulture, start, 50);
+         if (!batch.Any())
+         {
+             yield break;
+         }
+
+         foreach (var content in batch)
+         {
+             // Don't include linked products to avoid including them multiple times when traversing the catalog
+             if (!parentLink.CompareToIgnoreWorkID(content.ParentLink))
+             {
+                 continue;
+             }
+
+             yield return content;
+         }
+         start += 50;
+     }
+ }
+
+     */

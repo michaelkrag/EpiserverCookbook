@@ -23,6 +23,8 @@ namespace MovieShop.Models.ViewModels
 
         public string CartUrl { get; set; }
 
+        public IEnumerable<SelectEntry> Markets { get; set; } = new List<SelectEntry>();
+
         public bool ShowRecommendTitle()
         {
             return Recommend.Any();

@@ -31,8 +31,19 @@
         </div>
         <div class="nav-center"> <autocompleate></autocompleate></div>
         <div class="nav-right">
-            <div>more stof</div>
-            <div>               
+            <div class="dropdown">
+                <button class="dropbtn">
+                    @Model.Markets.FirstOrDefault(x => x.Selected == true).DisplayName
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    @foreach (var market in Model.Markets)
+                    {
+                        <a href="#">@market.DisplayName</a>
+                    }
+                </div>
+            </div>
+            <div>
                 <a href="@Model.CartUrl">
                     <img src="~/Static/images/Shopping-Cart-icon.png" />
                     <shoppingcartquantity></shoppingcartquantity>

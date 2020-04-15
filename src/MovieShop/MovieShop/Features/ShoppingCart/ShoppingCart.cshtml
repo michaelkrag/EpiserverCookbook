@@ -1,6 +1,23 @@
 ﻿@using MovieShop.Features.Home
 @using MovieShop.Models.ViewModels
 @using MovieShop.Features.ShoppingCart
-@model PageViewModel<ShoppingCartPage>
+@using MovieShop.Domain.MediaR;
+@model PageViewModel<ShoppingCartPage, CartContentResponce>
 
-<h1>shopping catt</h1>
+<div class="shooping-cart">
+
+    @foreach (var item in Model.CurrentData.LineItems)
+    {
+        <div class="shooping-cart-item">
+            <div class="cart-item-left">
+                <img src="https://via.placeholder.com/180"></img>
+            </div>
+            <div class="cart-item-center">
+                @item.DisplayName
+            </div>
+            <div class="cart-item-right">
+                100 kr
+            </div>
+        </div>
+    }
+</div>

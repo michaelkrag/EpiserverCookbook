@@ -21,6 +21,10 @@ using EPiServer.Commerce.Order;
 using MovieShop.Infrastructure.Factorys;
 using MovieShop.Domain.Settings.SettingsBlocke;
 using MovieShop.Infrastructure.Settings;
+using CommonLib.Cookies.Helpers;
+using CommonLib.Cookies;
+using Mediachase.Commerce;
+using MovieShop.Features.Market;
 
 namespace MovieShop.Infrastructure.DependencyInjection
 {
@@ -46,6 +50,9 @@ namespace MovieShop.Infrastructure.DependencyInjection
 
             container.AddTransient<IBlobRepository, BlobRepository>();
             container.AddTransient<ICart>(x => x.GetInstance<ICartFactory>().LoadOrCreateCart());
+
+            container.AddSingleton<ICookieHelper, CookieHelper>();
+            container.AddSingleton<ICookieRepository>(x => new CookieRepository(false, x.GetInstance<ICookieHelper>()));
 
             container.AddSingleton<IVocabulary>(x => CreateVocabulary(x.GetInstance<IBlobRepository>()));
 

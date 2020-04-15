@@ -2,6 +2,7 @@
 using EPiServer.Commerce.Order;
 using EPiServer.Web.Routing;
 using Mediachase.Commerce.Catalog;
+using Mediachase.Commerce.Pricing;
 using MediatR;
 using MovieShop.Domain.Commerce.Variants;
 using MovieShop.Domain.MediaR;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace MovieShop.Business.Handlers
 {
-    public class CartHandler : IRequestHandler<CartAddRequest, CartAddResponce>, IRequestHandler<CartQuantityQuery, int>
+    public class CartHandler : IRequestHandler<CartAddRequest, CartAddResponce>, IRequestHandler<CartQuantityQuery, int>, IRequestHandler<CartContentRequest, CartContentResponce>
     {
         private readonly ICartFactory _cartFactory;
         private readonly IOrderGroupFactory _orderGroupFactory;
@@ -58,6 +59,19 @@ namespace MovieShop.Business.Handlers
             }
             var quantity = cart.GetAllLineItems().Sum(x => x.Quantity);
             return await Task.FromResult(Convert.ToInt32(quantity));
+        }
+
+        public async Task<CartContentResponce> Handle(CartContentRequest request, CancellationToken cancellationToken)
+        {
+            var cart = _cartFactory.LoadOrCreateCart();
+            var lineItems = cart.GetAllLineItems().Select(x => new LineItem() { Code = x.Code, DisplayName = x.DisplayName, Quantity = Convert.ToInt32(x.Quantity) });
+
+            var model = new CartContentResponce()
+            {
+                LineItems = lineItems
+            };
+
+            return await Task.FromResult(model);
         }
     }
 }
