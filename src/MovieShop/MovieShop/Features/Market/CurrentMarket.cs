@@ -36,8 +36,12 @@ namespace MovieShop.Features.Market
 
         public void SetCurrentMarket(MarketId marketId)
         {
-            var cookie = new MarketCookie() { MarketId = marketId.Value };
-            _cookieRepository.Set(MarketCookie.CookieName, new TimeSpan(100, 0, 0, 0, 0), cookie);
+            var market = _marketService.GetMarket(marketId);
+            if (market != null)
+            {
+                var cookie = new MarketCookie() { MarketId = marketId.Value };
+                _cookieRepository.Set(MarketCookie.CookieName, new TimeSpan(100, 0, 0, 0, 0), cookie);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using EPiServer.Core;
 using Mediachase.Commerce;
 using Mediachase.Commerce.Markets;
 using MediatR;
+using MovieShop.Domain.Component;
 using MovieShop.Domain.MediaR;
 using MovieShop.Domain.Settings.SettingsBlocke;
 using MovieShop.Models.ViewModels;
@@ -34,8 +35,19 @@ namespace MovieShop.Business.Factory
 
             var currentMarket = _currentMarket.GetCurrentMarket();
 
-            viewModel.Markets = _marketService.GetAllMarkets().Select(
-                x => new SelectEntry() { DisplayName = x.MarketName, Key = x.MarketId.Value, Selected = x.MarketId.Value == currentMarket.MarketId.Value });
+            var markets = _marketService.GetAllMarkets();
+            var maketsSelector = new List<SelectEntry>();
+
+            foreach (var market in markets)
+            {
+                foreach (var currencie in market.Currencies)
+                {
+                    var code = MarketCurrency.Create(market.MarketId.Value, currencie.CurrencyCode);
+                    maketsSelector.Add(new SelectEntry() { DisplayName = $"{market.MarketName} - {currencie.CurrencyCode}", Selected = market.MarketId.Value == currentMarket.MarketId.Value, Key = code.ToString() });
+                }
+            }
+
+            viewModel.Markets = maketsSelector;
 
             var bugerMenu = await _mediator.Send(CategoryRequest.Create(_menuSettings.MovieFolder));
             viewModel.Categories = bugerMenu.CategoryEntries.Select(x => new MenuItem() { Link = x.Link, Title = x.Title });

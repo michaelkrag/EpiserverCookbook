@@ -330,6 +330,7 @@
     <Compile Include="Adapters\DocumentStore\DocumentStore.cs" />
     <Compile Include="Adapters\DocumentStore\IContentMapper.cs" />
     <Compile Include="Adapters\DocumentStore\ObjectGenerator.cs" />
+    <Compile Include="Business\Currencys\ICurrentCurrency.cs" />
     <Compile Include="Business\Extensions\ContentAreaItemExtensions.cs" />
     <Compile Include="Business\Extensions\ContentAreaExtensions.cs" />
     <Compile Include="Business\Factory\DependencyInjectionConfig.cs" />
@@ -345,6 +346,8 @@
     <Compile Include="Business\Services\Blobstore\IBlobFilenameRepository.cs" />
     <Compile Include="Business\Services\Blobstore\IBlobRepository.cs" />
     <Compile Include="Business\Services\Blobstore\Models\FileInfo.cs" />
+    <Compile Include="Business\Services\Prices\CustomerPriceService.cs" />
+    <Compile Include="Business\Services\Prices\ICustomerPriceService.cs" />
     <Compile Include="Business\Services\Search\AutocompleateService.cs" />
     <Compile Include="Business\Services\Search\IAutocompleateService.cs" />
     <Compile Include="Business\Services\Search\Models\TernaryTreeModel.cs" />
@@ -353,6 +356,7 @@
     <Compile Include="Controllers\MarketController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Domain\Commerce\Variants\MovieVariant.cs" />
+    <Compile Include="Domain\Component\MarketCurrency.cs" />
     <Compile Include="Domain\MediaR\CartAddRequest.cs" />
     <Compile Include="Domain\MediaR\CartAddResponce.cs" />
     <Compile Include="Domain\MediaR\CartContentResponce.cs" />
@@ -365,8 +369,10 @@
     <Compile Include="Domain\Settings\ISettingsPage.cs" />
     <Compile Include="Features\Category\CategoryController.cs" />
     <Compile Include="Features\Category\CategoryViewModel.cs" />
+    <Compile Include="Features\Market\CurrentCurrency.cs" />
     <Compile Include="Features\Market\CurrentMarket.cs" />
-    <Compile Include="Features\Market\Models\DIConfig.cs" />
+    <Compile Include="Features\Market\DIConfig.cs" />
+    <Compile Include="Features\Market\Models\CurrencyCookie.cs" />
     <Compile Include="Features\Market\Models\MarketCookie.cs" />
     <Compile Include="Features\Menu\Settings\CartSettings.cs" />
     <Compile Include="Features\Product\MovieProductController.cs" />
@@ -461,6 +467,7 @@
     <Content Include="Static\CSS\App.css" />
     <Content Include="Static\dist\app.js" />
     <Content Include="Static\dist\main.css" />
+    <Content Include="Static\images\cart-icon.svg" />
     <Content Include="Static\images\Shopping-Cart-icon.png" />
     <Content Include="Static\js\app.css" />
     <Content Include="Views\Web.config" />

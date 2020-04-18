@@ -39,14 +39,14 @@
                 <div class="dropdown-content">
                     @foreach (var market in Model.Markets)
                     {
-                        <a href="#">@market.DisplayName</a>
+                        <a href="@("/SetMarket?id=" + market.Key + "&rtnUrl="+ Request.Url.ToString())">@market.DisplayName</a>
                     }
                 </div>
             </div>
             <div>
-                <a href="@Model.CartUrl">
+                <a class="cart-counter-container" href="@Model.CartUrl">
+                    <shoppingcartquantity class="cart-counter"></shoppingcartquantity>
                     <img src="~/Static/images/Shopping-Cart-icon.png" />
-                    <shoppingcartquantity></shoppingcartquantity>
                 </a>
             </div>
         </div>

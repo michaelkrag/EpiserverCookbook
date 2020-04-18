@@ -1,32 +1,36 @@
 ﻿using Mediachase.Commerce;
 using Mediachase.Commerce.Markets;
+using MovieShop.Business.Currencys;
+using MovieShop.Domain.Component;
 using System.Net;
 
 using System.Web.Mvc;
 
 namespace MovieShop.Controllers
 {
-    public class MarketController
+    public class MarketController : Controller
     {
-        private readonly IMarketService _marketService;
         private readonly ICurrentMarket _currentMarket;
+        private readonly ICurrentCurrency _currentCurrency;
 
-        public MarketController(IMarketService marketService, ICurrentMarket currentMarket)
+        public MarketController(ICurrentMarket currentMarket, ICurrentCurrency currentCurrency)
         {
-            _marketService = marketService;
             _currentMarket = currentMarket;
+            _currentCurrency = currentCurrency;
         }
 
         [Route("SetMarket")]
         [HttpGet]
-        public ActionResult SetMarket(string marketId)
+        public ActionResult SetMarket(string id, string rtnUrl)
         {
-            var market = _marketService.GetMarket(marketId);
-            if (market != null)
-            {
-                _currentMarket.SetCurrentMarket(market.MarketId);
-            }
-            return new HttpStatusCodeResult(HttpStatusCode.OK);
+            var code = MarketCurrency.Create(id);
+
+            _currentMarket.SetCurrentMarket(code.MarketId);
+            _currentCurrency.SetCurrentCurrency(code.CurrentCode);
+
+            var redirectUrl = !string.IsNullOrEmpty(rtnUrl) ? rtnUrl : "/";
+
+            return Redirect(redirectUrl);
         }
     }
 }

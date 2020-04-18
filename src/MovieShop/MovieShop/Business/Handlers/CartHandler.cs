@@ -45,7 +45,7 @@ namespace MovieShop.Business.Handlers
             }
 
             cart.InsertOrUpdate(request.Code, request.Quantity, content.DisplayName);
-
+            cart.ValidateCart();
             _cartFactory.Save(cart);
             return await Task.FromResult(new CartAddResponce() { Code = request.Code, VariantAdded = true, QuantityAdded = request.Quantity });
         }

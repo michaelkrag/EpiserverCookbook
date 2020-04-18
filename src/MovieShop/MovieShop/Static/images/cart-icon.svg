@@ -1,0 +1,16 @@
+<svg width="220" height="120" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" overflow="hidden">
+	<defs>
+		<clipPath id="clip0">
+			<path d="M0 0 220 0 220 120 0 120Z" fill-rule="evenodd" clip-rule="evenodd"/>
+		</clipPath>
+	</defs>
+	<g clip-path="url(#clip0)">
+		<rect x="0" y="0" width="220" height="120" fill="#FFFFFF"/>
+		<path d="M0.500053 20.5001 39.4211 34.1579" stroke="#4472C4" stroke-width="0.666667" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/>
+		<path d="M39.5001 33.5001 74.0001 96.5001" stroke="#4472C4" stroke-width="0.666667" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/>
+		<path d="M74.5001 96.5001 177 96.5002" stroke="#4472C4" stroke-width="0.666667" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/>
+		<path d="M0 0 26.4999 63" stroke="#4472C4" stroke-width="0.666667" stroke-miterlimit="8" fill="none" fill-rule="evenodd" transform="matrix(1 0 0 -1 176.5 96.5001)"/>
+		<path d="M90.5001 107.5C90.5001 103.634 93.6341 100.5 97.5001 100.5 101.366 100.5 104.5 103.634 104.5 107.5 104.5 111.366 101.366 114.5 97.5001 114.5 93.6341 114.5 90.5001 111.366 90.5001 107.5Z" stroke="#2F528F" stroke-width="1.33333" stroke-miterlimit="8" fill="#FFFFFF" fill-rule="evenodd"/>
+		<path d="M147.5 107.5C147.5 103.634 150.634 100.5 154.5 100.5 158.366 100.5 161.5 103.634 161.5 107.5 161.5 111.366 158.366 114.5 154.5 114.5 150.634 114.5 147.5 111.366 147.5 107.5Z" stroke="#2F528F" stroke-width="1.33333" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/>
+	</g>
+</svg>
