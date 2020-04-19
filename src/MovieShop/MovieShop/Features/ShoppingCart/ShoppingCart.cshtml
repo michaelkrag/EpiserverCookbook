@@ -6,29 +6,70 @@
 @model PageViewModel<ShoppingCartPage, CartContentResponce>
 
 <div class="shooping-cart">
+    <div class="shopping-cart-left">
+        @foreach (var item in Model.CurrentData.LineItems)
+        {
+            <div class="shooping-cart-item">
+                <div class="cart-item-left">
+                    <img src="@Html.MovieDbImage(item.ImageUrl,200)" />
+                </div>
+                <div class="cart-item-center">
+                    <div>
+                        <a href="@Url.ContentUrl(item.ProductReference)">@item.DisplayName</a>
+                    </div>
+                    <div>Quantity: @item.Quantity</div>
+                </div>
+                <div class="cart-item-right">
 
-    @foreach (var item in Model.CurrentData.LineItems)
-    {
-        <div class="shooping-cart-item">
-            <div class="cart-item-left">
-                <img src="@Html.MovieDbImage(item.ImageUrl,200)" />
+                    @if (item.HasDiscount)
+                    {
+                        <div class="dicount-nomal-price">@item.Price</div>
+                        <div>@item.DiscountPrice</div>
+                    }
+                    else
+                    {
+                        <br />
+                        <div>@item.Price</div>
+                    }
+                </div>
             </div>
-            <div class="cart-item-center">
-                @item.DisplayName
-            </div>
-            <div class="cart-item-right">
+        }
+    </div>
+    <div class="shopping-cart-right">
+        <table>
+            @if (Model.CurrentData.HasDiscount())
+            {
+                <tr>
+                    <td>Normal price</td>
+                    <td>@Model.CurrentData.NoDiscount</td>
+                </tr>
+                if (Model.CurrentData.HasItemDiscount)
+                {
+                    <tr>
+                        <td>Item discount</td>
+                        <td>-@Model.CurrentData.ItemsDiscount</td>
+                    </tr>
+                }
+                if (Model.CurrentData.HasOrderDiscount)
+                {
+                    <tr>
+                        <td>Order discount</td>
+                        <td>-@Model.CurrentData.OrderDiscount</td>
+                    </tr>
+                }
+                <tr>
+                    <td><strong>You price</strong></td>
+                    <td><strong>@Model.CurrentData.Total</strong></td>
+                </tr>
 
-                @if (item.HasDiscount)
-                {
-                    <div class="dicount-nomal-price">@item.Price</div>
-                    <div>@item.DiscountPrice</div>
-                }
-                else
-                {
-                    <br />
-                    <div>@item.Price</div>
-                }
-            </div>
-        </div>
-    }
+            }
+            else
+            {
+                <tr>
+                    <td>Tatal:</td>
+                    <td>@Model.CurrentData.Total</td>
+                </tr>
+            }
+        </table>
+    </div>
 </div>

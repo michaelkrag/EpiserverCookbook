@@ -3,6 +3,7 @@ using EPiServer.Commerce.Catalog.ContentTypes;
 using EPiServer.Commerce.Order;
 using EPiServer.Core;
 using EPiServer.Web.Routing;
+using Mediachase.Commerce;
 using Mediachase.Commerce.Catalog;
 using Mediachase.Commerce.Pricing;
 using MediatR;
@@ -26,14 +27,16 @@ namespace MovieShop.Business.Handlers
         private readonly IContentLoader _contentLoader;
         private readonly ReferenceConverter _referenceConverter;
         private readonly ICustomerPriceService _customerPriceService;
+        private readonly IOrderGroupCalculator _orderGroupCalculator;
 
-        public CartHandler(ICartFactory cartFactory, IOrderGroupFactory orderGroupFactory, IContentLoader contentLoader, ReferenceConverter referenceConverter, ICustomerPriceService customerPriceService)
+        public CartHandler(ICartFactory cartFactory, IOrderGroupFactory orderGroupFactory, IContentLoader contentLoader, ReferenceConverter referenceConverter, ICustomerPriceService customerPriceService, IOrderGroupCalculator orderGroupCalculator)
         {
             _cartFactory = cartFactory;
             _orderGroupFactory = orderGroupFactory;
             _contentLoader = contentLoader;
             _referenceConverter = referenceConverter;
             _customerPriceService = customerPriceService;
+            _orderGroupCalculator = orderGroupCalculator;
         }
 
         public async Task<CartAddResponce> Handle(CartAddRequest request, CancellationToken cancellationToken)
@@ -89,13 +92,23 @@ namespace MovieShop.Business.Handlers
                 DisplayName = x.DisplayName,
                 Quantity = Convert.ToInt32(x.Quantity),
                 ImageUrl = products[variants.Where(y => y.Code == x.Code).Select(y => y.ContentLink).First()].PosterPath,
-                Price = prices[x.Code].UnitPrice.Amount.ToString(),
-                DiscountPrice = discounts[variants.First(y => y.Code == x.Code).ContentLink].DiscountPrices.Last().Price.ToString()
+                Price = prices[x.Code].UnitPrice.ToString(),
+                DiscountPrice = discounts[variants.First(y => y.Code == x.Code).ContentLink].DiscountPrices.Last().Price.ToString(),
+                ProductReference = products[variants.Where(y => y.Code == x.Code).Select(y => y.ContentLink).First()].ContentLink
             });
 
+            var total = _orderGroupCalculator.GetOrderGroupTotals(cart);
+            var tax = _orderGroupCalculator.GetTaxTotal(cart);
+            var orderDiscount = _orderGroupCalculator.GetOrderDiscountTotal(cart);
+            var lineItemDiscount = new Money(cart.GetAllLineItems().Sum(x => x.GetEntryDiscount()), cart.Currency);
+            var noDiscount = new Money(allLineItems.Sum(x => prices[x.Code].UnitPrice.Amount * x.Quantity), cart.Currency);
             var model = new CartContentResponce()
             {
-                LineItems = lineItems
+                LineItems = lineItems,
+                Total = total.Total.ToString(),
+                ItemsDiscount = lineItemDiscount.ToString(),
+                OrderDiscount = orderDiscount.ToString(),
+                NoDiscount = noDiscount.ToString()
             };
 
             return await Task.FromResult(model);
