@@ -13,20 +13,30 @@
         <h2 class="work-feature-block-header">@Html.PropertyFor(x => x.CurrentContent.OriginalTitle)</h2>
 
         @if (Model.CurrentData.Any())
-        {            
+        {
             <ul class="media-list">
                 @foreach (var item in Model.CurrentData.Variants)
                 {
                     <li>
                         <a href="@(Model.CurrentData.IsPrimaryVariant(item) ? "javascript:void(0)" : "?code=" +item.Code)">
                             <div class="horizontal-list-box @(Model.CurrentData.IsPrimaryVariant(item) ? "active":"")">
-                                <div>@item.DisplayName</div><br />
-                                <div>@item.Price</div>
+                                <div>@item.DisplayName</div>
+
+                                @if (item.HasDiscount)
+                                {
+                                    <div class="dicount-nomal-price">@item.NormalPrice</div>
+                                    <div>@item.DiscountPrice</div>
+                                }
+                                else
+                                {
+                                    <br />
+                                    <div>@item.NormalPrice</div>
+                                }
                             </div>
                         </a>
                     </li>
                 }
-            </ul>         
+            </ul>
         }
         <p>@Html.PropertyFor(x => x.CurrentContent.Summery)</p>
         <h2>Details</h2>
@@ -38,7 +48,40 @@
         </ul>
     </div>
     <div class="product-right">
-        <div>buy section</div>
-        <add-to-basket butten-label="Add to cart" sku="@Model.CurrentData.ActiveVariant.Code" hover-text="add @Model.CurrentData.ActiveVariant.Name to the cart"></add-to-basket>
+        <div class="buy-section">
+            @if (Model.CurrentData.HasActiveVariant())
+            {
+                <div>
+                    <h5>@Model.CurrentData.ActiveVariant.Name</h5>
+                    @if (Model.CurrentData.ActiveVariant.HasDiscount)
+                    {
+                        <table>
+                            <tr>
+                                <td>Normal price</td>
+                                <td>@Model.CurrentData.ActiveVariant.NormalPrice</td>
+                            </tr>
+
+                            @foreach (var discount in Model.CurrentData.ActiveVariant.Discounts)
+                            {
+                                <tr>
+                                    <td>@discount.Discription</td>
+                                    <td>@discount.Price</td>
+                                </tr>
+                            }
+                            <tr>
+                                <td><strong>Your price</strong></td>
+                                <td><strong>@Model.CurrentData.ActiveVariant.DiscountPrice</strong></td>
+                            </tr>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>@Model.CurrentData.ActiveVariant.NormalPrice</p>
+                    }
+                </div>
+
+            }
+            <add-to-basket butten-label="Add to cart" sku="@Model.CurrentData.ActiveVariant.Code" hover-text="add @Model.CurrentData.ActiveVariant.Name to the cart"></add-to-basket>
+        </div>
     </div>
 </div>

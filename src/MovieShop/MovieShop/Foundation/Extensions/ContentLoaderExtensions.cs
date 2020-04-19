@@ -1,8 +1,10 @@
 ﻿using EPiServer;
 using EPiServer.Commerce.Catalog.ContentTypes;
 using EPiServer.Core;
+using EPiServer.Globalization;
 using MovieShop.Domain.Commerce.Products;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace MovieShop.Foundation.Extensions
@@ -10,6 +12,59 @@ namespace MovieShop.Foundation.Extensions
     public static class ContentLoaderExtensions
     {
         public static IEnumerable<TChild> GetAllChildren<TChild>(this IContentLoader contentLoader, ContentReference contentReference) where TChild : IContent
+        {
+            var usedIds = new HashSet<int>();
+            var catalogRef = contentLoader.GetChildren<IContent>(contentReference).First();
+            var nodeQueue = new Queue<IContent>(new List<IContent>() { catalogRef });
+            while (nodeQueue.Any())
+            {
+                var contentData = nodeQueue.Dequeue();
+
+                if (!usedIds.Contains(contentData.ContentLink.ID))
+                {
+                    usedIds.Add(contentData.ContentLink.ID);
+
+                    var children = contentLoader.LoadChildrenBatched<IContent>(contentData.ContentLink, ContentLanguage.PreferredCulture);
+                    foreach (var child in children)
+                    {
+                        nodeQueue.Enqueue(child);
+                    }
+
+                    if (contentData is TChild content)
+                    {
+                        yield return content;
+                    }
+                }
+            }
+        }
+
+        private static IEnumerable<T> LoadChildrenBatched<T>(this IContentLoader contentLoader, ContentReference parentLink, CultureInfo defaultCulture) where T : IContent
+        {
+            var start = 0;
+
+            while (true)
+            {
+                var batch = contentLoader.GetChildren<T>(parentLink, defaultCulture, start, 50);
+                if (!batch.Any())
+                {
+                    yield break;
+                }
+
+                foreach (var content in batch)
+                {
+                    // Don't include linked products to avoid including them multiple times when traversing the catalog
+                    if (!parentLink.CompareToIgnoreWorkID(content.ParentLink))
+                    {
+                        continue;
+                    }
+
+                    yield return content;
+                }
+                start += 50;
+            }
+        }
+
+        public static IEnumerable<TChild> GetAllChildren2<TChild>(this IContentLoader contentLoader, ContentReference contentReference) where TChild : IContent
         {
             var usedIds = new HashSet<int>();
             var catalogRef = contentLoader.GetChildren<IContent>(contentReference).First();
@@ -37,7 +92,7 @@ namespace MovieShop.Foundation.Extensions
             }
         }
 
-        public static IEnumerable<TChild> GetAllChildren2<TChild>(this IContentLoader contentLoader, ContentReference contentReference) where TChild : IContent
+        public static IEnumerable<TChild> GetAllChildren_old<TChild>(this IContentLoader contentLoader, ContentReference contentReference) where TChild : IContent
         {
             var catalogRef = contentLoader.GetChildren<IContent>(contentReference);
             var nodeQueue = new Queue<IContent>(catalogRef);
@@ -74,32 +129,6 @@ namespace MovieShop.Foundation.Extensions
      foreach (var entry in LoadChildrenBatched<T>(parentLink, defaultCulture))
      {
          yield return entry;
-     }
- }
-
- private IEnumerable<T> LoadChildrenBatched<T>(ContentReference parentLink, CultureInfo defaultCulture) where T : IContent
- {
-     var start = 0;
-
-     while (true)
-     {
-         var batch = _contentLoader.GetChildren<T>(parentLink, defaultCulture, start, 50);
-         if (!batch.Any())
-         {
-             yield break;
-         }
-
-         foreach (var content in batch)
-         {
-             // Don't include linked products to avoid including them multiple times when traversing the catalog
-             if (!parentLink.CompareToIgnoreWorkID(content.ParentLink))
-             {
-                 continue;
-             }
-
-             yield return content;
-         }
-         start += 50;
      }
  }
 

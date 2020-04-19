@@ -59,3 +59,14 @@
 .active {
     border: 1px solid #f58482;
 }
+
+.buy-section {
+    padding-top: 10px;
+    border: 1px solid black;
+    div{
+        padding: 5px;
+    }
+}
+.dicount-nomal-price {
+    text-decoration: line-through;
+}

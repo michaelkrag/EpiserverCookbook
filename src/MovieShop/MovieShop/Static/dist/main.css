@@ -206,6 +206,15 @@ img {
 .active {
   border: 1px solid #f58482; }
 
+.buy-section {
+  padding-top: 10px;
+  border: 1px solid black; }
+  .buy-section div {
+    padding: 5px; }
+
+.dicount-nomal-price {
+  text-decoration: line-through; }
+
 .search-result-item {
   display: flex; }
   .search-result-item .search-result-left {

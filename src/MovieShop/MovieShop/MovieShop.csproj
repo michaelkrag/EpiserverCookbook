@@ -333,12 +333,15 @@
     <Compile Include="Business\Currencys\ICurrentCurrency.cs" />
     <Compile Include="Business\Extensions\ContentAreaItemExtensions.cs" />
     <Compile Include="Business\Extensions\ContentAreaExtensions.cs" />
+    <Compile Include="Business\Extensions\DictonaryExtensions.cs" />
+    <Compile Include="Business\Extensions\PriceValueExtensions.cs" />
     <Compile Include="Business\Factory\DependencyInjectionConfig.cs" />
     <Compile Include="Business\Factory\IViewModelFactory.cs" />
     <Compile Include="Business\Factory\ViewModelFactory.cs" />
     <Compile Include="Business\Handlers\CartHandler.cs" />
     <Compile Include="Business\Handlers\CategoryHandler.cs" />
     <Compile Include="Business\Repository\DynamicDataStoreRepository.cs" />
+    <Compile Include="Business\ScheduledJob\FixMarketScheduledJob.cs" />
     <Compile Include="Business\ScheduledJob\FixScheduledJob.cs" />
     <Compile Include="Business\ScheduledJob\VocabularyScheduledJob.cs" />
     <Compile Include="Business\Services\Blobstore\BlobFilenameRepository.cs" />
@@ -437,7 +440,7 @@
     <Compile Include="Models\ViewModels\PageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\MediaR\VariantsResponce.cs" />
-    <Compile Include="Business\Handlers\ProductHandle.cs" />
+    <Compile Include="Business\Handlers\VariantHandlerHandle.cs" />
     <Compile Include="Domain\MediaR\VariantsRequest.cs" />
   </ItemGroup>
   <ItemGroup>
