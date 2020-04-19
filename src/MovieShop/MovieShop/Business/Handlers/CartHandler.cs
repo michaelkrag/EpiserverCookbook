@@ -1,9 +1,13 @@
 ﻿using EPiServer;
+using EPiServer.Commerce.Catalog.ContentTypes;
 using EPiServer.Commerce.Order;
+using EPiServer.Core;
 using EPiServer.Web.Routing;
 using Mediachase.Commerce.Catalog;
 using Mediachase.Commerce.Pricing;
 using MediatR;
+using MovieShop.Business.Services.Prices;
+using MovieShop.Domain.Commerce.Products;
 using MovieShop.Domain.Commerce.Variants;
 using MovieShop.Domain.MediaR;
 using MovieShop.Foundation.Extensions;
@@ -21,13 +25,15 @@ namespace MovieShop.Business.Handlers
         private readonly IOrderGroupFactory _orderGroupFactory;
         private readonly IContentLoader _contentLoader;
         private readonly ReferenceConverter _referenceConverter;
+        private readonly ICustomerPriceService _customerPriceService;
 
-        public CartHandler(ICartFactory cartFactory, IOrderGroupFactory orderGroupFactory, IContentLoader contentLoader, ReferenceConverter referenceConverter)
+        public CartHandler(ICartFactory cartFactory, IOrderGroupFactory orderGroupFactory, IContentLoader contentLoader, ReferenceConverter referenceConverter, ICustomerPriceService customerPriceService)
         {
             _cartFactory = cartFactory;
             _orderGroupFactory = orderGroupFactory;
             _contentLoader = contentLoader;
             _referenceConverter = referenceConverter;
+            _customerPriceService = customerPriceService;
         }
 
         public async Task<CartAddResponce> Handle(CartAddRequest request, CancellationToken cancellationToken)
@@ -64,7 +70,28 @@ namespace MovieShop.Business.Handlers
         public async Task<CartContentResponce> Handle(CartContentRequest request, CancellationToken cancellationToken)
         {
             var cart = _cartFactory.LoadOrCreateCart();
-            var lineItems = cart.GetAllLineItems().Select(x => new LineItem() { Code = x.Code, DisplayName = x.DisplayName, Quantity = Convert.ToInt32(x.Quantity) });
+
+            var allLineItems = cart.GetAllLineItems();
+            var lineItemCodes = allLineItems.Select(x => x.Code).Distinct();
+            var variants = _contentLoader.GetItems(_referenceConverter.GetContentLinks(lineItemCodes).Select(x => x.Value), new LoaderOptions { LanguageLoaderOption.FallbackWithMaster() }).OfType<MovieVariant>();
+            var prices = _customerPriceService.GetPrices(variants.Select(x => x.Code)).ToDictionary(x => x.CatalogKey.CatalogEntryCode, x => x);
+            var discounts = _customerPriceService.GetDiscountPrices(variants.Select(x => x.ContentLink)).ToDictionary(x => x.EntryLink, x => x);
+            var products = variants.Select(
+                x => new
+                {
+                    variant = x.ContentLink,
+                    product = _contentLoader.GetItems(x.GetParentProducts(), new LoaderOptions { LanguageLoaderOption.FallbackWithMaster() }).OfType<MovieProduct>()
+                }).ToDictionary(x => x.variant, x => x.product.FirstOrDefault());
+
+            var lineItems = cart.GetAllLineItems().Select(x => new LineItem()
+            {
+                Code = x.Code,
+                DisplayName = x.DisplayName,
+                Quantity = Convert.ToInt32(x.Quantity),
+                ImageUrl = products[variants.Where(y => y.Code == x.Code).Select(y => y.ContentLink).First()].PosterPath,
+                Price = prices[x.Code].UnitPrice.Amount.ToString(),
+                DiscountPrice = discounts[variants.First(y => y.Code == x.Code).ContentLink].DiscountPrices.Last().Price.ToString()
+            });
 
             var model = new CartContentResponce()
             {

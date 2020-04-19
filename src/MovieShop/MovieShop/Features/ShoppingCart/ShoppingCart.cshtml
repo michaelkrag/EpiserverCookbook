@@ -2,6 +2,7 @@
 @using MovieShop.Models.ViewModels
 @using MovieShop.Features.ShoppingCart
 @using MovieShop.Domain.MediaR;
+@using MovieShop.Foundation.Helpers
 @model PageViewModel<ShoppingCartPage, CartContentResponce>
 
 <div class="shooping-cart">
@@ -10,13 +11,23 @@
     {
         <div class="shooping-cart-item">
             <div class="cart-item-left">
-                <img src="https://via.placeholder.com/180"></img>
+                <img src="@Html.MovieDbImage(item.ImageUrl,200)" />
             </div>
             <div class="cart-item-center">
                 @item.DisplayName
             </div>
             <div class="cart-item-right">
-                100 kr
+
+                @if (item.HasDiscount)
+                {
+                    <div class="dicount-nomal-price">@item.Price</div>
+                    <div>@item.DiscountPrice</div>
+                }
+                else
+                {
+                    <br />
+                    <div>@item.Price</div>
+                }
             </div>
         </div>
     }

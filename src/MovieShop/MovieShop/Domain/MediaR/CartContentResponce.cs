@@ -17,5 +17,8 @@ namespace MovieShop.Domain.MediaR
         public string Media { get; set; }
         public string ImageUrl { get; set; }
         public int Quantity { get; set; }
+        public string Price { get; set; }
+        public string DiscountPrice { get; set; }
+        public bool HasDiscount => !string.IsNullOrEmpty(DiscountPrice);
     }
 }
