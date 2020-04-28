@@ -340,7 +340,11 @@
     <Compile Include="Business\Factory\ViewModelFactory.cs" />
     <Compile Include="Business\Handlers\CartHandler.cs" />
     <Compile Include="Business\Handlers\CategoryHandler.cs" />
+    <Compile Include="Business\Handlers\CustomerContactHandler.cs" />
     <Compile Include="Business\Repository\DynamicDataStoreRepository.cs" />
+    <Compile Include="Business\Repository\Models\Customer.cs" />
+    <Compile Include="Business\Repository\Models\CustomerRepository.cs" />
+    <Compile Include="Business\Repository\Models\ICustomerRepository.cs" />
     <Compile Include="Business\ScheduledJob\FixMarketScheduledJob.cs" />
     <Compile Include="Business\ScheduledJob\FixScheduledJob.cs" />
     <Compile Include="Business\ScheduledJob\VocabularyScheduledJob.cs" />
@@ -367,11 +371,16 @@
     <Compile Include="Domain\MediaR\CartQuantityQuery.cs" />
     <Compile Include="Domain\MediaR\CategoryRequest.cs" />
     <Compile Include="Domain\MediaR\CategoryResponce.cs" />
+    <Compile Include="Domain\MediaR\GetOrCreateCustomerResponce.cs" />
+    <Compile Include="Domain\MediaR\GetOrCreateCustomerRequest.cs" />
     <Compile Include="Domain\Settings\SettingsBlocke\IMenuSettings.cs" />
     <Compile Include="Domain\Settings\ISettingBlock.cs" />
     <Compile Include="Domain\Settings\ISettingsPage.cs" />
     <Compile Include="Features\Category\CategoryController.cs" />
     <Compile Include="Features\Category\CategoryViewModel.cs" />
+    <Compile Include="Features\CheckOut\CheckOutPageController.cs" />
+    <Compile Include="Features\CheckOut\CheckOutPage.cs" />
+    <Compile Include="Features\CheckOut\Models\CheckoutModel.cs" />
     <Compile Include="Features\Market\CurrentCurrency.cs" />
     <Compile Include="Features\Market\CurrentMarket.cs" />
     <Compile Include="Features\Market\DIConfig.cs" />
@@ -427,6 +436,7 @@
     <Compile Include="Infrastructure\DependencyInjection\IDependencyInjectionConfig.cs" />
     <Compile Include="Infrastructure\Factorys\CartFactory.cs" />
     <Compile Include="Infrastructure\Factorys\ICartFactory.cs" />
+    <Compile Include="Infrastructure\Helpers\HtmlHelpers.cs" />
     <Compile Include="Infrastructure\initialize\EPiServerCommerceInitializationModule.cs" />
     <Compile Include="Infrastructure\Helpers\SetDefaultHelper.cs" />
     <Compile Include="Infrastructure\MediaFiles\ImageFile.cs" />
@@ -461,6 +471,7 @@
     <Content Include="Features\Category\CategoryView.cshtml" />
     <Content Include="Frontend\Sass\Components\category-page.scss" />
     <Content Include="Frontend\Sass\Components\ShoppingCart.scss" />
+    <Content Include="Features\CheckOut\CheckOutPage.cshtml" />
     <None Include="Frontend\Sass\styles.scss" />
     <Content Include="Frontend\Javascript\components\autocompleate.vue" />
     <Content Include="Frontend\Javascript\components\cart.js" />

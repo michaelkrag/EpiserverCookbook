@@ -7,6 +7,7 @@ using NLPLib.Search;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace MovieShop.Features.Category
 {
@@ -23,6 +24,8 @@ namespace MovieShop.Features.Category
 
         public async Task<ActionResult> Index(GenreNode currentContent, HomePage currentPage)
         {
+            var image = currentContent.CommerceMediaCollection.FirstOrDefault(x => x.GroupName == "Default")?.AssetLink;
+
             var searchResult = _searchEngine.Query().MultiMatch("Back to the", new List<MatchField<ISearch>>()
                     {
                         new MatchField<ISearch>() { field = x => x.Title },

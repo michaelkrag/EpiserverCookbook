@@ -9,5 +9,6 @@ namespace MovieShop.Features.ShoppingCart.Settings
     public class CartSettings : BaseBlock, ISettingBlock
     {
         public virtual ContentReference ShoppingCart { get; set; }
+        public virtual ContentReference CheckoutPage { get; set; }
     }
 }
