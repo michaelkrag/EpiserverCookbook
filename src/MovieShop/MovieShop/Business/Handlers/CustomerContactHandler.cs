@@ -11,7 +11,7 @@ using System.Web;
 
 namespace MovieShop.Business.Handlers
 {
-    public class CustomerContactHandler : IRequestHandler<GetOrCreateCustomerRequest, GetOrCreateCustomerResponce>
+    public class CustomerContactHandler : IRequestHandler<CreateOrUpdateCustomerRequest, CreateOrUpdateCustomerResponce>
     {
         private readonly ICustomerRepository _customerRepository;
 
@@ -59,7 +59,7 @@ namespace MovieShop.Business.Handlers
         //    // will still be null.
         //    contact.SaveChanges();
         //}
-        public Task<GetOrCreateCustomerResponce> Handle(GetOrCreateCustomerRequest request, CancellationToken cancellationToken)
+        public Task<CreateOrUpdateCustomerResponce> Handle(CreateOrUpdateCustomerRequest request, CancellationToken cancellationToken)
         {
             var user = _customerRepository.GetCustomer(request.Email);
             if (user == null)
@@ -73,7 +73,7 @@ namespace MovieShop.Business.Handlers
                     }
                     );
             }
-            return Task.FromResult(new GetOrCreateCustomerResponce() { CustomerId = user.UserId, Email = user.Email, familyName = user.LastName, FirstName = user.FirstName });
+            return Task.FromResult(new CreateOrUpdateCustomerResponce() { CustomerId = user.UserId, Email = user.Email, familyName = user.LastName, FirstName = user.FirstName });
         }
     }
 }

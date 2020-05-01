@@ -32,8 +32,9 @@ namespace MovieShop.Features.CheckOut
             var australiaJurisdictions = jurisdictions.Jurisdiction.ToList();
             var jurisdictionGroups = JurisdictionManager.GetJurisdictionGroups(JurisdictionManager.JurisdictionType.Tax);
 
-            var addressModel = new GetOrCreateCustomerResponce();
-            var checkoutModel = new CheckoutModel() { Customer = addressModel };
+            var addressModel = new CreateOrUpdateCustomerResponce();
+            var cart = await _mediator.Send(CartContentRequest.Create());
+            var checkoutModel = new CheckoutModel() { Customer = addressModel, Cart = cart };
             var viewModel = await _viewModelFactory.Create(currentPage, checkoutModel);
             return View("~/Features/CheckOut/CheckOutPage.cshtml", viewModel);
         }
@@ -43,26 +44,36 @@ namespace MovieShop.Features.CheckOut
         public async Task<ActionResult> AddEmail(int contentId, string command, string firstName, string familyName, string email)
         {
             var currentPage = _contentLoader.Get<CheckOutPage>(new ContentReference(contentId));
-            var request = new GetOrCreateCustomerRequest() { Email = email, familyName = familyName, FirstName = firstName };
+            var request = new CreateOrUpdateCustomerRequest() { Email = email, familyName = familyName, FirstName = firstName };
 
-            var responce = await _mediator.Send(request);
+            var customer = await _mediator.Send(request);
+            var cart = await _mediator.Send(CartContentRequest.Create());
 
-            var checkoutModel = new CheckoutModel() { Customer = responce, Step = NextStep(command) };
+            var checkoutModel = new CheckoutModel() { Customer = customer, Step = NextStep(command), Cart = cart };
             var viewModel = await _viewModelFactory.Create(currentPage, checkoutModel);
             return View("~/Features/CheckOut/CheckOutPage.cshtml", viewModel);
         }
 
         private string NextStep(string command)
         {
-            if (command == "nameEdit")
+            if (command == "Edit name")
             {
                 return "step1";
             }
-            if (command == "nameSet")
+            if (command == "To address")
             {
                 return "step2";
             }
-            return "step2";
+            if (command == "Edit address")
+            {
+                return "step2";
+            }
+            if (command == "To payment")
+            {
+                return "step3";
+            }
+
+            return "step10";
         }
     }
 }

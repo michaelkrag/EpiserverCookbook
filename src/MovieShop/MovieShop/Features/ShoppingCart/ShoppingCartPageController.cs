@@ -21,6 +21,7 @@ namespace MovieShop.Features.ShoppingCart
         public async Task<ActionResult> Index(ShoppingCartPage currentPage)
         {
             var data = await _mediator.Send(CartContentRequest.Create());
+
             var viewModel = await _viewModelFactory.Create(currentPage, data);
             return View("~/Features/ShoppingCart/ShoppingCart.cshtml", viewModel);
         }

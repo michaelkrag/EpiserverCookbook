@@ -371,8 +371,8 @@
     <Compile Include="Domain\MediaR\CartQuantityQuery.cs" />
     <Compile Include="Domain\MediaR\CategoryRequest.cs" />
     <Compile Include="Domain\MediaR\CategoryResponce.cs" />
-    <Compile Include="Domain\MediaR\GetOrCreateCustomerResponce.cs" />
-    <Compile Include="Domain\MediaR\GetOrCreateCustomerRequest.cs" />
+    <Compile Include="Domain\MediaR\CreateOrUpdateCustomerResponce.cs" />
+    <Compile Include="Domain\MediaR\CreateOrUpdateCustomerRequest.cs" />
     <Compile Include="Domain\Settings\SettingsBlocke\IMenuSettings.cs" />
     <Compile Include="Domain\Settings\ISettingBlock.cs" />
     <Compile Include="Domain\Settings\ISettingsPage.cs" />
@@ -437,6 +437,7 @@
     <Compile Include="Infrastructure\Factorys\CartFactory.cs" />
     <Compile Include="Infrastructure\Factorys\ICartFactory.cs" />
     <Compile Include="Infrastructure\Helpers\HtmlHelpers.cs" />
+    <Compile Include="Infrastructure\Helpers\ScriptFingerprint.cs" />
     <Compile Include="Infrastructure\initialize\EPiServerCommerceInitializationModule.cs" />
     <Compile Include="Infrastructure\Helpers\SetDefaultHelper.cs" />
     <Compile Include="Infrastructure\MediaFiles\ImageFile.cs" />

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MovieShop.Domain.MediaR
 {
-    public class GetOrCreateCustomerResponce
+    public class CreateOrUpdateCustomerResponce
     {
         public string Email { get; set; }
         public string FirstName { get; set; }
