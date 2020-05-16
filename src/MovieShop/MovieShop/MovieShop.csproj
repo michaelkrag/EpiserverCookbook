@@ -341,7 +341,11 @@
     <Compile Include="Business\Handlers\CartHandler.cs" />
     <Compile Include="Business\Handlers\CategoryHandler.cs" />
     <Compile Include="Business\Handlers\CustomerContactHandler.cs" />
+    <Compile Include="Business\Promotions\FreeStuffPromotion.cs" />
+    <Compile Include="Business\Promotions\FreeStuffPromotionProcessor.cs" />
     <Compile Include="Business\Repository\DynamicDataStoreRepository.cs" />
+    <Compile Include="Business\Repository\Extensions\AddressExtensions.cs" />
+    <Compile Include="Business\Repository\Models\Address.cs" />
     <Compile Include="Business\Repository\Models\Customer.cs" />
     <Compile Include="Business\Repository\Models\CustomerRepository.cs" />
     <Compile Include="Business\Repository\Models\ICustomerRepository.cs" />
@@ -373,6 +377,8 @@
     <Compile Include="Domain\MediaR\CategoryResponce.cs" />
     <Compile Include="Domain\MediaR\CreateOrUpdateCustomerResponce.cs" />
     <Compile Include="Domain\MediaR\CreateOrUpdateCustomerRequest.cs" />
+    <Compile Include="Domain\MediaR\SetAddressRequest.cs" />
+    <Compile Include="Domain\MediaR\SetAddressResponce.cs" />
     <Compile Include="Domain\Settings\SettingsBlocke\IMenuSettings.cs" />
     <Compile Include="Domain\Settings\ISettingBlock.cs" />
     <Compile Include="Domain\Settings\ISettingsPage.cs" />
@@ -380,6 +386,7 @@
     <Compile Include="Features\Category\CategoryViewModel.cs" />
     <Compile Include="Features\CheckOut\CheckOutPageController.cs" />
     <Compile Include="Features\CheckOut\CheckOutPage.cs" />
+    <Compile Include="Features\CheckOut\Models\CheckOutInputModel.cs" />
     <Compile Include="Features\CheckOut\Models\CheckoutModel.cs" />
     <Compile Include="Features\Market\CurrentCurrency.cs" />
     <Compile Include="Features\Market\CurrentMarket.cs" />
@@ -437,9 +444,12 @@
     <Compile Include="Infrastructure\Factorys\CartFactory.cs" />
     <Compile Include="Infrastructure\Factorys\ICartFactory.cs" />
     <Compile Include="Infrastructure\Helpers\HtmlHelpers.cs" />
+    <Compile Include="Infrastructure\Helpers\HtmlMemberHelper.cs" />
     <Compile Include="Infrastructure\Helpers\ScriptFingerprint.cs" />
+    <Compile Include="Infrastructure\initialize\AssociationsGroupsInit.cs" />
     <Compile Include="Infrastructure\initialize\EPiServerCommerceInitializationModule.cs" />
     <Compile Include="Infrastructure\Helpers\SetDefaultHelper.cs" />
+    <Compile Include="Infrastructure\initialize\EventsInit.cs" />
     <Compile Include="Infrastructure\MediaFiles\ImageFile.cs" />
     <Compile Include="Infrastructure\Settings\ISettingsService.cs" />
     <Compile Include="Infrastructure\Settings\SettingsService.cs" />
@@ -539,6 +549,10 @@
     <ProjectReference Include="..\CommonLib\CommonLib.csproj">
       <Project>{1B7F19D7-9904-4398-9848-BE8AB520300D}</Project>
       <Name>CommonLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DankortPaymentProvider\DankortPaymentProvider.csproj">
+      <Project>{525caa07-ea92-4d2b-b63b-533b5d2d793f}</Project>
+      <Name>DankortPaymentProvider</Name>
     </ProjectReference>
     <ProjectReference Include="..\NLPLib\NLPLib.csproj">
       <Project>{2BD9C206-E37F-4335-AE7C-92DE7308C882}</Project>

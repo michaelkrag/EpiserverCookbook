@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Build xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <LastBuildDate>0001-01-01T00:00:00</LastBuildDate>
+  <Status>Started</Status>
+  <Properties>
+    <Property name="StartingRecord" value="4" />
+    <Property name="LastRecordKey" value="19003" />
+    <Property name="CatalogName" value="MoveCatalog" />
+  </Properties>
+</Build>

@@ -72,6 +72,7 @@
     <Compile Include="Cookies\Helpers\ICookieHelper.cs" />
     <Compile Include="Cookies\ICookieRepository.cs" />
     <Compile Include="Extensions\AssemblyScanner.cs" />
+    <Compile Include="Extensions\FormExtension.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Monads\Maybe.cs" />

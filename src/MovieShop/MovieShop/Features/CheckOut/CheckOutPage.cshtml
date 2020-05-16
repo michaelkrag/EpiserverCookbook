@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-75">
         <div class="container">
-            <form action="/checkout/AddEmail" method="post">
+            <form action="/checkout/AddEmail" method="post" id="addressForm">
                 <div class="row">
                     <div class="col-50">
                         <h3>Billing Address</h3>
@@ -15,43 +15,59 @@
                         <input type="hidden" name="contentId" value="@Model.CurrentPage.ContentLink.ID" />
                         @if (!Model.CurrentData.IsStep1)
                         {
-                            <input type="hidden" name="firstName" value="@Model.CurrentData.Customer.FirstName" />
-                            <input type="hidden" name="familyName" value="@Model.CurrentData.Customer.familyName" />
-                            <input type="hidden" name="email" value="@Model.CurrentData.Customer.Email" />
+                            <input type="hidden" name="@(Html.GetMember<CheckOutInputModel>(x=>x.firstName))" value="@Model.CurrentData.Customer.firstName" />
+                            <input type="hidden" name="@(Html.GetMember<CheckOutInputModel>(x=>x.familyName))" value="@Model.CurrentData.Customer.familyName" />
+                            <input type="hidden" name="@(Html.GetMember<CheckOutInputModel>(x=>x.email))" value="@Model.CurrentData.Customer.email" />
                         }
 
                         <div class="row">
                             <div class="col-50">
                                 <label for="firstName">First name</label>
-                                <input type="text" id="firstName" name="firstName" placeholder="John" value="@Model.CurrentData.Customer.FirstName" @Html.SetReadOnly(!Model.CurrentData.IsStep1)>
+                                <input type="text" id="firstName" name="@(Html.GetMember<CheckOutInputModel>(x=>x.firstName))" placeholder="John" value="@Model.CurrentData.Customer.firstName" @Html.SetReadOnly(!Model.CurrentData.IsStep1)>
                             </div>
                             <div class="col-50">
                                 <label for="familyName">Family name</label>
-                                <input type="text" id="familyName" name="familyName" placeholder="Doe" value="@Model.CurrentData.Customer.familyName" @Html.SetReadOnly(!Model.CurrentData.IsStep1)>
+                                <input type="text" id="familyName" name="@(Html.GetMember<CheckOutInputModel>(x=>x.familyName))" placeholder="Doe" value="@Model.CurrentData.Customer.familyName" @Html.SetReadOnly(!Model.CurrentData.IsStep1)>
                             </div>
                         </div>
                         <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                        <input type="text" id="email" name="email" placeholder="john@example.com" value="@Model.CurrentData.Customer.Email" @Html.SetReadOnly(!Model.CurrentData.IsStep1)>
+                        <input type="text" id="email" name="@(Html.GetMember<CheckOutInputModel>(x=>x.email))" placeholder="john@example.com" value="@Model.CurrentData.Customer.email" @Html.SetReadOnly(!Model.CurrentData.IsStep1)>
                         <input type="submit" name="command" value="@(Model.CurrentData.IsStep1 ? "To address" : "Edit name")" class="btn">
 
+                        @if (!Model.CurrentData.IsStep2)
+                        {
+                            <input type="hidden" name="@(Html.GetMember<CheckOutInputModel>(x=>x.address1))" value="@Model.CurrentData.Customer.address1" />
+                            <input type="hidden" name="@(Html.GetMember<CheckOutInputModel>(x=>x.address2))" value="@Model.CurrentData.Customer.address2" />
+                            <input type="hidden" name="@(Html.GetMember<CheckOutInputModel>(x=>x.city))" value="@Model.CurrentData.Customer.city" />
+                            <input type="hidden" name="@(Html.GetMember<CheckOutInputModel>(x=>x.zip))" value="@Model.CurrentData.Customer.zip" />
+                            <input type="hidden" name="@(Html.GetMember<CheckOutInputModel>(x=>x.contry))" value="@Model.CurrentData.Customer.contry" />
+                        }
+
                         <label for="adr1"><i class="fa fa-address-card-o"></i> Address line 1</label>
-                        <input type="text" id="adr1" name="address1" placeholder="542 W. 15th Street" @Html.SetReadOnly(!Model.CurrentData.IsStep2)>
+                        <input type="text" id="adr1" name="@(Html.GetMember<CheckOutInputModel>(x=>x.address1))" value="@Model.CurrentData.Customer.address1" placeholder="542 W. 15th Street" @Html.SetReadOnly(!Model.CurrentData.IsStep2)>
 
                         <label for="adr2"><i class="fa fa-address-card-o"></i> Address line 2</label>
-                        <input type="text" id="adr2" name="address2" placeholder="542 W. 15th Street" @Html.SetReadOnly(!Model.CurrentData.IsStep2)>
+                        <input type="text" id="adr2" name="@(Html.GetMember<CheckOutInputModel>(x=>x.address2))" value="@Model.CurrentData.Customer.address2" placeholder="542 W. 15th Street" @Html.SetReadOnly(!Model.CurrentData.IsStep2)>
                         <label for="city"><i class="fa fa-institution"></i> City</label>
-                        <input type="text" id="city" name="city" placeholder="New York" @Html.SetReadOnly(!Model.CurrentData.IsStep2)>
+                        <input type="text" id="city" name="@(Html.GetMember<CheckOutInputModel>(x=>x.city))" value="@Model.CurrentData.Customer.city" placeholder="New York" @Html.SetReadOnly(!Model.CurrentData.IsStep2)>
 
                         <div class="row">
                             <div class="col-50">
                                 <label for="state">State / Province / Region</label>
-                                <input type="text" id="state" name="state" placeholder="NY" @Html.SetReadOnly(!Model.CurrentData.IsStep2)>
+                                <input type="text" id="state" name="@(Html.GetMember<CheckOutInputModel>(x=>x.state))" value="@Model.CurrentData.Customer.state" placeholder="NY" @Html.SetReadOnly(!Model.CurrentData.IsStep2)>
                             </div>
                             <div class="col-50">
                                 <label for="zip">Zip / Post code</label>
-                                <input type="text" id="zip" name="zip" placeholder="10001" @Html.SetReadOnly(!Model.CurrentData.IsStep2)>
+                                <input type="text" id="zip" name="@(Html.GetMember<CheckOutInputModel>(x=>x.zip))" value="@Model.CurrentData.Customer.zip" placeholder="10001" @Html.SetReadOnly(!Model.CurrentData.IsStep2)>
                             </div>
                         </div>
+                        <label for="contry"><i class="fa fa-address-card-o"></i>Contry</label>                        
+                        <select id="contry" name="@(Html.GetMember<CheckOutInputModel>(x=>x.contry))" form="addressForm">
+                            @foreach (var contry in Model.CurrentData.JurisdictionContrys)
+                            {
+                                <option value="@contry.Key">@contry.DisplayName</option>
+                            }
+                        </select>
                         <input type="submit" name="command" value="@(Model.CurrentData.IsStep2 ? "To payment" : "Edit address")" class="btn">
                     </div>
 
@@ -95,8 +111,8 @@
 
             @foreach (var item in Model.CurrentData.Cart.LineItems)
             {
-        <p><a href="@Url.ContentUrl(item.ProductReference)"></a>@item.Quantity x @item.DisplayName <span class="price">@item.Price</span></p>
-            }            
+                <p><a href="@Url.ContentUrl(item.ProductReference)"></a>@item.Quantity x @item.DisplayName <span class="price">@item.Price</span></p>
+            }
             <hr>
             <p>Total <span class="price" style="color:black"><b>@Model.CurrentData.Cart.Total</b></span></p>
         </div>

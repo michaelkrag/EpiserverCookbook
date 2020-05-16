@@ -1,6 +1,8 @@
 ﻿using Mediachase.BusinessFoundation.Data;
 using Mediachase.Commerce.Customers;
+using MovieShop.Business.Repository.Extensions;
 using System;
+using System.Linq;
 
 namespace MovieShop.Business.Repository.Models
 {
@@ -30,12 +32,33 @@ namespace MovieShop.Business.Repository.Models
             {
                 return null;
             }
+
+            var address = contact.ContactAddresses.Select(x => x.ToAddress()).ToList();
+
             return new Customer()
             {
                 Email = contact.Email,
                 LastName = contact.LastName,
-                FirstName = contact.FirstName
+                FirstName = contact.FirstName,
+                Addresses = address
             };
+        }
+
+        public void AddAddress(string email, Address address)
+        {
+            var userId = Customer.CreateUserId(email);
+            CustomerContact contact = _customerContext.GetContactByUserId(userId);
+            if (contact == null)
+            {
+                return;
+            }
+
+            var customerContact = address.ToCustomerAddress();
+            contact.AddContactAddress(customerContact);
+            contact.SaveChanges();
+            contact.PreferredShippingAddress = customerContact;
+            contact.SaveChanges();
+            return;
         }
     }
 }
