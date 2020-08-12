@@ -7,7 +7,7 @@
 
 <div class="product">
     <div class="product-left">
-        <img class="work-feature-block-image" src="@Html.MovieDbImage(Model.CurrentContent.PosterPath,400)" />
+        <img class="work-feature-block-image" src="@Url.ContentUrl(Model.CurrentContent.MoviePoster())" />
     </div>
     <div class="product-center">
         <h2 class="work-feature-block-header">@Html.PropertyFor(x => x.CurrentContent.OriginalTitle)</h2>
@@ -38,7 +38,7 @@
                 }
             </ul>
         }
-        <p>@Html.PropertyFor(x => x.CurrentContent.Summery)</p>
+        <p>@Html.PropertyFor(x => x.CurrentContent.Overview)</p>
         <h2>Details</h2>
         <ul>
             <li>ReleaseDate @Html.PropertyFor(x => x.CurrentContent.ReleaseDate)</li>

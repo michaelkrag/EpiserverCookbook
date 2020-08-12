@@ -25,6 +25,9 @@ using CommonLib.Cookies.Helpers;
 using CommonLib.Cookies;
 using Mediachase.Commerce;
 using MovieShop.Features.Market;
+using MovieShop.Business.Services.ImageStore;
+using Nest;
+using MovieShop.Foundation.MovieSearches;
 
 namespace MovieShop.Infrastructure.DependencyInjection
 {
@@ -47,6 +50,7 @@ namespace MovieShop.Infrastructure.DependencyInjection
         private static void SetupExternal(IServiceConfigurationProvider container)
         {
             container.AddTransient<IBlobFilenameRepository, BlobFilenameRepository>();
+            container.AddTransient<IImageRepository, ImageRepository>();
 
             container.AddTransient<IBlobRepository, BlobRepository>();
             container.AddTransient<ICart>(x => x.GetInstance<ICartFactory>().LoadOrCreateCart());
@@ -65,6 +69,10 @@ namespace MovieShop.Infrastructure.DependencyInjection
             container.AddSingleton<IBiGram>(x => x.GetInstance<SearchFactory>().CreateBiGram());
             container.AddSingleton<ITriGram>(x => x.GetInstance<SearchFactory>().CreateTriGram());
             container.AddSingleton<ISentencezer>(new Sentencezer(new Tokinizer(new HashSet<string>() { "-", "\"", "(", ")", ":", ";", "," })));
+
+            container.AddSingleton<IConnectionSettingsValues>(new ConnectionSettings(new Uri("http://localhost:9200")).DefaultIndex("movie"));
+            container.AddSingleton<ElasticClient>(s => new ElasticClient(s.GetInstance<IConnectionSettingsValues>()));
+            container.AddSingleton<IMovieSearch, MovieSearch>();
         }
 
         private static IVocabulary CreateVocabulary(IBlobRepository blobRepository)

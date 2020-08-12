@@ -22,11 +22,11 @@
         {
             <div class="category-result-item">
                 <div class="search-result-left">
-                    <img src="@Html.MovieDbImage(result.Document.PosterPath,300)" />
+                    <img src="@Url.ContentUrl(result.Poster)" />
                 </div>
                 <div class="search-result-right">
-                    <h3>@result.Document.Title</h3>
-                    <p>@result.Document.Summery<a href="@Url.ContentUrl(result.Document.ContentLink)"> Learn More</a></p>
+                    <h3>@result.Title</h3>
+                    <p>@result.Overview<a href="@Url.ContentUrl(result.ContentLink)"> Learn More</a></p>
                 </div>
             </div>
         }

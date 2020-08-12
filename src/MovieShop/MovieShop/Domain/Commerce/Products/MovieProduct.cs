@@ -1,9 +1,16 @@
-﻿using EPiServer.Commerce.Catalog.ContentTypes;
+﻿using EPiServer.Cms.Shell.UI.ObjectEditing.EditorDescriptors;
+using EPiServer.Commerce.Catalog.ContentTypes;
 using EPiServer.Commerce.Catalog.DataAnnotations;
+using EPiServer.Core;
+using EPiServer.DataAnnotations;
+using EPiServer.Shell.ObjectEditing;
 using EPiServer.Web;
 using MovieShop.Foundation.Search;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web.UI.WebControls;
 
 namespace MovieShop.Domain.Commerce.Products
 {
@@ -28,20 +35,57 @@ namespace MovieShop.Domain.Commerce.Products
         [Display(Name = "TheMovieDb id")]
         public virtual string TheMovieDbId { get; set; }
 
-        [Display(Name = "Summery")]
+        [Display(Name = "Overview")]
         [UIHint(UIHint.Textarea)]
-        public virtual string Summery { get; set; }
-
-        public virtual string PosterPath { get; set; }
-        public virtual string BackdropPath { get; set; }
+        public virtual string Overview { get; set; }
 
         public virtual DateTime ReleaseDate { get; set; }
-
         public virtual double VoteAverage { get; set; }
-        public virtual int VoteCount { get; set; }
-        //IList<string> Director { get; }
-        //IList<string> Genres { get; }
-        //IList<string> Starring { get; }
-        //int Reating { get; }
+        public virtual int VoteCount { get; set; } /**/
+        public virtual string Genres { get; set; }
+        public virtual string OrginalLang { get; set; }
+        public virtual string BelongsToCollection { get; set; }
+        public virtual string SpokenLanguages { get; set; }
+
+        [BackingType(typeof(CastProperty))]
+        public virtual IList<Cast> Casts { get; set; }
+
+        [BackingType(typeof(CrewProperty))]
+        public virtual IList<Crew> Crews { get; set; }
+
+        public ContentReference Poster => MoviePoster();
+
+        public ContentReference MoviePoster()
+        {
+            var poster = CommerceMediaCollection.Where(x => x.GroupName == "Poster").FirstOrDefault();
+            if (poster != null)
+            {
+                return poster.AssetLink;
+            }
+            return CommerceMediaCollection.FirstOrDefault()?.AssetLink ?? ContentReference.EmptyReference;
+        }
     }
 }
+
+/*
+adult
+Title
+OrgiginalTilte
+popularity
+imdbId =
+id = 3224
+Overview
+posterPath
+releaseDate
+voteaverage
+Genres = Comedy
+orginalLang = en
+BelongsToCollection : name/ postPath/ backdropPath
+SpokenLanguages
+
+ProductionCompanies
+
+cast { character , name }
+Crew {name, job}
+
+ */

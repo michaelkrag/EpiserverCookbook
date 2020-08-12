@@ -9,6 +9,6 @@ namespace MovieShop.Features.Category
 {
     public class CategoryViewModel
     {
-        public IEnumerable<SearchHit<ISearch>> SearchHits { get; set; }
+        public IEnumerable<MovieDocument> SearchHits { get; set; }
     }
 }

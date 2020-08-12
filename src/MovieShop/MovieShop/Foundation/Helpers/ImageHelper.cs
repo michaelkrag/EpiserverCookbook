@@ -1,4 +1,7 @@
-﻿using System.Web;
+﻿using EPiServer.Commerce.SpecializedProperties;
+using EPiServer.Core;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace MovieShop.Foundation.Helpers

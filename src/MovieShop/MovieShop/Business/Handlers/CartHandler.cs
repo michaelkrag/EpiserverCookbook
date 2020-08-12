@@ -91,7 +91,7 @@ namespace MovieShop.Business.Handlers
                 Code = x.Code,
                 DisplayName = x.DisplayName,
                 Quantity = Convert.ToInt32(x.Quantity),
-                ImageUrl = products[variants.Where(y => y.Code == x.Code).Select(y => y.ContentLink).First()].PosterPath,
+                ImageUrl = "",//products[variants.Where(y => y.Code == x.Code).Select(y => y.ContentLink).First()].PosterPath,
                 Price = prices[x.Code].UnitPrice.ToString(),
                 DiscountPrice = discounts[variants.First(y => y.Code == x.Code).ContentLink].DiscountPrices.Last().Price.ToString(),
                 ProductReference = products[variants.Where(y => y.Code == x.Code).Select(y => y.ContentLink).First()].ContentLink

@@ -5,11 +5,14 @@ using EPiServer.Framework;
 using EPiServer.Framework.Initialization;
 using EPiServer.ServiceLocation;
 using Mediachase.Commerce.Catalog.Events;
+using MovieShop.Business.Repository.EvidenceCollector;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
+
+using MovieShop.Business.Repository.EvidenceCollector.Models;
 
 namespace MovieShop.Infrastructure.initialize
 {

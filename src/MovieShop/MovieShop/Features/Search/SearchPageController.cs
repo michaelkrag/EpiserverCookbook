@@ -29,7 +29,7 @@ namespace MovieShop.Features.Search
             var searchResult = _searchEngine.Query().MultiMatch(q, new List<MatchField<ISearch>>()
                     {
                         new MatchField<ISearch>() { field = x => x.Title },
-                        new MatchField<ISearch>() { field = x => x.Summery}
+                        new MatchField<ISearch>() { field = x => x.Overview}
                     }).GetSearchHits<ISearch>();
 
             var result = new SearchResultData()

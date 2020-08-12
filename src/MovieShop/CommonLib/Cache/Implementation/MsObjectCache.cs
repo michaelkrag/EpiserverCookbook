@@ -22,6 +22,10 @@ namespace CommonLib.Cache.Implementation
 
         public void Set<TObj>(string key, TObj obj, TimeSpan timeSpan, CacheDurationType cacheDuration)
         {
+            if (string.IsNullOrEmpty(key) && obj == null)
+            {
+                return;
+            }
             var cacheItemPolicy = CreateCacheItemPolicy(cacheDuration, timeSpan);
             _cache.Set(key, obj, cacheItemPolicy);
         }

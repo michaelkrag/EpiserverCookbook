@@ -62,6 +62,9 @@
     <Reference Include="Dynamitey, Version=2.0.9.136, Culture=neutral, PublicKeyToken=cbf53ea3aeb972c6, processorArchitecture=MSIL">
       <HintPath>..\packages\Dynamitey.2.0.9.136\lib\net40\Dynamitey.dll</HintPath>
     </Reference>
+    <Reference Include="Elasticsearch.Net, Version=7.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elasticsearch.Net.7.7.1\lib\net461\Elasticsearch.Net.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -225,6 +228,9 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="Nest, Version=7.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\NEST.7.7.1\lib\net461\Nest.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -234,12 +240,18 @@
     <Reference Include="StructureMap.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\structuremap.web.4.0.0.315\lib\net40\StructureMap.Web.dll</HintPath>
     </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ComponentModel.Annotations.4.4.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Data.SqlClient, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SqlClient.4.4.0\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
@@ -333,30 +345,42 @@
     <Compile Include="Business\Currencys\ICurrentCurrency.cs" />
     <Compile Include="Business\Extensions\ContentAreaItemExtensions.cs" />
     <Compile Include="Business\Extensions\ContentAreaExtensions.cs" />
+    <Compile Include="Business\Extensions\DateTimeExtenions.cs" />
     <Compile Include="Business\Extensions\DictonaryExtensions.cs" />
     <Compile Include="Business\Extensions\PriceValueExtensions.cs" />
+    <Compile Include="Business\Extensions\StringExtensions.cs" />
     <Compile Include="Business\Factory\DependencyInjectionConfig.cs" />
     <Compile Include="Business\Factory\IViewModelFactory.cs" />
     <Compile Include="Business\Factory\ViewModelFactory.cs" />
     <Compile Include="Business\Handlers\CartHandler.cs" />
     <Compile Include="Business\Handlers\CategoryHandler.cs" />
     <Compile Include="Business\Handlers\CustomerContactHandler.cs" />
+    <Compile Include="Business\Handlers\Evidences\EvidenceCollectorHandler.cs" />
+    <Compile Include="Business\Handlers\Evidences\Models\LogEvent.cs" />
     <Compile Include="Business\Promotions\FreeStuffPromotion.cs" />
     <Compile Include="Business\Promotions\FreeStuffPromotionProcessor.cs" />
     <Compile Include="Business\Repository\DynamicDataStoreRepository.cs" />
+    <Compile Include="Business\Repository\EvidenceCollector\EvidenceContext.cs" />
+    <Compile Include="Business\Repository\EvidenceCollector\Models\Evidence.cs" />
     <Compile Include="Business\Repository\Extensions\AddressExtensions.cs" />
     <Compile Include="Business\Repository\Models\Address.cs" />
     <Compile Include="Business\Repository\Models\Customer.cs" />
     <Compile Include="Business\Repository\Models\CustomerRepository.cs" />
     <Compile Include="Business\Repository\Models\ICustomerRepository.cs" />
     <Compile Include="Business\ScheduledJob\FixMarketScheduledJob.cs" />
+    <Compile Include="Business\ScheduledJob\ImportMoviesScheduledJob.cs" />
     <Compile Include="Business\ScheduledJob\FixScheduledJob.cs" />
+    <Compile Include="Business\ScheduledJob\MovieIndexerScheduledJob.cs" />
     <Compile Include="Business\ScheduledJob\VocabularyScheduledJob.cs" />
     <Compile Include="Business\Services\Blobstore\BlobFilenameRepository.cs" />
     <Compile Include="Business\Services\Blobstore\BlobRepository.cs" />
     <Compile Include="Business\Services\Blobstore\IBlobFilenameRepository.cs" />
     <Compile Include="Business\Services\Blobstore\IBlobRepository.cs" />
     <Compile Include="Business\Services\Blobstore\Models\FileInfo.cs" />
+    <Compile Include="Business\Services\ImageStore\ContentRepositoryExtension.cs" />
+    <Compile Include="Business\Services\ImageStore\ImageRepository.cs" />
+    <Compile Include="Business\Services\ImageStore\IImageRepository.cs" />
+    <Compile Include="Business\Services\ImageStore\UrlResolverExtension.cs" />
     <Compile Include="Business\Services\Prices\CustomerPriceService.cs" />
     <Compile Include="Business\Services\Prices\ICustomerPriceService.cs" />
     <Compile Include="Business\Services\Search\AutocompleateService.cs" />
@@ -366,6 +390,8 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\MarketController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Domain\Commerce\Products\Cast.cs" />
+    <Compile Include="Domain\Commerce\Products\Crew.cs" />
     <Compile Include="Domain\Commerce\Variants\MovieVariant.cs" />
     <Compile Include="Domain\Component\MarketCurrency.cs" />
     <Compile Include="Domain\MediaR\CartAddRequest.cs" />
@@ -397,8 +423,6 @@
     <Compile Include="Features\Product\MovieProductController.cs" />
     <Compile Include="Features\Container\ContainerPage.cs" />
     <Compile Include="Features\Container\ContainerPageUIDescriptor .cs" />
-    <Compile Include="Domain\Commerce\Variants\BlueRayVariant.cs" />
-    <Compile Include="Domain\Commerce\Variants\DVDVariant.cs" />
     <Compile Include="Domain\Commerce\Nodes\GenresNode.cs" />
     <Compile Include="Domain\Commerce\Nodes\MovieNode.cs" />
     <Compile Include="Domain\Commerce\Products\MovieProduct.cs" />
@@ -418,6 +442,9 @@
     <Compile Include="Foundation\Menu\Models\IMenu.cs" />
     <Compile Include="Features\Menu\Models\MenuItemPage.cs" />
     <Compile Include="Features\Menu\Models\SubMenuItemPage.cs" />
+    <Compile Include="Foundation\MovieSearches\IMovieSearch.cs" />
+    <Compile Include="Foundation\MovieSearches\MovieSearch.cs" />
+    <Compile Include="Foundation\Search\MovieDocument.cs" />
     <Compile Include="Foundation\Search\ISearch.cs" />
     <Compile Include="Foundation\Search\SearchFactory.cs" />
     <Compile Include="Foundation\Search\ITernaryTreeFactory.cs" />
@@ -554,8 +581,12 @@
       <Project>{525caa07-ea92-4d2b-b63b-533b5d2d793f}</Project>
       <Name>DankortPaymentProvider</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MoveDb\MoveDb.csproj">
+      <Project>{554F9A4F-782E-4E0D-81B9-F0A4149ADC33}</Project>
+      <Name>MoveDb</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NLPLib\NLPLib.csproj">
-      <Project>{2BD9C206-E37F-4335-AE7C-92DE7308C882}</Project>
+      <Project>{e28cbea1-e3c8-4efe-a60a-5b416d0813d2}</Project>
       <Name>NLPLib</Name>
     </ProjectReference>
   </ItemGroup>

@@ -8,5 +8,11 @@ namespace NLPLib.Vocabularys
         int GetIndex(string word);
 
         int GetOrAddIndex(string word);
+
+        void AddIndex(IEnumerable<string> words);
+
+        void Import(IEnumerable<VocabularyItem> terms);
+
+        IEnumerable<VocabularyItem> Export();
     }
 }

@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NLPLib\NLPLib.csproj">
-      <Project>{2BD9C206-E37F-4335-AE7C-92DE7308C882}</Project>
+      <Project>{e28cbea1-e3c8-4efe-a60a-5b416d0813d2}</Project>
       <Name>NLPLib</Name>
     </ProjectReference>
   </ItemGroup>

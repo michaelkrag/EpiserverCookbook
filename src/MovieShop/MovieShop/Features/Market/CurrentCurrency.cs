@@ -20,9 +20,12 @@ namespace MovieShop.Features.Market
 
         public Currency GetCurrentCurrency()
         {
-            var currencyCookie = _cookieRepository.Get<CurrencyCookie>(CurrencyCookie.CookieName);
-
             var currentMaket = _currentMarket.GetCurrentMarket();
+            var currencyCookie = _cookieRepository.Get<CurrencyCookie>(CurrencyCookie.CookieName);
+            if (currencyCookie == null)
+            {
+                return currentMaket.DefaultCurrency;
+            }
             var currency = currentMaket.Currencies.FirstOrDefault(x => x.CurrencyCode == currencyCookie.CurrencytId);
             if (currency != null)
             {

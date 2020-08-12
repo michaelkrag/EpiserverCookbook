@@ -8,31 +8,28 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Linq;
+using MovieShop.Foundation.MovieSearches;
 
 namespace MovieShop.Features.Category
 {
     public class CategoryController : ContentController<GenreNode>
     {
         private readonly IViewModelFactory _viewModelFactory;
-        private readonly ISearchEngine _searchEngine;
+        private readonly IMovieSearch _movieSearch;
 
-        public CategoryController(IViewModelFactory viewModelFactory, ISearchEngine searchEngine)
+        public CategoryController(IViewModelFactory viewModelFactory, IMovieSearch movieSearch)
         {
             _viewModelFactory = viewModelFactory;
-            _searchEngine = searchEngine;
+            _movieSearch = movieSearch;
         }
 
         public async Task<ActionResult> Index(GenreNode currentContent, HomePage currentPage)
         {
             var image = currentContent.CommerceMediaCollection.FirstOrDefault(x => x.GroupName == "Default")?.AssetLink;
 
-            var searchResult = _searchEngine.Query().MultiMatch("Back to the", new List<MatchField<ISearch>>()
-                    {
-                        new MatchField<ISearch>() { field = x => x.Title },
-                        new MatchField<ISearch>() { field = x => x.Summery}
-                    }).GetSearchHits<ISearch>();
+            var movies = _movieSearch.SearchByGenre(currentContent.Name);
             var categoryViewModel = new CategoryViewModel();
-            categoryViewModel.SearchHits = searchResult;
+            categoryViewModel.SearchHits = movies;
             var viewModel = await _viewModelFactory.CreateCatalog(currentContent, currentPage, categoryViewModel);
             return View("~/Features/Category/CategoryView.cshtml", viewModel);
         }
