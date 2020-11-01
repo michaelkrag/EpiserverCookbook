@@ -14,7 +14,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLPLib.Tokenizers;
 using NLPLib.Vocabularys;
+using SuggestionApi.NLP.Gram;
 using SuggestionApi.NLP.TernaryTree;
+using SuggestionApi.NLP.Tokenizers;
 using SuggestionApi.NLP.Vocabularys.Repository;
 using SuggestionApi.Services;
 
@@ -40,6 +42,8 @@ namespace SuggestionApi
             services.AddSingleton<IFileLocation, FileLocation>();
             services.AddTransient<IVocabularyFileFactory, VocabularyFileFactory>();
             services.AddTransient<ITernarySearchFactory, TernarySearchFactory>();
+            services.AddTransient<INGramRepository, NGramRepository>();
+            services.AddTransient<ITokenizer, Tokenizer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

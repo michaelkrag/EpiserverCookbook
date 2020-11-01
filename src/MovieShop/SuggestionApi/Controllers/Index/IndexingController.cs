@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SuggestionApi.Models.Indexing;
+using SuggestionApi.NLP.Gram;
 using SuggestionApi.NLP.TernaryTree;
 using SuggestionApi.NLP.Vocabularys.Models;
 using SuggestionApi.NLP.Vocabularys.Repository;
