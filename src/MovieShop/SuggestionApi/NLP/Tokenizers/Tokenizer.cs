@@ -26,7 +26,7 @@ namespace SuggestionApi.NLP.Tokenizers
             var sentences = _sentenceDetector.SentenceDetect(corpus);
             foreach (var sentence in sentences)
             {
-                var tokens = _tokenizer.Tokenize(sentence).Where(x => !specialTokens.Contains(x)).ToArray();
+                var tokens = _tokenizer.Tokenize(sentence).Where(x => !specialTokens.Contains(x)).Select(x => x.ToLower()).ToArray();
                 yield return Sentence.Create(sentence, tokens);
             }
         }

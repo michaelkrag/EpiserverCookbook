@@ -11,11 +11,16 @@
         {
             return new VocabularyEntry()
             {
-                Occurs = 1,
+                Occurs = 0,
                 StoreId = -1,
                 Term = term,
                 TermId = termId
             };
+        }
+
+        public void IncementOccurred()
+        {
+            Occurs++;
         }
 
         public override string ToString()

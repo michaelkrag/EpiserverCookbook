@@ -2,8 +2,9 @@
 using SuggestionApi.Models.Indexing;
 using SuggestionApi.NLP.Gram;
 using SuggestionApi.NLP.TernaryTree;
+using SuggestionApi.NLP.Vocabularys;
 using SuggestionApi.NLP.Vocabularys.Models;
-using SuggestionApi.NLP.Vocabularys.Repository;
+
 using SuggestionApi.Services;
 using System;
 using System.Collections.Generic;
@@ -17,14 +18,14 @@ namespace SuggestionApi.Controllers.Index
     public class IndexingController : ControllerBase
     {
         private readonly IndexService _indexService;
-        private readonly IVocabularyFileFactory _vocabularyFileFactory;
         private readonly IFileLocation _fileLocation;
+        private readonly IVocabularyRepository _vocabularyRepository;
 
-        public IndexingController(IndexService indexService, IVocabularyFileFactory vocabularyFileFactory, IFileLocation fileLocation)
+        public IndexingController(IndexService indexService, IFileLocation fileLocation, IVocabularyRepository vocabularyRepository)
         {
             _indexService = indexService;
-            _vocabularyFileFactory = vocabularyFileFactory;
             _fileLocation = fileLocation;
+            _vocabularyRepository = vocabularyRepository;
         }
 
         [HttpPost("{index}")]
@@ -36,7 +37,7 @@ namespace SuggestionApi.Controllers.Index
         [HttpGet("{index}")]
         public IEnumerable<VocabularyEntry> Get(string index)
         {
-            var vocabulary = _vocabularyFileFactory.Get(index);
+            var vocabulary = _vocabularyRepository.Get(index);
             var tokens = vocabulary.GetAll().OrderByDescending(x => x.Occurs).ToList();
             return tokens;
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace SuggestionApi.Services
 {
@@ -13,7 +14,9 @@ namespace SuggestionApi.Services
 
         public string GetBasePath(string index)
         {
-            return $"{_webHostEnvironment.ContentRootPath}//Data//{index}";
+            var path = $"{_webHostEnvironment.ContentRootPath}//Data//{index}";
+            Directory.CreateDirectory(path);
+            return path;
         }
 
         public string Get(string index, string fileName)

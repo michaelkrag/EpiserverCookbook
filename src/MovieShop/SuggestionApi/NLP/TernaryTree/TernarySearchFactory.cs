@@ -1,4 +1,5 @@
-﻿using SuggestionApi.NLP.Vocabularys.Repository;
+﻿using SuggestionApi.NLP.Vocabularys;
+
 using System;
 using System.Collections.Concurrent;
 
@@ -7,11 +8,11 @@ namespace SuggestionApi.NLP.TernaryTree
     public class TernarySearchFactory : ITernarySearchFactory
     {
         private static ConcurrentDictionary<string, ITernarySearch> TernarySearchCollection = new ConcurrentDictionary<string, ITernarySearch>();
-        private readonly IVocabularyFileFactory _vocabularyFileFactory;
+        private readonly IVocabularyRepository _vocabularyRepository;
 
-        public TernarySearchFactory(IVocabularyFileFactory vocabularyFileFactory)
+        public TernarySearchFactory(IVocabularyRepository vocabularyRepository)
         {
-            _vocabularyFileFactory = vocabularyFileFactory;
+            _vocabularyRepository = vocabularyRepository;
         }
 
         public ITernarySearch Get(string index)
@@ -28,7 +29,7 @@ namespace SuggestionApi.NLP.TernaryTree
 
         private ITernarySearch Load(string index)
         {
-            var vocabulary = _vocabularyFileFactory.Get(index);
+            var vocabulary = _vocabularyRepository.Get(index);
             var ternarySearch = new TernarySearch();
             foreach (var term in vocabulary.GetAll())
             {
