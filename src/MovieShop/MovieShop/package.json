@@ -3,7 +3,7 @@
   "name": "Movieshop",
   "private": true,
   "dependencies": {
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "vue": "2.6.11"
   },
   "devDependencies": {
